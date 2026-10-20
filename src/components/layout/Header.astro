@@ -1,0 +1,185 @@
+---
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import type { getSettings } from '../../i18n';
+
+interface Props {
+  settings: Awaited<ReturnType<typeof getSettings>>;
+  homeHref: string;
+}
+const { settings, homeHref } = Astro.props;
+---
+
+<header class="header" data-header>
+  <a class="header__brand" href={homeHref} aria-label={`${settings.siteName}, inicio`}>
+    <span class="header__logo" aria-hidden="true"></span>
+    <span class="header__name">{settings.siteName}</span>
+  </a>
+
+  <nav class="header__nav" aria-label="Principal">
+    <ul role="list">
+      {settings.nav.map((item) => (
+        <li><a href={item.href} data-cursor-hover>{item.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="header__actions">
+    <a class="header__lang" href={settings.langSwitch.href} hreflang={settings.langSwitch.lang} lang={settings.langSwitch.lang}>
+      {settings.langSwitch.label}
+    </a>
+    <Button href={settings.navCta.href} variant="orange" class="header__cta">{settings.navCta.label}</Button>
+    <button class="header__menu" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+      <span class="visually-hidden" data-menu-label data-open={settings.menuLabel.open} data-close={settings.menuLabel.close}>{settings.menuLabel.open}</span>
+      <Icon name="menu" size="1.5rem" />
+    </button>
+  </div>
+
+  <div class="menu grain" id="menu" data-surface="orange" data-menu hidden>
+    <nav aria-label="Móvil">
+      <ul role="list">
+        {settings.nav.map((item) => (
+          <li><a class="poster menu__link" href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <p class="menu__foot">
+      <a href={settings.langSwitch.href} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}</a>
+      <span>{settings.role}</span>
+    </p>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    height: var(--header-h);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--space-m);
+    padding-inline: var(--gutter);
+    color: var(--cm-gunmetal);
+    transition:
+      transform var(--dur-m) var(--ease-out),
+      background-color var(--dur-s) var(--ease-soft),
+      color var(--dur-s) var(--ease-soft);
+  }
+  :global(.header.is-solid) {
+    background: color-mix(in oklab, var(--cm-cream) 94%, transparent);
+    box-shadow: 0 1px 0 rgb(29 39 48 / 0.12);
+  }
+  :global(.header.is-hidden) {
+    transform: translateY(-110%);
+  }
+  .header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    justify-self: start;
+  }
+  .header__logo {
+    width: 2.1rem;
+    aspect-ratio: 880 / 695;
+    background: currentColor;
+    mask: url('/brand/m.svg') center / contain no-repeat;
+  }
+  .header__nav ul {
+    display: flex;
+    gap: clamp(1rem, 2.4vw, 2.4rem);
+  }
+  .header__nav a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--step--1);
+    background: linear-gradient(currentColor, currentColor) left bottom / 0 1.5px no-repeat;
+    padding-bottom: 2px;
+    transition: background-size var(--dur-s) var(--ease-out);
+  }
+  .header__nav a:hover {
+    background-size: 100% 1.5px;
+  }
+  .header__actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .header__lang {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    padding: 0.45rem 0.55rem;
+    border-radius: var(--radius-s);
+    box-shadow: inset 0 0 0 1px currentColor;
+  }
+  .header :global(.header__cta) {
+    min-height: 2.6rem;
+    font-size: var(--step--1);
+    padding-left: 1rem;
+  }
+  .header :global(.header__cta .btn__icon) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  .header__menu {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border-radius: var(--radius-s);
+    background: var(--cm-gunmetal);
+    color: var(--cm-cream);
+    position: relative;
+    z-index: 2;
+  }
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    align-content: space-between;
+    padding: calc(var(--header-h) + var(--space-l)) var(--gutter) var(--space-l);
+    clip-path: inset(0 0 0 0);
+  }
+  .menu[hidden] {
+    display: none;
+  }
+  .menu ul {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .menu__link {
+    font-size: clamp(3.6rem, 17vw, 7rem);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .menu__foot {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  @media (max-width: 860px) {
+    .header {
+      grid-template-columns: 1fr auto;
+    }
+    .header__nav,
+    .header__lang,
+    .header :global(.header__cta) {
+      display: none;
+    }
+    .header__menu {
+      display: grid;
+    }
+  }
+</style>

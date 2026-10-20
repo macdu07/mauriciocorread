@@ -1,0 +1,112 @@
+---
+import Icon from '../ui/Icon.astro';
+import type { getPage } from '../../i18n';
+
+type Data = NonNullable<Awaited<ReturnType<typeof getPage>>['stats']>;
+interface Props {
+  stats: Data;
+  index: string;
+}
+const { stats, index } = Astro.props;
+---
+
+<section class="stats grain" data-surface="orange" data-stats aria-label={stats.folio}>
+  <p class="folio folio--corner">{index} · {stats.folio}</p>
+
+  <dl class="stats__grid">
+    {stats.items.map((item, i) => (
+      <div class={`stats__item stats__item--${i + 1}`} data-reveal>
+        <dt class="stats__label">{item.label}</dt>
+        <dd class="stats__value poster" data-breathe>
+          {item.prefix && <span>{item.prefix}</span>}
+          <span data-count={item.value}>{item.value}</span>
+        </dd>
+      </div>
+    ))}
+  </dl>
+
+  <span class="stats__star stats__star--a" aria-hidden="true"><Icon name="star" size="100%" /></span>
+  <span class="stats__star stats__star--b" aria-hidden="true"><Icon name="star" size="100%" /></span>
+</section>
+
+<style>
+  .stats {
+    position: relative;
+    overflow: clip;
+    padding: var(--space-2xl) var(--gutter);
+  }
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    row-gap: var(--space-l);
+    column-gap: var(--space-m);
+  }
+  .stats__item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: end;
+    gap: var(--space-m);
+    padding-top: var(--space-s);
+    border-top: 1.5px solid var(--cm-gunmetal);
+  }
+  /* Escalones constructivistas: cada cifra baja y se desplaza */
+  .stats__item--1 {
+    grid-column: 1 / span 7;
+  }
+  .stats__item--2 {
+    grid-column: 6 / span 7;
+  }
+  .stats__item--3 {
+    grid-column: 2 / span 6;
+  }
+  .stats__value {
+    order: -1;
+    font-size: clamp(6rem, 15vw, 16rem);
+    line-height: 0.78;
+    display: flex;
+    font-variant-numeric: tabular-nums;
+  }
+  .stats__item--1 .stats__value {
+    font-size: clamp(7rem, 20vw, 22rem);
+  }
+  .stats__label {
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    max-width: 18ch;
+    padding-bottom: 0.4rem;
+  }
+  .stats__star {
+    position: absolute;
+    color: var(--cm-cream);
+  }
+  .stats__star--a {
+    width: clamp(2.5rem, 5vw, 4.5rem);
+    right: 9%;
+    top: 22%;
+  }
+  .stats__star--b {
+    width: clamp(1.5rem, 2.6vw, 2.4rem);
+    left: 5%;
+    bottom: 18%;
+    color: var(--cm-gunmetal);
+  }
+
+  @media (max-width: 860px) {
+    .stats__item--1,
+    .stats__item--2,
+    .stats__item--3 {
+      grid-column: 1 / -1;
+    }
+    .stats__item {
+      grid-template-columns: 1fr;
+    }
+    .stats__value {
+      font-size: 34vw;
+    }
+    .stats__item--1 .stats__value {
+      font-size: 40vw;
+    }
+  }
+</style>

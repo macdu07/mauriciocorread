@@ -1,0 +1,161 @@
+---
+import type { getPage } from '../../i18n';
+
+type Data = NonNullable<Awaited<ReturnType<typeof getPage>>['process']>;
+interface Props {
+  process: Data;
+  index: string;
+}
+const { process, index } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="process grain" data-surface="gunmetal" data-process aria-labelledby="process-title">
+  <p class="folio folio--corner">{index} · {process.folio}</p>
+
+  <svg class="process__radar" viewBox="0 0 800 800" fill="none" aria-hidden="true">
+    <circle cx="400" cy="400" r="390" />
+    <circle cx="400" cy="400" r="290" />
+    <circle cx="400" cy="400" r="190" stroke-dasharray="3 8" />
+    <circle cx="400" cy="400" r="90" />
+    <path d="M400 0v800M0 400h800" />
+  </svg>
+
+  <h2 id="process-title" class="process__title" data-split-lines>{process.title}</h2>
+
+  <div class="process__route">
+    <svg class="process__path" viewBox="0 0 1000 120" preserveAspectRatio="none" fill="none" aria-hidden="true">
+      <path class="process__line process__line--ghost" d="M0 90 C 160 90, 200 30, 333 30 S 520 90, 666 90 S 860 30, 1000 30" />
+      <path class="process__line process__line--draw" data-process-line d="M0 90 C 160 90, 200 30, 333 30 S 520 90, 666 90 S 860 30, 1000 30" />
+    </svg>
+
+    <ol class="process__steps" role="list">
+      {process.steps.map((step, i) => (
+        <li class="process__step" data-process-step>
+          <span class="process__dot" aria-hidden="true"></span>
+          <p class="process__num poster" aria-hidden="true">{pad(i + 1)}</p>
+          <h3 class="process__name">{step.title}</h3>
+          <p class="process__body">{step.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    position: relative;
+    overflow: clip;
+    padding: var(--space-2xl) var(--gutter);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+  .process__radar {
+    position: absolute;
+    z-index: -1;
+    width: min(90vw, 62rem);
+    right: -18%;
+    top: 50%;
+    translate: 0 -50%;
+    stroke: color-mix(in oklab, var(--cm-turquoise) 35%, transparent);
+    stroke-width: 1;
+  }
+  .process__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    max-width: 16ch;
+  }
+  .process__route {
+    position: relative;
+  }
+  .process__path {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 7.5rem;
+  }
+  .process__line {
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+  .process__line--ghost {
+    stroke: color-mix(in oklab, var(--cm-cream) 18%, transparent);
+    stroke-dasharray: 2 8;
+  }
+  .process__line--draw {
+    stroke: var(--cm-orange);
+  }
+  .process__steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-l);
+  }
+  .process__step {
+    display: grid;
+    gap: var(--space-xs);
+    align-content: start;
+  }
+  /* Las estaciones siguen la curva: alternan altura */
+  .process__step:nth-child(odd) {
+    padding-top: 4.4rem;
+  }
+  .process__step:nth-child(even) {
+    padding-top: 0.6rem;
+  }
+  .process__dot {
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: var(--cm-gunmetal);
+    box-shadow: inset 0 0 0 2px var(--cm-turquoise);
+    margin-bottom: var(--space-s);
+    transition:
+      background-color var(--dur-s) var(--ease-soft),
+      transform var(--dur-s) var(--ease-out);
+  }
+  :global(.process__step.is-lit) .process__dot {
+    background: var(--cm-orange);
+    box-shadow: inset 0 0 0 2px var(--cm-orange);
+    transform: scale(1.35);
+  }
+  .process__num {
+    font-size: clamp(4rem, 7vw, 7rem);
+    color: var(--cm-turquoise);
+    line-height: 0.8;
+  }
+  .process__name {
+    font-size: var(--step-2);
+    letter-spacing: -0.03em;
+  }
+  .process__body {
+    color: color-mix(in oklab, var(--cm-cream) 82%, var(--cm-turquoise));
+    max-width: 30ch;
+  }
+
+  @media (max-width: 860px) {
+    .process__path {
+      display: none;
+    }
+    .process__steps {
+      grid-template-columns: 1fr;
+      border-left: 2px dashed color-mix(in oklab, var(--cm-cream) 25%, transparent);
+      padding-left: var(--space-m);
+      gap: var(--space-xl);
+    }
+    .process__step:nth-child(odd),
+    .process__step:nth-child(even) {
+      padding-top: 0;
+    }
+    .process__dot {
+      position: absolute;
+      left: calc(var(--space-m) * -1 - 0.6rem);
+    }
+    .process__step {
+      position: relative;
+    }
+  }
+</style>

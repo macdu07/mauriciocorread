@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "title": "Mauricio Correa — Diseñador UI/UX y desarrollador web",
+    "description": "Diseño interfaces y construyo sitios web que convierten tu identidad en una experiencia clara, memorable y lista para crecer. Más de 10 años de experiencia."
+  },
+  "preloader": {
+    "edition": "Edición 2026"
+  },
+  "hero": {
+    "nameLines": [
+      "Mauricio",
+      "Correa"
+    ],
+    "title": "Transformo ideas en experiencias digitales.",
+    "lead": "Diseño interfaces y construyo sitios web que convierten tu identidad en una experiencia clara, memorable y lista para crecer.",
+    "primaryCta": {
+      "label": "Ver proyectos",
+      "href": "/proyectos"
+    },
+    "secondaryCta": {
+      "label": "Hablemos",
+      "href": "#contacto"
+    },
+    "stat": {
+      "value": "+10 años",
+      "label": "creando soluciones digitales para marcas y empresas."
+    },
+    "stamp": "UI/UX · Web · Branding · +10 años · ",
+    "scrollHint": "Desliza para entrar",
+    "screens": [
+      {
+        "image": "../../../assets/projects/encanto-amatista/cover.webp",
+        "alt": "Página principal de Encanto Amatista",
+        "name": "Encanto Amatista"
+      },
+      {
+        "image": "../../../assets/projects/autovenz/cover.webp",
+        "alt": "Página principal de AutoVenz",
+        "name": "AutoVenz"
+      },
+      {
+        "image": "../../../assets/projects/chanell-clean-co/cover.webp",
+        "alt": "Página principal de Chanell Clean Co",
+        "name": "Chanell Clean Co"
+      }
+    ]
+  },
+  "manifesto": {
+    "folio": "Mirada",
+    "statement": "Diseñar es decidir qué merece ser visto.",
+    "highlight": "merece ser visto.",
+    "body": "Cada proyecto empieza con una pregunta simple: ¿qué necesita entender tu cliente en los primeros segundos? Desde ahí ordeno, diseño y construyo."
+  },
+  "marquee": [
+    "Diseño",
+    "Código",
+    "Dirección"
+  ],
+  "contact": {
+    "folio": "Tu proyecto",
+    "display": "Hablemos",
+    "title": "¿Tienes un proyecto en mente?",
+    "body": "Conversemos sobre el objetivo, la experiencia y la forma más clara de llevarlo a la web.",
+    "ticket": [
+      {
+        "label": "Pasajero",
+        "value": "Tu marca"
+      },
+      {
+        "label": "Destino",
+        "value": "Tu nueva web"
+      },
+      {
+        "label": "Salida",
+        "value": "Hoy"
+      },
+      {
+        "label": "Puerta",
+        "value": "WhatsApp"
+      }
+    ],
+    "whatsappLabel": "Escríbeme por WhatsApp",
+    "emailLabel": "Enviar email",
+    "copyLabel": "Copiar",
+    "copiedLabel": "Copiado"
+  },
+  "work": {
+    "folio": "Trabajo seleccionado",
+    "title": "El trabajo habla primero.",
+    "lead": "Cada caso conecta el concepto, las decisiones de interfaz y el sitio real. Sin pasos ocultos.",
+    "viewCase": "Ver caso",
+    "visitSite": "Visitar sitio",
+    "dragHint": "Desliza"
+  },
+  "archive": {
+    "folio": "Archivo",
+    "title": "Más proyectos",
+    "lead": "Una selección adicional de interfaces, tiendas y experiencias digitales.",
+    "openCase": "Abrir caso",
+    "all": {
+      "label": "Ver todos los proyectos",
+      "href": "/proyectos"
+    }
+  },
+  "capabilities": {
+    "folio": "Capacidades",
+    "title": "Una idea. Tres formas de hacerla visible.",
+    "lead": "Tres capacidades conectadas para que una idea conserve su intención desde el primer boceto hasta el sitio publicado.",
+    "receives": "Lo que recibes",
+    "link": {
+      "label": "Ver servicios en detalle",
+      "href": "/servicios"
+    },
+    "stamp": "Diseño · Código · Dirección · "
+  },
+  "process": {
+    "folio": "Recorrido",
+    "title": "Del primer boceto al sitio publicado.",
+    "steps": [
+      {
+        "title": "Descubrir",
+        "body": "Entiendo tu negocio, tu público y lo que la web debe lograr."
+      },
+      {
+        "title": "Diseñar",
+        "body": "Estructura, prototipo y diseño visual en Figma, validados contigo antes de escribir código."
+      },
+      {
+        "title": "Construir",
+        "body": "Desarrollo responsive, rápido y fácil de administrar."
+      },
+      {
+        "title": "Lanzar",
+        "body": "Publicación, pruebas finales y acompañamiento para que tu sitio siga creciendo."
+      }
+    ]
+  },
+  "stats": {
+    "folio": "Cifras",
+    "items": [
+      {
+        "value": 10,
+        "prefix": "+",
+        "label": "años diseñando y desarrollando para la web."
+      },
+      {
+        "value": 8,
+        "label": "proyectos publicados en este portafolio."
+      },
+      {
+        "value": 3,
+        "label": "capacidades conectadas: diseño, código y dirección de marca."
+      }
+    ]
+  },
+  "about": {
+    "folio": "Sobre mí",
+    "title": "Hola, soy Mauricio Correa.",
+    "body": [
+      "Diseñador gráfico y web con más de una década de experiencia transformando ideas en experiencias visuales impactantes y funcionales.",
+      "Mi objetivo es ayudarte a contar tu historia a través del diseño, con soluciones que reflejen la identidad única de tu marca y conecten con tu audiencia de forma significativa."
+    ],
+    "principles": [
+      {
+        "title": "Innovación creativa",
+        "body": "Diseños modernos y únicos que hacen destacar tu marca."
+      },
+      {
+        "title": "Experiencia del usuario",
+        "body": "Diseño web intuitivo y fácil de usar para una navegación fluida."
+      },
+      {
+        "title": "Personalización única",
+        "body": "Soluciones que reflejan la identidad y valores de cada cliente."
+      },
+      {
+        "title": "Calidad y detalle",
+        "body": "Atención meticulosa a cada detalle para un resultado impecable."
+      }
+    ],
+    "toolsTitle": "Guía de herramientas",
+    "tools": [
+      "Figma",
+      "WordPress",
+      "Bricks Builder",
+      "WooCommerce",
+      "Astro",
+      "UI/UX",
+      "Diseño gráfico",
+      "Identidad corporativa"
+    ],
+    "link": {
+      "label": "Conoce más",
+      "href": "/sobre-mi"
+    },
+    "cards": {
+      "palette": "Marca",
+      "type": "Tipografía",
+      "code": "Código"
+    }
+  }
+}

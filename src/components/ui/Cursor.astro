@@ -1,0 +1,62 @@
+<div class="cursor" data-cursor-el aria-hidden="true">
+  <span class="cursor__dot"></span>
+  <span class="cursor__label" data-cursor-label></span>
+</div>
+
+<style>
+  .cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 150;
+    pointer-events: none;
+    display: none;
+  }
+  :global(html.has-cursor) .cursor {
+    display: block;
+  }
+  .cursor__dot {
+    position: absolute;
+    left: -6px;
+    top: -6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--cm-orange);
+    transition:
+      transform var(--dur-s) var(--ease-out),
+      background-color var(--dur-s) var(--ease-soft);
+  }
+  .cursor__label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    translate: -50% -50%;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--cm-gunmetal);
+    opacity: 0;
+    scale: 0.6;
+    white-space: nowrap;
+    transition:
+      opacity var(--dur-xs) var(--ease-soft),
+      scale var(--dur-s) var(--ease-out);
+  }
+  :global(.cursor.is-label) .cursor__dot {
+    transform: scale(7.5);
+  }
+  :global(.cursor.is-label) .cursor__label {
+    opacity: 1;
+    scale: 1;
+  }
+  :global(.cursor.is-hover) .cursor__dot {
+    transform: scale(2.6);
+    background: var(--cm-turquoise);
+  }
+  :global(.cursor.is-hidden) .cursor__dot {
+    transform: scale(0);
+  }
+</style>

@@ -1,0 +1,377 @@
+---
+import Icon from '../ui/Icon.astro';
+import Stamp from '../ui/Stamp.astro';
+import type { getPage } from '../../i18n';
+
+type Data = NonNullable<Awaited<ReturnType<typeof getPage>>['about']>;
+interface Props {
+  about: Data;
+  index: string;
+}
+const { about, index } = Astro.props;
+// El anillo del sello repite el principio hasta llenar el círculo sin apretar letras.
+const ring = (t: string) => {
+  let r = '';
+  while ((r + t + ' · ').length <= 46) r += t + ' · ';
+  return r || `${t} · `;
+};
+const swatches = [
+  { name: 'Cream', hex: '#F8F3EA' },
+  { name: 'Turquoise', hex: '#00AEAE' },
+  { name: 'Orange', hex: '#FF6B30' },
+  { name: 'Gunmetal', hex: '#1D2730' },
+];
+---
+
+<section class="about grain" data-surface="cream" data-about aria-labelledby="about-title">
+  <p class="folio folio--corner">{index} · {about.folio}</p>
+
+  <div class="about__grid">
+    <div class="about__copy">
+      <h2 id="about-title" class="about__title" data-split-lines>{about.title}</h2>
+      {about.body.map((p) => <p class="about__body" data-reveal>{p}</p>)}
+      <a class="about__link" href={about.link.href} data-reveal>
+        {about.link.label}
+        <Icon name="arrow-up-right" size="1.1em" />
+      </a>
+    </div>
+
+    <!-- Collage: las tres capacidades como piezas reales de trabajo -->
+    <div class="about__collage" aria-hidden="true">
+      <div class="about__arch" data-depth-scroll="0.06">
+        <span class="about__sun"></span>
+        <svg class="about__orbits" viewBox="0 0 400 520" fill="none">
+          <ellipse cx="200" cy="200" rx="170" ry="60" transform="rotate(-14 200 200)" />
+          <ellipse cx="200" cy="200" rx="110" ry="38" transform="rotate(-14 200 200)" />
+        </svg>
+      </div>
+
+      <div class="card card--palette" data-depth-scroll="-0.18">
+        <p class="card__label">{about.cards.palette}</p>
+        <ul class="card__swatches">
+          {swatches.map((s) => (
+            <li style={`--c:${s.hex}`}>
+              <span class="card__chip"></span>
+              <span class="card__hex">{s.hex}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="card card--type" data-depth-scroll="0.14">
+        <p class="card__label">{about.cards.type}</p>
+        <p class="card__aa">Aa</p>
+        <p class="card__specimen poster">Archivo</p>
+        <p class="card__meta">Geist · Archivo</p>
+      </div>
+
+      <div class="card card--code" data-depth-scroll="-0.08">
+        <p class="card__label">{about.cards.code}</p>
+        <pre class="card__pre"><code><span class="t">&lt;section</span> <span class="a">class</span>=<span class="s">"hero"</span><span class="t">&gt;</span>
+  <span class="t">&lt;h1&gt;</span>Mauricio<span class="t">&lt;/h1&gt;</span>
+<span class="t">&lt;/section&gt;</span></code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="about__lower">
+    <ul class="about__principles" role="list">
+      {about.principles.map((p) => (
+        <li class="principle" data-reveal>
+          <Stamp text={ring(p.title)} size="7.5rem" tone="ink" class="principle__stamp" />
+          <div class="principle__text">
+            <h3 class="principle__title">{p.title}</h3>
+            <p class="principle__body">{p.body}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="about__tools" data-reveal>
+      <p class="about__tools-title">{about.toolsTitle}</p>
+      <ul role="list">
+        {about.tools.map((t) => (
+          <li><Icon name="star" size="0.75em" class="about__tool-star" />{t}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    position: relative;
+    overflow: clip;
+    padding: var(--space-2xl) var(--gutter);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+  .about__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .about__copy {
+    display: grid;
+    gap: var(--space-m);
+    align-content: center;
+  }
+  .about__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    max-width: 12ch;
+  }
+  .about__body {
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--cm-ink-soft);
+    max-width: 42ch;
+  }
+  .about__link {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: var(--step-1);
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) left bottom / 100% 1.5px no-repeat;
+    padding-bottom: 0.2rem;
+    transition: background-size var(--dur-s) var(--ease-out);
+  }
+  .about__link:hover {
+    background-size: 30% 1.5px;
+  }
+
+  /* Collage */
+  .about__collage {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    max-height: 78svh;
+    justify-self: center;
+    width: min(100%, 34rem);
+  }
+  .about__arch {
+    position: absolute;
+    inset: 4% 14% 0;
+    border-radius: var(--radius-arch);
+    background: linear-gradient(170deg, var(--cm-turquoise) 0%, var(--cm-turquoise-deep) 60%, var(--cm-gunmetal) 100%);
+    overflow: hidden;
+  }
+  .about__sun {
+    position: absolute;
+    width: 46%;
+    aspect-ratio: 1;
+    left: 27%;
+    top: 16%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, rgb(29 39 48 / 0.28) 0.9px, transparent 1.3px) 0 0 / 7px 7px,
+      var(--cm-orange);
+  }
+  .about__orbits {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    stroke: rgb(248 243 234 / 0.55);
+    stroke-width: 1.2;
+  }
+  .card {
+    position: absolute;
+    background: var(--cm-cream);
+    color: var(--cm-gunmetal);
+    border-radius: var(--radius-m);
+    padding: 1rem 1.1rem;
+    box-shadow: 0 24px 40px -22px rgb(29 39 48 / 0.6);
+  }
+  .card__label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cm-ink-soft);
+    margin-bottom: 0.6rem;
+  }
+  .card--palette {
+    left: 0;
+    top: 40%;
+    width: 52%;
+    rotate: -6deg;
+  }
+  .card__swatches {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+  }
+  .card__chip {
+    display: block;
+    aspect-ratio: 1;
+    border-radius: var(--radius-s);
+    background: var(--c);
+    box-shadow: inset 0 0 0 1px rgb(29 39 48 / 0.15);
+  }
+  .card__hex {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    margin-top: 0.25rem;
+  }
+  .card--type {
+    right: 0;
+    top: 10%;
+    width: 44%;
+    rotate: 5deg;
+  }
+  .card__aa {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+  }
+  .card__specimen {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    color: var(--cm-orange);
+    margin-top: 0.2rem;
+  }
+  .card__meta {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    margin-top: 0.5rem;
+    color: var(--cm-ink-soft);
+  }
+  .card--code {
+    right: 4%;
+    bottom: 6%;
+    width: 58%;
+    rotate: -3deg;
+    background: var(--cm-gunmetal);
+    color: var(--cm-cream);
+  }
+  .card--code .card__label {
+    color: color-mix(in oklab, var(--cm-cream) 70%, var(--cm-turquoise));
+  }
+  .card__pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: clamp(0.62rem, 0.9vw, 0.78rem);
+    line-height: 1.6;
+    white-space: pre;
+    overflow: hidden;
+  }
+  .card__pre .t {
+    color: var(--cm-turquoise);
+  }
+  .card__pre .a {
+    color: var(--cm-orange);
+  }
+  .card__pre .s {
+    color: color-mix(in oklab, var(--cm-orange) 55%, var(--cm-cream));
+  }
+
+  /* Principios: sellos en escalera, junto a la guía de herramientas */
+  .about__lower {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: start;
+    border-top: 1.5px solid var(--cm-gunmetal);
+    padding-top: var(--space-l);
+  }
+  .about__principles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-l) var(--space-xl);
+  }
+  /* margin (no translate): GSAP limpia las propiedades de transformación individuales */
+  .principle:nth-child(even) {
+    margin-top: 3.5rem;
+  }
+  .principle {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-s);
+    align-items: center;
+  }
+  .principle :global(.principle__stamp) {
+    rotate: -8deg;
+  }
+  .principle:nth-child(even) :global(.principle__stamp) {
+    rotate: 7deg;
+  }
+  .principle__text {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+  .principle__title {
+    font-size: var(--step-1);
+    letter-spacing: -0.02em;
+  }
+  .principle__body {
+    color: var(--cm-ink-soft);
+    max-width: 28ch;
+  }
+
+  /* Guía de herramientas: etiqueta de papel */
+  .about__tools {
+    align-self: start;
+    width: 100%;
+    background: var(--cm-cream-deep);
+    border-radius: var(--radius-s);
+    padding: 1.4rem 1.6rem;
+    rotate: -1.5deg;
+    box-shadow: 0 18px 30px -22px rgb(29 39 48 / 0.5);
+  }
+  .about__tools-title {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1.5px dashed color-mix(in oklab, var(--cm-gunmetal) 40%, transparent);
+  }
+  .about__tools ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 1.5rem;
+    font-weight: 600;
+  }
+  .about__tools li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+  :global(.about__tool-star) {
+    color: var(--cm-orange);
+    flex: none;
+  }
+
+  @media (max-width: 860px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+    .about__lower {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .card--palette {
+      width: 64%;
+    }
+    .card__hex {
+      font-size: 0.56rem;
+    }
+  }
+  @media (max-width: 520px) {
+    .about__principles {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .principle:nth-child(even) {
+      margin-top: 0;
+    }
+  }
+</style>

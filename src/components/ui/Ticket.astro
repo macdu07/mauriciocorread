@@ -1,0 +1,95 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  rows: { label: string; value: string }[];
+  code?: string;
+}
+const { rows, code = 'MC/26' } = Astro.props;
+---
+
+<div class="ticket" data-ticket>
+  <dl class="ticket__body">
+    {rows.map((row) => (
+      <div class="ticket__row">
+        <dt>{row.label}</dt>
+        <dd>{row.value}</dd>
+      </div>
+    ))}
+  </dl>
+  <div class="ticket__stub" aria-hidden="true">
+    <Icon name="star" size="1.6rem" />
+    <span class="ticket__code">{code}</span>
+    <span class="ticket__bars"></span>
+  </div>
+</div>
+
+<style>
+  .ticket {
+    --notch: 0.9rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background: var(--cm-cream);
+    color: var(--cm-gunmetal);
+    border-radius: var(--radius-m);
+    filter: drop-shadow(0 18px 30px rgb(29 39 48 / 0.28));
+    mask:
+      radial-gradient(circle var(--notch) at calc(100% - 6.5rem) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+      radial-gradient(circle var(--notch) at calc(100% - 6.5rem) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+    transition: transform var(--dur-m) var(--ease-out);
+  }
+  .ticket__body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4rem 2rem;
+    padding: 2rem 2.2rem;
+  }
+  .ticket__row dt {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cm-ink-soft);
+  }
+  .ticket__row dd {
+    font-weight: 700;
+    font-size: var(--step-2);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+  @media (max-width: 640px) {
+    .ticket__body {
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+      padding: 1.4rem;
+    }
+    .ticket__row dd {
+      font-size: var(--step-1);
+    }
+  }
+  .ticket__stub {
+    width: 6.5rem;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 0.6rem;
+    padding: 1rem 0.75rem;
+    border-left: 2px dashed color-mix(in oklab, var(--cm-gunmetal) 40%, transparent);
+    color: var(--cm-orange);
+    transition: transform var(--dur-m) var(--ease-out);
+  }
+  .ticket__code {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: var(--step--1);
+    color: var(--cm-gunmetal);
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    letter-spacing: 0.1em;
+  }
+  .ticket__bars {
+    width: 2.6rem;
+    height: 1.1rem;
+    background: repeating-linear-gradient(90deg, var(--cm-gunmetal) 0 2px, transparent 2px 4px, var(--cm-gunmetal) 4px 5px, transparent 5px 8px);
+  }
+</style>

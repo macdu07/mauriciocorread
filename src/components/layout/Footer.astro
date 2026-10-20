@@ -1,0 +1,119 @@
+---
+import Icon from '../ui/Icon.astro';
+import type { getSettings } from '../../i18n';
+
+interface Props {
+  settings: Awaited<ReturnType<typeof getSettings>>;
+}
+const { settings } = Astro.props;
+---
+
+<footer class="footer grain" data-surface="gunmetal" data-footer>
+  <div class="footer__inner" data-footer-inner>
+    <p class="footer__closing">{settings.footer.closing}</p>
+
+    <div class="footer__grid">
+      <nav aria-label="Pie de página">
+        <ul role="list">
+          {settings.nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </nav>
+      <ul role="list">
+        {settings.social.map((item) => (
+          <li><a href={item.href} target="_blank" rel="noopener">{item.label}<Icon name="arrow-up-right" size="0.9em" /></a></li>
+        ))}
+      </ul>
+      <ul role="list">
+        <li>{settings.role}</li>
+        <li><a href={settings.langSwitch.href} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}</a></li>
+        <li><a href="#top">{settings.footer.backToTop}</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__sign" aria-hidden="true">
+      <span class="footer__logo"></span>
+      <span class="poster footer__word">{settings.siteName}</span>
+    </div>
+    <p class="footer__legal">{settings.footer.copyright}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    overflow: clip;
+  }
+  .footer__inner {
+    padding: var(--space-2xl) var(--gutter) var(--space-m);
+    display: grid;
+    gap: var(--space-xl);
+  }
+  .footer__closing {
+    font-size: var(--step-3);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--space-l);
+    font-size: var(--step--1);
+  }
+  .footer__grid ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+  }
+  .footer__grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    text-decoration: none;
+    color: var(--cm-cream);
+  }
+  .footer__grid a:hover {
+    color: var(--cm-orange);
+  }
+  .footer__grid li {
+    color: color-mix(in oklab, var(--cm-cream) 72%, var(--cm-turquoise));
+  }
+  .footer__sign {
+    display: flex;
+    align-items: end;
+    gap: clamp(0.8rem, 2vw, 2rem);
+    color: var(--cm-orange);
+  }
+  .footer__logo {
+    width: clamp(4rem, 13vw, 13rem);
+    aspect-ratio: 880 / 695;
+    background: currentColor;
+    mask: url('/brand/m.svg') center / contain no-repeat;
+    flex: none;
+  }
+  .footer__word {
+    font-size: clamp(3rem, 10.4vw, 13rem);
+    color: var(--cm-cream);
+    white-space: nowrap;
+    margin-bottom: -0.04em;
+  }
+  .footer__legal {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cm-cream-soft);
+  }
+  @media (max-width: 640px) {
+    .footer__sign {
+      flex-direction: column;
+      align-items: start;
+    }
+    .footer__word {
+      font-size: 18vw;
+    }
+  }
+</style>

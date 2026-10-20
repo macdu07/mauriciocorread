@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Manifesto from '../components/sections/Manifesto.astro';
+import Marquee from '../components/ui/Marquee.astro';
+import Work from '../components/sections/Work.astro';
+import Archive from '../components/sections/Archive.astro';
+import Capabilities from '../components/sections/Capabilities.astro';
+import Process from '../components/sections/Process.astro';
+import Stats from '../components/sections/Stats.astro';
+import About from '../components/sections/About.astro';
+import ContactClose from '../components/sections/ContactClose.astro';
+import { getPage, getProjects, getServices, getSettings, toLocale } from '../i18n';
+
+const locale = toLocale(Astro.currentLocale);
+const page = await getPage(locale, 'home');
+const settings = await getSettings(locale);
+const projects = await getProjects(locale);
+const services = await getServices(locale);
+---
+
+<BaseLayout title={page.meta.title} description={page.meta.description} preloader={page.preloader}>
+  {page.hero && <Hero hero={page.hero} settings={settings} />}
+  {page.manifesto && <Manifesto manifesto={page.manifesto} index="02" />}
+  {page.marquee && <Marquee items={page.marquee} surface="orange" />}
+  {page.work && <Work work={page.work} projects={projects} locale={locale} index="03" />}
+  {page.archive && <Archive archive={page.archive} projects={projects} locale={locale} index="04" />}
+  {page.capabilities && <Capabilities capabilities={page.capabilities} services={services} index="05" />}
+  {page.process && <Process process={page.process} index="06" />}
+  {page.stats && <Stats stats={page.stats} index="07" />}
+  {page.about && <About about={page.about} index="08" />}
+  {page.contact && <ContactClose contact={page.contact} settings={settings} index="09" stamp={page.hero?.stamp ?? ''} />}
+</BaseLayout>

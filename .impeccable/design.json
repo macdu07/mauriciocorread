@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-20T15:22:38+00:00",
+  "title": "Design System: Mauricio Correa",
+  "extensions": {
+    "colorMeta": {
+      "cm-orange": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "oklch(70.4% 0.194 40.2)",
+        "tonalRamp": [
+          "#3d0000",
+          "#660000",
+          "#900000",
+          "#ba2600",
+          "#e45209",
+          "#ff7a41",
+          "#ffb38f",
+          "#ffd0ab"
+        ]
+      },
+      "cm-turquoise": {
+        "role": "secondary",
+        "displayName": "Print Turquoise",
+        "canonical": "oklch(68.0% 0.116 194.8)",
+        "tonalRamp": [
+          "#00151a",
+          "#003538",
+          "#005658",
+          "#00797a",
+          "#009e9f",
+          "#36c5c4",
+          "#64e9e8",
+          "#84ffff"
+        ]
+      },
+      "cm-turquoise-deep": {
+        "role": "secondary",
+        "displayName": "Deep Turquoise",
+        "canonical": "oklch(52.3% 0.089 198.8)",
+        "tonalRamp": [
+          "#001319",
+          "#003237",
+          "#005257",
+          "#007579",
+          "#38999d",
+          "#62bfc3",
+          "#86e3e7",
+          "#a4ffff"
+        ]
+      },
+      "cm-cream": {
+        "role": "neutral",
+        "displayName": "Edition Cream",
+        "canonical": "oklch(96.6% 0.013 82.4)",
+        "tonalRamp": [
+          "#0e0b06",
+          "#2a261f",
+          "#48443d",
+          "#6a655e",
+          "#8d8980",
+          "#b2ada5",
+          "#d5d0c8",
+          "#f3eee5"
+        ]
+      },
+      "cm-cream-deep": {
+        "role": "neutral",
+        "displayName": "Cream Deep",
+        "canonical": "oklch(92.8% 0.023 82.1)",
+        "tonalRamp": [
+          "#100a02",
+          "#2c2519",
+          "#4b4437",
+          "#6d6557",
+          "#908879",
+          "#b5ad9e",
+          "#d9d0c0",
+          "#f6eddd"
+        ]
+      },
+      "cm-gunmetal": {
+        "role": "neutral",
+        "displayName": "Gunmetal Ink",
+        "canonical": "oklch(26.7% 0.022 245.9)",
+        "tonalRamp": [
+          "#040c14",
+          "#1e2831",
+          "#3c4650",
+          "#5c6872",
+          "#7f8b96",
+          "#a3b0bb",
+          "#c6d3df",
+          "#e3f0fd"
+        ]
+      },
+      "cm-gunmetal-soft": {
+        "role": "neutral",
+        "displayName": "Gunmetal Soft",
+        "canonical": "oklch(33.0% 0.026 244.2)",
+        "tonalRamp": [
+          "#030c15",
+          "#1b2832",
+          "#394752",
+          "#5a6874",
+          "#7c8b98",
+          "#a1b0be",
+          "#c3d3e1",
+          "#e0f1ff"
+        ]
+      },
+      "cm-ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "color-mix(in oklab, var(--cm-gunmetal) 78%, var(--cm-cream))"
+      },
+      "cm-cream-soft": {
+        "role": "neutral",
+        "displayName": "Cream Soft",
+        "canonical": "color-mix(in oklab, var(--cm-cream) 74%, var(--cm-gunmetal))"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Poster",
+        "purpose": "Archivo 900 at 62% width, uppercase. Giant display words (hero name, contact word, marquee, footer signature, menu links, ghost word, preloader count); aria-hidden when it repeats a heading. Width axis breathes 62-72% with scroll velocity. Archivo is used only at poster scale (2.6rem+): display words, project names, figures, giant numerals."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Hero H1; carries the accessible meaning of the poster name."
+      },
+      "headline-large": {
+        "displayName": "Headline Large",
+        "purpose": "Section headings such as the contact title."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Ticket values and short data headings."
+      },
+      "body-large": {
+        "displayName": "Body Large",
+        "purpose": "Manifesto and contact body copy, 34-38ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default reading text; leads capped near 40ch."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "Header links with left-origin underline wipe."
+      },
+      "label": {
+        "displayName": "Folio / Label",
+        "purpose": "Geist Mono uppercase: corner folios, ticket labels, language switch, browser-bar captions, preloader meta. Never an eyebrow above a heading."
+      },
+      "display-name": {
+        "displayName": "Project Name",
+        "purpose": "Work poster project heading (real h3). Under the hero's 15.5vw so two-word names fit; 17vw on mobile. Breathes; cream swap copy over the screenshot."
+      },
+      "display-figure": {
+        "displayName": "Figure",
+        "purpose": "Figures plate numbers (real dd values), tabular, count-up; lead figure clamp(7rem, 20vw, 22rem)."
+      },
+      "display-row": {
+        "displayName": "Row Name",
+        "purpose": "Archive project names inside the row link."
+      }
+    },
+    "shadows": [
+      {
+        "name": "button-lift",
+        "value": "0 10px 24px -12px rgb(29 39 48 / 0.55)",
+        "purpose": "Hover on orange and cream buttons only."
+      },
+      {
+        "name": "ticket-drop",
+        "value": "drop-shadow(0 18px 30px rgb(29 39 48 / 0.28))",
+        "purpose": "Boarding ticket; filter so it follows the notched mask."
+      },
+      {
+        "name": "screen-float",
+        "value": "0 30px 50px -20px rgb(0 0 0 / 0.55)",
+        "purpose": "Project screens floating inside the gunmetal M window."
+      },
+      {
+        "name": "object-drop",
+        "value": "0 24px 40px -22px rgb(29 39 48 / 0.6) … 0 40px 60px -30px rgb(29 39 48 / 0.6)",
+        "purpose": "Phase 2 objects on the paper: tools label (0 18px 30px -22px / 0.5), collage cards, capability tickets (0 30px 50px -30px / 0.55), phone (0 30px 40px -20px / 0.6), archive shots (0 30px 50px -25px / 0.55), work browser frame (0 40px 60px -30px / 0.6). Larger object, deeper drop."
+      },
+      {
+        "name": "header-hairline",
+        "value": "0 1px 0 rgb(29 39 48 / 0.12)",
+        "purpose": "Solid header state."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out / mc-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrances: line/char reveals, print-registration, buttons, underline wipes."
+      },
+      {
+        "name": "ease-in-out / mc-inout",
+        "value": "cubic-bezier(0.76, 0, 0.24, 1)",
+        "purpose": "Wipes and portals: M window clip, field, menu clip, preloader scale."
+      },
+      {
+        "name": "ease-soft",
+        "value": "cubic-bezier(0.33, 1, 0.68, 1)",
+        "purpose": "Colour and background transitions."
+      },
+      {
+        "name": "dur-xs",
+        "value": "0.2s",
+        "purpose": "Opacity micro-states (cursor label)."
+      },
+      {
+        "name": "dur-s",
+        "value": "0.45s",
+        "purpose": "Hover states, label roll, icon rotation."
+      },
+      {
+        "name": "dur-m",
+        "value": "0.8s",
+        "purpose": "Header hide/show, ticket, menu clip."
+      },
+      {
+        "name": "dur-l",
+        "value": "1.2s",
+        "purpose": "Section reveals, field scale, image entrances."
+      },
+      {
+        "name": "dur-xl",
+        "value": "1.6s",
+        "purpose": "Anchor scroll, window inner scale."
+      },
+      {
+        "name": "stamp-spin",
+        "value": "14deg/s + |scroll velocity| x 6",
+        "purpose": "Continuous stamp ring rotation boosted by scroll."
+      },
+      {
+        "name": "breathe-width",
+        "value": "font-stretch 62% -> 72% (velocity x 0.9, lerp 0.08)",
+        "purpose": "Poster width breathing on data-breathe lines (hero name, work names and swap copies, figures). Shared velocity decays x0.86 per tick once Lenis stops, so width returns to 62% at rest."
+      },
+      {
+        "name": "marquee",
+        "value": "28s loop, skewX clamp(-8deg, 8deg)",
+        "purpose": "Marquee drift and velocity skew."
+      },
+      {
+        "name": "grain-shift",
+        "value": "1.1s steps(6) infinite",
+        "purpose": "Fine grain movement; stops under reduced motion."
+      },
+      {
+        "name": "work-track",
+        "value": "pinned horizontal translate, scrub 0.6, ease none",
+        "purpose": "Desktop work track (min-width 861px); prints, phones and tonal numbers trigger via containerAnimation."
+      },
+      {
+        "name": "print-in",
+        "value": "frame clip inset(0 0 100% 0) -> 0 (1.2s mc-inout); image scale 1.2 -> 1 (1.6s); plates ±16% x / ±5% y -> 0 (1.4s mc-out)",
+        "purpose": "Imprenta registration on work posters."
+      },
+      {
+        "name": "ticket-stack",
+        "value": "scale 0.94 (-0.02 per deeper ticket), yPercent -4; content autoAlpha 0, scrubbed",
+        "purpose": "Covered capability tickets recede leaving edge and numeral."
+      },
+      {
+        "name": "route-draw",
+        "value": "strokeDashoffset length -> 0, scrub 0.5; stations .is-lit in sequence",
+        "purpose": "Process route and lit stations."
+      },
+      {
+        "name": "count-up",
+        "value": "0 -> value, 1.6s power3.out, once",
+        "purpose": "Figures plate numbers."
+      },
+      {
+        "name": "depth-scroll",
+        "value": "yPercent ±depth x 100, scrubbed, depths -0.18..0.14",
+        "purpose": "About collage layers separating with scroll."
+      },
+      {
+        "name": "cursor-float",
+        "value": "quickTo x/y 0.7s, rotate clamp ±10deg from horizontal speed",
+        "purpose": "Archive screenshot following the pointer (fine pointers only)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "860px"
+      },
+      {
+        "name": "tablet-narrow",
+        "value": "640px"
+      },
+      {
+        "name": "desktop-mid",
+        "value": "1180px"
+      },
+      {
+        "name": "narrow",
+        "value": "520px"
+      }
+    ],
+    "radii": [
+      {
+        "name": "s",
+        "value": "3px",
+        "purpose": "Buttons, chips, arrow box, progress chip, swatches, paper label."
+      },
+      {
+        "name": "frame",
+        "value": "6px",
+        "purpose": "Browser frames and archive cursor-follow shots."
+      },
+      {
+        "name": "m",
+        "value": "10px",
+        "purpose": "Tickets and collage cards."
+      },
+      {
+        "name": "device",
+        "value": "14px",
+        "purpose": "Phone mockup inside a 5px gunmetal bezel."
+      },
+      {
+        "name": "arch",
+        "value": "999px 999px 8px 8px",
+        "purpose": "About collage arch."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Primary action: gunmetal block, cream Geist 600 label, rotating arrow chip.",
+      "html": "<a href=\"#\" class=\"ds-btn ds-btn--ink\"><span>Ver proyectos</span><span class=\"ds-btn__icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8.5 7H17v8.5\"/></svg></span></a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; gap:0.9rem; min-height:3.25rem; padding:0 1.15rem 0 1.4rem; border-radius:var(--radius-s,3px); background:var(--btn-bg); color:var(--btn-fg); font-family:var(--font-sans,'Geist',sans-serif); font-weight:600; font-size:1.0625rem; letter-spacing:-0.01em; text-decoration:none; white-space:nowrap; border:0; cursor:pointer; transition:background-color .45s cubic-bezier(.33,1,.68,1), box-shadow .45s cubic-bezier(.33,1,.68,1), transform .2s; } .ds-btn__icon { display:grid; place-items:center; width:2rem; height:2rem; border-radius:2px; background:color-mix(in oklab, var(--btn-fg) 12%, transparent); transition:transform .45s cubic-bezier(.16,1,.3,1); } .ds-btn:hover .ds-btn__icon { transform:rotate(45deg); } .ds-btn:focus-visible { outline:2px solid #ff6b30; outline-offset:4px; } .ds-btn:active { transform:scale(.98); } .ds-btn--ink { --btn-bg:#1d2730; --btn-fg:#f8f3ea; } .ds-btn--ink:hover { --btn-bg:#2a3742; }"
+    },
+    {
+      "name": "Orange Button",
+      "kind": "button",
+      "refersTo": "button-orange",
+      "description": "Contact action ('Hablemos'): orange block, gunmetal label, soft lift on hover.",
+      "html": "<a href=\"#\" class=\"ds-btn ds-btn--orange\"><span>Hablemos</span><span class=\"ds-btn__icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8.5 7H17v8.5\"/></svg></span></a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; gap:0.9rem; min-height:3.25rem; padding:0 1.15rem 0 1.4rem; border-radius:var(--radius-s,3px); background:var(--btn-bg); color:var(--btn-fg); font-family:var(--font-sans,'Geist',sans-serif); font-weight:600; font-size:1.0625rem; letter-spacing:-0.01em; text-decoration:none; white-space:nowrap; border:0; cursor:pointer; transition:background-color .45s cubic-bezier(.33,1,.68,1), box-shadow .45s cubic-bezier(.33,1,.68,1), transform .2s; } .ds-btn__icon { display:grid; place-items:center; width:2rem; height:2rem; border-radius:2px; background:color-mix(in oklab, var(--btn-fg) 12%, transparent); transition:transform .45s cubic-bezier(.16,1,.3,1); } .ds-btn:hover .ds-btn__icon { transform:rotate(45deg); } .ds-btn:focus-visible { outline:2px solid #ff6b30; outline-offset:4px; } .ds-btn:active { transform:scale(.98); } .ds-btn--orange { --btn-bg:#ff6b30; --btn-fg:#1d2730; } .ds-btn--orange:hover { box-shadow:0 10px 24px -12px rgb(29 39 48 / .55); }"
+    },
+    {
+      "name": "Line Button",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Secondary action: transparent with 1.5px inset currentColor stroke.",
+      "html": "<a href=\"#\" class=\"ds-btn ds-btn--line\"><span>Escríbeme</span><span class=\"ds-btn__icon\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8.5 7H17v8.5\"/></svg></span></a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; gap:0.9rem; min-height:3.25rem; padding:0 1.15rem 0 1.4rem; border-radius:var(--radius-s,3px); background:var(--btn-bg); color:var(--btn-fg); font-family:var(--font-sans,'Geist',sans-serif); font-weight:600; font-size:1.0625rem; letter-spacing:-0.01em; text-decoration:none; white-space:nowrap; border:0; cursor:pointer; transition:background-color .45s cubic-bezier(.33,1,.68,1), box-shadow .45s cubic-bezier(.33,1,.68,1), transform .2s; } .ds-btn__icon { display:grid; place-items:center; width:2rem; height:2rem; border-radius:2px; background:color-mix(in oklab, var(--btn-fg) 12%, transparent); transition:transform .45s cubic-bezier(.16,1,.3,1); } .ds-btn:hover .ds-btn__icon { transform:rotate(45deg); } .ds-btn:focus-visible { outline:2px solid #ff6b30; outline-offset:4px; } .ds-btn:active { transform:scale(.98); } .ds-btn--line { --btn-bg:transparent; --btn-fg:#1d2730; box-shadow:inset 0 0 0 1.5px currentColor; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Logo M, Geist 500 links with left-origin underline wipe, mono ES/EN switch.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav__brand\" href=\"#\"><span class=\"ds-nav__m\">M</span>Mauricio Correa</a><ul><li><a href=\"#\">Proyectos</a></li><li><a href=\"#\">Servicios</a></li><li><a href=\"#\">Proceso</a></li><li><a href=\"#\">Sobre mí</a></li></ul><a class=\"ds-nav__lang\" href=\"#\">EN</a></nav>",
+      "css": ".ds-nav { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:1rem 1.5rem; background:#f8f3ea; color:#1d2730; font-family:'Geist',sans-serif; } .ds-nav__brand { font-weight:700; letter-spacing:-.02em; text-decoration:none; color:inherit; display:inline-flex; gap:.6rem; align-items:center; } .ds-nav__m { font-family:'Archivo',sans-serif; font-weight:900; font-stretch:62%; font-size:1.6rem; color:#1d2730; } .ds-nav ul { display:flex; gap:2rem; list-style:none; margin:0; padding:0; } .ds-nav ul a { color:inherit; text-decoration:none; font-weight:500; font-size:.9rem; padding-bottom:2px; background:linear-gradient(currentColor,currentColor) left bottom / 0 1.5px no-repeat; transition:background-size .45s cubic-bezier(.16,1,.3,1); } .ds-nav ul a:hover, .ds-nav ul a:focus-visible { background-size:100% 1.5px; } .ds-nav a:focus-visible { outline:2px solid #ff6b30; outline-offset:4px; } .ds-nav__lang { font-family:'Geist Mono',monospace; font-size:.75rem; font-weight:600; letter-spacing:.08em; padding:.45rem .55rem; border-radius:2px; box-shadow:inset 0 0 0 1px currentColor; color:inherit; text-decoration:none; }"
+    },
+    {
+      "name": "Stamp",
+      "kind": "custom",
+      "refersTo": "stamp",
+      "description": "Rotating circular printer's stamp: two rings, mono text on a path, orange four-point star core.",
+      "html": "<div class=\"ds-stamp\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\" class=\"ds-stamp__ring\"><defs><path id=\"ds-stamp-p\" d=\"M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0\"/></defs><circle cx=\"100\" cy=\"100\" r=\"96\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"100\" cy=\"100\" r=\"54\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text><textPath href=\"#ds-stamp-p\" textLength=\"462\">UI/UX · WEB · BRANDING · +10 AÑOS · </textPath></text></svg><span class=\"ds-stamp__core\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span></div>",
+      "css": ".ds-stamp { position:relative; width:9rem; aspect-ratio:1; border-radius:50%; background:#f8f3ea; color:#1d2730; } .ds-stamp__ring { width:100%; height:100%; animation:ds-spin 26s linear infinite; } .ds-stamp__ring text { font-family:'Geist Mono',monospace; font-size:15.5px; font-weight:500; letter-spacing:.04em; fill:currentColor; } .ds-stamp__core { position:absolute; inset:33%; color:#ff6b30; } @keyframes ds-spin { to { transform:rotate(360deg); } } @media (prefers-reduced-motion: reduce) { .ds-stamp__ring { animation:none; } }"
+    },
+    {
+      "name": "Boarding Ticket",
+      "kind": "card",
+      "refersTo": "ticket",
+      "description": "Contact ticket: cream body with mono labels and Geist 700 values, notched perforated stub.",
+      "html": "<div class=\"ds-ticket\"><dl class=\"ds-ticket__body\"><div><dt>Destino</dt><dd>Tu nueva web</dd></div><div><dt>Canal</dt><dd>WhatsApp</dd></div><div><dt>Respuesta</dt><dd>Mismo día</dd></div><div><dt>Desde</dt><dd>Colombia</dd></div></dl><div class=\"ds-ticket__stub\" aria-hidden=\"true\"><span class=\"ds-ticket__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span><span class=\"ds-ticket__code\">MC/26</span><span class=\"ds-ticket__bars\"></span></div></div>",
+      "css": ".ds-ticket { --notch:.9rem; display:grid; grid-template-columns:1fr auto; max-width:34rem; background:#f8f3ea; color:#1d2730; border-radius:10px; rotate:-3deg; filter:drop-shadow(0 18px 30px rgb(29 39 48 / .28)); mask:radial-gradient(circle var(--notch) at calc(100% - 6.5rem) 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--notch) at calc(100% - 6.5rem) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; font-family:'Geist',sans-serif; transition:rotate .8s cubic-bezier(.16,1,.3,1); } .ds-ticket:hover { rotate:0deg; } .ds-ticket__body { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.4rem 2rem; padding:2rem 2.2rem; margin:0; } .ds-ticket dt { font-family:'Geist Mono',monospace; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:color-mix(in oklab, #1d2730 78%, #f8f3ea); } .ds-ticket dd { margin:0; font-weight:700; font-size:1.6rem; letter-spacing:-.03em; line-height:1.15; } .ds-ticket__stub { width:6.5rem; display:grid; justify-items:center; align-content:center; gap:.6rem; padding:1rem .75rem; border-left:2px dashed color-mix(in oklab, #1d2730 40%, transparent); } .ds-ticket__star { width:1.6rem; height:1.6rem; color:#ff6b30; } .ds-ticket__code { font-family:'Geist Mono',monospace; font-weight:600; font-size:.9rem; writing-mode:vertical-rl; rotate:180deg; letter-spacing:.1em; } .ds-ticket__bars { width:2.6rem; height:1.1rem; background:repeating-linear-gradient(90deg,#1d2730 0 2px,transparent 2px 4px,#1d2730 4px 5px,transparent 5px 8px); }"
+    },
+    {
+      "name": "Corner Folio",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Plate folio set in the corner, mono uppercase with a CSS registration mark. Never above a heading.",
+      "html": "<section class=\"ds-plate\"><p class=\"ds-folio\">02 · Manifiesto</p></section>",
+      "css": ".ds-plate { position:relative; min-height:8rem; background:#1d2730; color:color-mix(in oklab, #f8f3ea 74%, #1d2730); } .ds-folio { position:absolute; top:1.5rem; right:1.5rem; margin:0; font-family:'Geist Mono',monospace; font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; font-variant-numeric:tabular-nums; display:inline-flex; align-items:center; gap:.6em; } .ds-folio::before { content:''; width:.9em; height:.9em; border-radius:50%; border:1px solid currentColor; background:linear-gradient(currentColor,currentColor) center / 100% 1px no-repeat, linear-gradient(currentColor,currentColor) center / 1px 100% no-repeat; }"
+    },
+    {
+      "name": "Poster Marquee",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Orange plate band of Archivo poster words and stars between gunmetal rules.",
+      "html": "<div class=\"ds-marquee\" aria-label=\"Diseño, Desarrollo, Identidad\"><div class=\"ds-marquee__track\" aria-hidden=\"true\"><span class=\"ds-marquee__word\">Diseño</span><span class=\"ds-marquee__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span><span class=\"ds-marquee__word\">Desarrollo</span><span class=\"ds-marquee__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span><span class=\"ds-marquee__word\">Identidad</span><span class=\"ds-marquee__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span></div></div>",
+      "css": ".ds-marquee { overflow:hidden; background:#ff6b30; color:#1d2730; padding-block:1rem; border-block:1.5px solid #1d2730; } .ds-marquee__track { display:flex; align-items:center; gap:1.5rem; width:max-content; animation:ds-marq 28s linear infinite; } .ds-marquee__word { font-family:'Archivo',sans-serif; font-weight:900; font-stretch:62%; text-transform:uppercase; font-size:4.5rem; line-height:.86; } .ds-marquee__star { width:2.4rem; height:2.4rem; color:#f8f3ea; } @keyframes ds-marq { to { transform:translateX(-30%); } } @media (prefers-reduced-motion: reduce) { .ds-marquee__track { animation:none; flex-wrap:wrap; width:auto; } }"
+    },
+    {
+      "name": "Work Poster",
+      "kind": "card",
+      "refersTo": "browser-frame",
+      "description": "Full-bleed project plate: Archivo name crossing an Imprenta browser frame (cream swap copy clipped to the shot), corner folio, tonal number, true-colour phone.",
+      "html": "<article class=\"ds-wp\"><p class=\"ds-wp__num\" aria-hidden=\"true\">01</p><p class=\"ds-wp__folio\" aria-hidden=\"true\">01 / 05</p><div class=\"ds-wp__text\"><h3 class=\"ds-wp__name\">Spartan Helmets</h3><p class=\"ds-wp__sum\">Un e-commerce robusto para equipamiento certificado DOT, ECE y CE.</p><p class=\"ds-wp__cat\">Diseño Web · E-Commerce — Desarrollado durante mi trabajo en Naikka</p></div><div class=\"ds-wp__media\"><figure class=\"ds-wp__browser\"><figcaption>myspartanhelmets.com</figcaption><div class=\"ds-wp__shot\"></div></figure><figure class=\"ds-wp__phone\"></figure></div></article>",
+      "css": ".ds-wp { position:relative; overflow:hidden; display:grid; grid-template-columns:.9fr 1.1fr; gap:2rem; align-items:center; min-height:26rem; padding:2.5rem; background:#ff6b30; color:#1d2730; font-family:'Geist',sans-serif; } .ds-wp__num { position:absolute; left:-.04em; bottom:-.12em; margin:0; font:900 16rem/.8 'Archivo',sans-serif; font-stretch:62%; color:color-mix(in oklab, currentColor 9%, transparent); } .ds-wp__folio { position:absolute; top:1.25rem; right:1.5rem; margin:0; font:400 .75rem 'Geist Mono',monospace; letter-spacing:.06em; } .ds-wp__text { position:relative; z-index:3; display:grid; gap:1rem; } .ds-wp__name { margin:0; font:900 7rem/.8 'Archivo',sans-serif; font-stretch:62%; text-transform:uppercase; transition:font-stretch .8s cubic-bezier(.16,1,.3,1); } .ds-wp:hover .ds-wp__name { font-stretch:72%; } .ds-wp__sum { margin:0; font-weight:600; font-size:1.6rem; letter-spacing:-.03em; line-height:1.12; max-width:22ch; } .ds-wp__cat { margin:0; font:400 .75rem 'Geist Mono',monospace; letter-spacing:.06em; text-transform:uppercase; } .ds-wp__media { position:relative; z-index:2; } .ds-wp__browser { margin:0; border-radius:var(--radius-frame,6px); overflow:hidden; background:#f8f3ea; rotate:2deg; box-shadow:0 40px 60px -30px rgb(29 39 48 / .6); } .ds-wp__browser figcaption { text-align:right; font:400 .75rem 'Geist Mono',monospace; padding:.55em .9em; border-bottom:1px solid rgb(29 39 48 / .14); } .ds-wp__shot { aspect-ratio:16/10; background:linear-gradient(135deg, color-mix(in oklab,#ff6b30 70%,#1d2730), #00797d); } .ds-wp__phone { position:absolute; margin:0; width:22%; right:-5%; bottom:-14%; aspect-ratio:9/18; border-radius:var(--radius-device,14px); border:5px solid #1d2730; background:#00aeae; rotate:6deg; box-shadow:0 30px 40px -20px rgb(29 39 48 / .6); }"
+    },
+    {
+      "name": "Archive Row",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Ruled list row: mono number, Archivo name, mono category, arrow box that fills and turns on hover.",
+      "html": "<ol class=\"ds-ar\"><li><a href=\"#\" class=\"ds-ar__link\"><span class=\"ds-ar__num\">06</span><span class=\"ds-ar__name\">X Sports Helmets</span><span class=\"ds-ar__cat\">Diseño Web · E-Commerce<br>Desarrollado durante mi trabajo en Naikka</span><span class=\"ds-ar__go\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8.5 7H17v8.5\"/></svg></span></a></li></ol>",
+      "css": ".ds-ar { list-style:none; margin:0; padding:0 1.5rem; background:#f8f3ea; color:#1d2730; border-top:1.5px solid #1d2730; } .ds-ar li { border-bottom:1.5px solid #1d2730; } .ds-ar__link { display:grid; grid-template-columns:4rem 1fr auto 3rem; align-items:center; gap:1.5rem; padding:1.5rem 0; color:inherit; text-decoration:none; } .ds-ar__num { font:400 .9rem 'Geist Mono',monospace; font-variant-numeric:tabular-nums; transition:color .45s cubic-bezier(.33,1,.68,1); } .ds-ar__name { font:900 4.5rem/.86 'Archivo',sans-serif; font-stretch:62%; text-transform:uppercase; } .ds-ar__cat { font:400 .75rem 'Geist Mono',monospace; letter-spacing:.06em; text-transform:uppercase; color:color-mix(in oklab,#1d2730 78%,#f8f3ea); } .ds-ar__go { display:grid; place-items:center; width:3rem; height:3rem; border-radius:3px; box-shadow:inset 0 0 0 1.5px currentColor; transition:background-color .45s, color .45s, transform .45s cubic-bezier(.16,1,.3,1); } .ds-ar__link:hover .ds-ar__num { color:#ff6b30; } .ds-ar__link:hover .ds-ar__go { background:#1d2730; color:#f8f3ea; transform:rotate(45deg); } .ds-ar__link:focus-visible { outline:2px solid #ff6b30; outline-offset:4px; }"
+    },
+    {
+      "name": "Capability Ticket",
+      "kind": "card",
+      "refersTo": "capability-ticket",
+      "description": "Notched cream ticket: giant pale numeral, Geist title and description, perforated stub listing deliverables with orange stars.",
+      "html": "<div class=\"ds-cap-plate\"><article class=\"ds-cap\"><div class=\"ds-cap__main\"><p class=\"ds-cap__num\" aria-hidden=\"true\">01</p><h3>Desarrollo de sitios web creativos</h3><p class=\"ds-cap__desc\">Diseños modernos y únicos que hacen destacar tu marca, construidos con las mejores herramientas del mercado.</p></div><div class=\"ds-cap__stub\"><p class=\"ds-cap__label\">Lo que recibes</p><ul><li><span class=\"ds-cap__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span>Desarrollo responsive</li><li><span class=\"ds-cap__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span>Optimización de velocidad</li></ul></div></article></div>",
+      "css": ".ds-cap-plate { background:#00aeae; padding:2rem; } .ds-cap { --notch:1rem; display:grid; grid-template-columns:1.6fr 1fr; min-height:18rem; background:#f8f3ea; color:#1d2730; border-radius:var(--radius-m,10px); box-shadow:0 30px 50px -30px rgb(29 39 48 / .55); font-family:'Geist',sans-serif; mask:radial-gradient(circle var(--notch) at 61.5% 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--notch) at 61.5% 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; } .ds-cap__main { position:relative; overflow:hidden; display:grid; align-content:end; gap:1rem; padding:2rem; } .ds-cap__main h3 { position:relative; margin:0; font-size:2.4rem; font-weight:700; letter-spacing:-.035em; line-height:1; } .ds-cap__num { position:absolute; top:-.06em; right:.1em; margin:0; font:900 10rem/.8 'Archivo',sans-serif; font-stretch:62%; color:color-mix(in oklab,#00aeae 30%,#f8f3ea); } .ds-cap__desc { position:relative; margin:0; font-size:1.2rem; line-height:1.45; color:color-mix(in oklab,#1d2730 78%,#f8f3ea); } .ds-cap__stub { display:grid; align-content:center; gap:1rem; padding:2rem; border-left:2px dashed color-mix(in oklab,#1d2730 35%,transparent); } .ds-cap__label { margin:0; font:400 .75rem 'Geist Mono',monospace; letter-spacing:.08em; text-transform:uppercase; color:color-mix(in oklab,#1d2730 78%,#f8f3ea); } .ds-cap__stub ul { list-style:none; margin:0; padding:0; display:grid; gap:.65rem; font-weight:600; } .ds-cap__stub li { display:flex; gap:.6rem; align-items:baseline; } .ds-cap__star { width:.8em; height:.8em; flex:none; color:#ff6b30; }"
+    },
+    {
+      "name": "Process Station",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Station on the orange route: dot that lights orange, turquoise Archivo numeral, Geist title and body on gunmetal.",
+      "html": "<ol class=\"ds-ps\"><li class=\"is-lit\"><span class=\"ds-ps__dot\"></span><p class=\"ds-ps__num\" aria-hidden=\"true\">01</p><h3>Descubrir</h3><p>Entiendo tu negocio, tu público y lo que la web debe lograr.</p></li><li><span class=\"ds-ps__dot\"></span><p class=\"ds-ps__num\" aria-hidden=\"true\">02</p><h3>Diseñar</h3><p>Estructura, prototipo y diseño visual en Figma, validados contigo antes de escribir código.</p></li></ol>",
+      "css": ".ds-ps { list-style:none; margin:0; padding:2rem; display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; background:#1d2730; color:#f8f3ea; font-family:'Geist',sans-serif; } .ds-ps li { display:grid; gap:.75rem; align-content:start; } .ds-ps li:nth-child(odd) { padding-top:3rem; } .ds-ps__dot { width:1.1rem; height:1.1rem; border-radius:50%; background:#1d2730; box-shadow:inset 0 0 0 2px #00aeae; transition:background-color .45s, transform .45s cubic-bezier(.16,1,.3,1); } .ds-ps li.is-lit .ds-ps__dot, .ds-ps li:hover .ds-ps__dot { background:#ff6b30; box-shadow:inset 0 0 0 2px #ff6b30; transform:scale(1.35); } .ds-ps__num { margin:0; font:900 5rem/.8 'Archivo',sans-serif; font-stretch:62%; color:#00aeae; } .ds-ps h3 { margin:0; font-size:1.8rem; font-weight:700; letter-spacing:-.03em; } .ds-ps li p:last-child { margin:0; max-width:30ch; color:color-mix(in oklab,#f8f3ea 82%,#00aeae); }"
+    },
+    {
+      "name": "Figure Step",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Constructivist figure on the orange plate: gunmetal top rule, Archivo figure, Geist 600 label.",
+      "html": "<dl class=\"ds-fs\"><div><dt>años diseñando y desarrollando para la web.</dt><dd>+10</dd></div><div class=\"ds-fs__b\"><dt>proyectos publicados en este portafolio.</dt><dd>8</dd></div></dl>",
+      "css": ".ds-fs { margin:0; padding:2rem; display:grid; grid-template-columns:repeat(12,1fr); row-gap:2rem; column-gap:1.5rem; background:#ff6b30; color:#1d2730; font-family:'Geist',sans-serif; } .ds-fs > div { grid-column:1 / span 8; display:grid; grid-template-columns:auto 1fr; align-items:end; gap:1.5rem; padding-top:1rem; border-top:1.5px solid #1d2730; } .ds-fs > .ds-fs__b { grid-column:5 / span 8; } .ds-fs dd { order:-1; margin:0; font:900 8rem/.78 'Archivo',sans-serif; font-stretch:62%; font-variant-numeric:tabular-nums; } .ds-fs dt { font-size:1.25rem; font-weight:600; letter-spacing:-.02em; line-height:1.25; max-width:18ch; padding-bottom:.4rem; }"
+    },
+    {
+      "name": "Tools Paper Label",
+      "kind": "card",
+      "refersTo": "paper-label",
+      "description": "Cream-deep paper label rotated -1.5deg: mono title over a dashed rule, starred tools in two columns.",
+      "html": "<div class=\"ds-pl\"><p class=\"ds-pl__title\">Guía de herramientas</p><ul><li><span class=\"ds-pl__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span>Figma</li><li><span class=\"ds-pl__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span>WordPress</li><li><span class=\"ds-pl__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span>Bricks Builder</li><li><span class=\"ds-pl__star\"><svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z\"/></svg></span>WooCommerce</li></ul></div>",
+      "css": ".ds-pl { max-width:22rem; background:#efe6d6; color:#1d2730; border-radius:var(--radius-s,3px); padding:1.4rem 1.6rem; rotate:-1.5deg; box-shadow:0 18px 30px -22px rgb(29 39 48 / .5); font-family:'Geist',sans-serif; } .ds-pl__title { margin:0 0 .8rem; padding-bottom:.8rem; font:400 .9rem 'Geist Mono',monospace; letter-spacing:.08em; text-transform:uppercase; border-bottom:1.5px dashed color-mix(in oklab,#1d2730 40%,transparent); } .ds-pl ul { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem 1.5rem; font-weight:600; } .ds-pl li { display:flex; gap:.5rem; align-items:baseline; } .ds-pl__star { width:.75em; height:.75em; flex:none; color:#ff6b30; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Print Edition Coming Alive",
+    "overview": "The site is a retro-futurist poster series. Every section is a full-bleed plate: a flat field of cream paper, turquoise, orange or gunmetal, with fine animated grain under the content and giant condensed poster lettering that changes colour where it crosses a field. Scrolling turns the pages. The brand M is the recurring device: window, mask, preloader and portal into the next plate.\n\nTwo voices carry the type. Archivo, compressed to its narrowest width and set in black uppercase, is the poster: decorative, enormous, often hidden from assistive tech because an accessible Geist heading says the same thing. Geist carries everything that is read, from the H1 down to the button labels, and Geist Mono sets folios, ticket fields and the stamp ring like a printer's slug. Imagery registers like a print run: grayscale source with an orange multiply plate and a deep-turquoise screen plate sliding into register.\n\nDensity is low and theatrical at display size, tight and plain at reading size. Ornament is limited to the printer's furniture the world owns natively: rotating circular stamps, ticket stubs, thin orbit lines, four-point stars, registration marks and folios in the margins. Composition is constructivist and flat; depth comes from layering, parallax and colour, never from dimensional type.",
+    "keyCharacteristics": [
+      "Full-bleed colour plates (cream, turquoise, orange, gunmetal) set by a `data-surface` attribute, each with fine grain under the content.",
+      "Archivo 900 at 62% width for poster display only; Geist for everything read.",
+      "The brand M as window, mask, preloader and portal.",
+      "Printer's furniture as ornament: stamps, ticket stubs, orbits, four-point stars, registration marks, corner folios.",
+      "Duotone \"print run\" imagery with offset colour plates.",
+      "Expo-out motion over Lenis smooth scroll, with a full reduced-motion alternative.",
+      "Poster names switch to cream where they cross an image or field through a clipped aria-hidden copy, never by hiding letters.",
+      "Phase 2 furniture: pinned horizontal work posters, a ruled archive with cursor-follow shots, a sticky notched ticket stack, a radar-and-route process, constructivist figure steps and a material collage with principle stamps."
+    ],
+    "rules": [
+      {
+        "name": "The Gunmetal Reads Rule",
+        "body": "On orange and turquoise plates, every reading word and every button label is gunmetal (~5.4:1 and ~5.5:1). Cream on orange or turquoise (~2.5:1) and orange on cream (~2.6:1) are allowed only for giant decorative display type marked `aria-hidden`, with the same message present in accessible text nearby. Never use them for body copy, buttons or labels.",
+        "section": "colors"
+      },
+      {
+        "name": "The Plate Rule",
+        "body": "A section takes one full-bleed field through `data-surface` (cream, turquoise, orange or gunmetal), and that attribute sets both the background and the default text colour. Avoid long, unbroken cream stretches. Alternate plates so orange and turquoise carry the edition.",
+        "section": "colors"
+      },
+      {
+        "name": "The Colour-Swap Rule",
+        "body": "Where a poster name crosses an image or a colour field, its letters switch to cream through an aria-hidden copy clipped to the crossing area, never by hiding or masking out letters. The hero does it with the M mask and the field clip; the work posters do it with a cream copy clipped to the screenshot rectangle, recomputed on every refresh. The accessible name stays whole.",
+        "section": "colors"
+      },
+      {
+        "name": "The Derived Tones Rule",
+        "body": "New tints come from `color-mix(in oklab, ...)` between palette colours. No colour from outside the palette enters the system.",
+        "section": "colors"
+      },
+      {
+        "name": "The Poster-Only Rule",
+        "body": "Archivo appears only at poster scale, at 62% width, weight 900 and uppercase: giant display words, project names (work poster headings and archive row names), figures, and giant numerals (process stations, capability tickets, work posters). A project name or figure may be the accessible text itself when it is a name or a number, not a sentence. Never use Archivo for running text, buttons, small UI, or anything under 2.6rem. The one sub-scale exception is the type-specimen card in the About collage, which shows the face as a sample inside an aria-hidden illustration.",
+        "section": "typography"
+      },
+      {
+        "name": "The Breathing Width Rule",
+        "body": "Poster lines marked `data-breathe` (hero name, work project names and their swap copies, figures) widen with scroll velocity, from 62% up to 72% width, then ease back. The shared velocity decays to zero once Lenis stops, so every breathing line returns to 62% at rest. Width is the only axis that breathes. Weight and size stay fixed.",
+        "section": "typography"
+      },
+      {
+        "name": "The Corner Folio Rule",
+        "body": "Folios (\"02 · MANIFIESTO\") live in a corner of the plate (top right, at the gutter) or along the margin, prefixed by a registration-mark glyph drawn in CSS. They are never eyebrows stacked above a heading. Inline mono labels next to data, such as \"WhatsApp\" before the phone number, are fine.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Plate Rule",
+        "body": "Plates and type never carry shadow, glow or bevel. Only physical objects resting on the paper (tickets, buttons on hover, browser frames, phones, collage cards, paper labels, floating screens) get a soft, negative-spread shadow tinted toward gunmetal.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Covered Ticket Rule",
+        "body": "In the capability stack, depth is shown by scale, not shadow: the covered ticket scales back (about 0.94, less for each deeper ticket), lifts 4% and fades its title, description and stub, leaving only its edge and giant numeral.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** set every section as a full-bleed plate through `data-surface` (cream, turquoise, orange or gunmetal) with `.grain` under the content.",
+      "**Do** set reading text and button labels in gunmetal on orange and turquoise plates.",
+      "**Do** keep cream-on-orange, cream-on-turquoise and orange-on-cream (~2.5–2.6:1) for giant `aria-hidden` poster display only, with the same message in an accessible Geist heading.",
+      "**Do** use Archivo only at poster scale (2.6rem and up): display words, project names, figures and giant numerals, at weight 900, 62% width, uppercase, line-height 0.78–0.86.",
+      "**Do** switch poster letters to cream where they cross an image or field with a clipped `aria-hidden` copy, keeping the real name whole.",
+      "**Do** pick radii from the scale by object: s for chips and buttons, frame for browser frames and shots, m for tickets and cards, device for phones, arch for the about arch.",
+      "**Do** use Geist for everything read and Geist Mono for folios, data labels and stamp text.",
+      "**Do** place folios in the plate corner (top right at the gutter) or along the margin, with the CSS registration mark.",
+      "**Do** take ornament from the world's own furniture: stamps, ticket stubs, 1–1.5px orbit lines, four-point stars, registration marks, the M silhouette.",
+      "**Do** finish imagery as duotone print plates (orange multiply plus deep-turquoise screen over grayscale).",
+      "**Do** use `mc-out` for entrances and `mc-inout` for wipes and portals, and ship a complete reduced-motion state."
+    ],
+    "donts": [
+      "**Don't** use cream or orange text on colour plates for body copy, buttons, links or labels.",
+      "**Don't** use Archivo for running text, buttons or small UI, or swap Geist for another system face.",
+      "**Don't** hide or mask out letters of a poster name to make it fit over an image; resize the name or swap its colour.",
+      "**Don't** put a folio, kicker or eyebrow label above a heading.",
+      "**Don't** use 3D or extruded type, gradient-filled text, or glow halos around type or UI. Colour light lives only as soft gradients inside a plate's field.",
+      "**Don't** bring in colours from outside the five-colour palette. Derive tints with oklab `color-mix`.",
+      "**Don't** use worn textures, dry brush, speed lines, decorative rays or brush underlines.",
+      "**Don't** put shadows on plates or type. Shadows belong only to objects resting on the paper.",
+      "**Don't** show photos of Mauricio; imagery is the work and surreal, content-tied illustration."
+    ]
+  }
+}

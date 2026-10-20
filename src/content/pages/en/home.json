@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "title": "Mauricio Correa — UI/UX designer and web developer",
+    "description": "I design interfaces and build websites that turn your identity into a clear, memorable experience that is ready to grow. More than 10 years of experience."
+  },
+  "preloader": {
+    "edition": "Edition 2026"
+  },
+  "hero": {
+    "nameLines": [
+      "Mauricio",
+      "Correa"
+    ],
+    "title": "I turn ideas into digital experiences.",
+    "lead": "I design interfaces and build websites that turn your identity into a clear, memorable experience that is ready to grow.",
+    "primaryCta": {
+      "label": "See projects",
+      "href": "/en/projects"
+    },
+    "secondaryCta": {
+      "label": "Let's talk",
+      "href": "#contacto"
+    },
+    "stat": {
+      "value": "10+ years",
+      "label": "building digital solutions for brands and companies."
+    },
+    "stamp": "UI/UX · Web · Branding · 10+ years · ",
+    "scrollHint": "Scroll to enter",
+    "screens": [
+      {
+        "image": "../../../assets/projects/encanto-amatista/cover.webp",
+        "alt": "Encanto Amatista home page",
+        "name": "Encanto Amatista"
+      },
+      {
+        "image": "../../../assets/projects/autovenz/cover.webp",
+        "alt": "AutoVenz home page",
+        "name": "AutoVenz"
+      },
+      {
+        "image": "../../../assets/projects/chanell-clean-co/cover.webp",
+        "alt": "Chanell Clean Co home page",
+        "name": "Chanell Clean Co"
+      }
+    ]
+  },
+  "manifesto": {
+    "folio": "Point of view",
+    "statement": "Design is deciding what deserves to be seen.",
+    "highlight": "deserves to be seen.",
+    "body": "Every project starts with a simple question: what does your customer need to understand in the first few seconds? From there I organize, design and build."
+  },
+  "marquee": [
+    "Design",
+    "Code",
+    "Direction"
+  ],
+  "contact": {
+    "folio": "Your project",
+    "display": "Let's talk",
+    "title": "Have a project in mind?",
+    "body": "Let's talk about the goal, the experience and the clearest way to bring it to the web.",
+    "ticket": [
+      {
+        "label": "Passenger",
+        "value": "Your brand"
+      },
+      {
+        "label": "Destination",
+        "value": "Your new website"
+      },
+      {
+        "label": "Departure",
+        "value": "Today"
+      },
+      {
+        "label": "Gate",
+        "value": "WhatsApp"
+      }
+    ],
+    "whatsappLabel": "Message me on WhatsApp",
+    "emailLabel": "Send an email",
+    "copyLabel": "Copy",
+    "copiedLabel": "Copied"
+  },
+  "work": {
+    "folio": "Selected work",
+    "title": "The work speaks first.",
+    "lead": "Each case connects the concept, the interface decisions and the live site. No hidden steps.",
+    "viewCase": "View case",
+    "visitSite": "Visit site",
+    "dragHint": "Scroll"
+  },
+  "archive": {
+    "folio": "Archive",
+    "title": "More projects",
+    "lead": "An additional selection of interfaces, stores and digital experiences.",
+    "openCase": "Open case",
+    "all": {
+      "label": "See all projects",
+      "href": "/en/projects"
+    }
+  },
+  "capabilities": {
+    "folio": "Capabilities",
+    "title": "One idea. Three ways to make it visible.",
+    "lead": "Three connected capabilities so an idea keeps its intention from the first sketch to the published site.",
+    "receives": "What you get",
+    "link": {
+      "label": "See services in detail",
+      "href": "/en/services"
+    },
+    "stamp": "Design · Code · Direction · "
+  },
+  "process": {
+    "folio": "Route",
+    "title": "From the first sketch to the published site.",
+    "steps": [
+      {
+        "title": "Discover",
+        "body": "I get to know your business, your audience and what the website needs to achieve."
+      },
+      {
+        "title": "Design",
+        "body": "Structure, prototype and visual design in Figma, approved with you before any code is written."
+      },
+      {
+        "title": "Build",
+        "body": "Responsive development that is fast and easy to manage."
+      },
+      {
+        "title": "Launch",
+        "body": "Publishing, final testing and ongoing support so your site keeps growing."
+      }
+    ]
+  },
+  "stats": {
+    "folio": "Numbers",
+    "items": [
+      {
+        "value": 10,
+        "prefix": "+",
+        "label": "years designing and building for the web."
+      },
+      {
+        "value": 8,
+        "label": "published projects in this portfolio."
+      },
+      {
+        "value": 3,
+        "label": "connected capabilities: design, code and brand direction."
+      }
+    ]
+  },
+  "about": {
+    "folio": "About",
+    "title": "Hi, I'm Mauricio Correa.",
+    "body": [
+      "A graphic and web designer with more than a decade of experience turning ideas into striking, functional visual experiences.",
+      "My goal is to help you tell your story through design, with solutions that reflect your brand's unique identity and connect with your audience in a meaningful way."
+    ],
+    "principles": [
+      {
+        "title": "Creative innovation",
+        "body": "Modern, original designs that make your brand stand out."
+      },
+      {
+        "title": "User experience",
+        "body": "Intuitive, easy-to-use web design for smooth navigation."
+      },
+      {
+        "title": "Tailored solutions",
+        "body": "Solutions that reflect each client's identity and values."
+      },
+      {
+        "title": "Quality and detail",
+        "body": "Careful attention to every detail for a flawless result."
+      }
+    ],
+    "toolsTitle": "Tool guide",
+    "tools": [
+      "Figma",
+      "WordPress",
+      "Bricks Builder",
+      "WooCommerce",
+      "Astro",
+      "UI/UX",
+      "Graphic design",
+      "Corporate identity"
+    ],
+    "link": {
+      "label": "Learn more",
+      "href": "/en/about"
+    },
+    "cards": {
+      "palette": "Brand",
+      "type": "Type",
+      "code": "Code"
+    }
+  }
+}

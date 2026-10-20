@@ -1,0 +1,43 @@
+---
+/* Iconos dibujados a mano para el sistema: trazo 1.6, extremos cuadrados. */
+interface Props {
+  name: 'arrow-up-right' | 'arrow-down-right' | 'arrow-down' | 'star' | 'copy' | 'check' | 'menu' | 'close';
+  size?: number | string;
+  class?: string;
+}
+const { name, size = '1em', class: className } = Astro.props;
+---
+
+<svg
+  class:list={['icon', className]}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="square"
+  aria-hidden="true"
+  focusable="false"
+>
+  {name === 'arrow-up-right' && <path d="M7 17 17 7M8.5 7H17v8.5" />}
+  {name === 'arrow-down-right' && <path d="M7 7l10 10M17 8.5V17H8.5" />}
+  {name === 'arrow-down' && <path d="M12 4v15M6 13l6 6 6-6" />}
+  {name === 'star' && (
+    <path
+      d="M12 1.5c.6 5.6 4.9 9.9 10.5 10.5-5.6.6-9.9 4.9-10.5 10.5C11.4 16.9 7.1 12.6 1.5 12 7.1 11.4 11.4 7.1 12 1.5Z"
+      fill="currentColor"
+      stroke="none"
+    />
+  )}
+  {name === 'copy' && <path d="M9 9h10v10H9zM5 15V5h10" />}
+  {name === 'check' && <path d="m5 12.5 4.5 4.5L19 7.5" />}
+  {name === 'menu' && <path d="M4 8h16M4 16h16" />}
+  {name === 'close' && <path d="M6 6l12 12M18 6 6 18" />}
+</svg>
+
+<style>
+  .icon {
+    flex: none;
+  }
+</style>

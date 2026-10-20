@@ -1,0 +1,402 @@
+---
+import { Image } from 'astro:assets';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import { projectHref, type getPage, type getProjects, type Locale } from '../../i18n';
+
+type Data = NonNullable<Awaited<ReturnType<typeof getPage>>['work']>;
+interface Props {
+  work: Data;
+  projects: Awaited<ReturnType<typeof getProjects>>;
+  locale: Locale;
+  index: string;
+}
+const { work, projects, locale, index } = Astro.props;
+const featured = projects.filter((p) => p.featured);
+const tones = ['orange', 'turquoise', 'cream', 'gunmetal', 'orange'] as const;
+const pad = (n: number) => String(n).padStart(2, '0');
+const total = pad(featured.length);
+---
+
+<section class="work" data-work aria-labelledby="work-title">
+  <div class="work__pin" data-work-pin>
+    <div class="work__track" data-work-track>
+      <div class="work__intro grain" data-surface="gunmetal">
+        <p class="folio folio--corner">{index} · {work.folio}</p>
+        <p class="work__count poster" aria-hidden="true">{total}</p>
+        <div class="work__intro-copy">
+          <h2 id="work-title" class="work__title" data-split-lines>{work.title}</h2>
+          <p class="work__lead" data-reveal>{work.lead}</p>
+          <p class="work__hint folio" data-reveal aria-hidden="true">{work.dragHint} <Icon name="arrow-down-right" size="1.1em" /></p>
+        </div>
+      </div>
+
+      {featured.map((p, i) => {
+        const tone = tones[i % tones.length];
+        return (
+          <article class={`work__poster work__poster--${tone} grain`} data-surface={tone} data-work-panel aria-labelledby={`work-${p.slug}`}>
+            <p class="work__num poster" aria-hidden="true">{pad(i + 1)}</p>
+            <p class="folio folio--corner work__folio" aria-hidden="true">{pad(i + 1)} / {total}</p>
+
+            <div class="work__text">
+              <h3 class="work__name poster" id={`work-${p.slug}`} data-work-name data-breathe>{p.title}</h3>
+              <p class="work__summary">{p.summary}</p>
+              <p class="work__cat">{p.categories.join(' · ')}{p.credit && <span> — {p.credit}</span>}</p>
+              <ul class="work__tags" role="list">
+                {p.stack.map((t) => <li>{t}</li>)}
+              </ul>
+              <div class="work__actions">
+                <Button href={projectHref(locale, p.slug)} variant={tone === 'gunmetal' ? 'orange' : 'ink'} cursor={work.viewCase}>{work.viewCase}</Button>
+                <Button href={p.url} variant="line" external>{work.visitSite}</Button>
+              </div>
+            </div>
+
+            <div class="work__media">
+              <figure class="work__browser" data-work-media>
+                <figcaption class="work__bar">{new URL(p.url).hostname.replace('www.', '')}</figcaption>
+                <div class="print" data-print>
+                  <Image src={p.cover} alt={`${p.title} — ${p.summary}`} widths={[640, 960, 1280]} sizes="(min-width: 861px) 44vw, 88vw" />
+                  <span class="print__plate print__plate--a" aria-hidden="true"></span>
+                  <span class="print__plate print__plate--b" aria-hidden="true"></span>
+                </div>
+              </figure>
+              <figure class="work__phone" data-work-phone>
+                <Image src={p.mobile} alt="" widths={[240, 360]} sizes="(min-width: 861px) 12vw, 30vw" />
+              </figure>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+    <div class="work__progress" aria-hidden="true">
+      <span data-work-current>01</span>
+      <span class="work__bar-track"><span class="work__bar-fill" data-work-fill></span></span>
+      <span>{total}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .work {
+    position: relative;
+    background: var(--cm-gunmetal);
+  }
+  .work__pin {
+    position: relative;
+    overflow: clip;
+  }
+  /* Por defecto los carteles se apilan; el JS activa el recorrido horizontal (has-hscroll). */
+  .work__track {
+    display: flex;
+    flex-direction: column;
+  }
+  :global(html.has-hscroll) .work__track {
+    flex-direction: row;
+    width: max-content;
+    will-change: transform;
+  }
+
+  /* Panel de apertura */
+  .work__intro {
+    position: relative;
+    min-height: 70svh;
+    display: grid;
+    align-content: end;
+    padding: var(--space-2xl) var(--gutter) var(--space-xl);
+    overflow: clip;
+  }
+  .work__count {
+    position: absolute;
+    right: -0.05em;
+    top: 50%;
+    translate: 0 -55%;
+    font-size: clamp(14rem, 34vw, 40rem);
+    color: var(--cm-gunmetal-soft);
+    z-index: -1;
+  }
+  .work__intro-copy {
+    display: grid;
+    gap: var(--space-m);
+    max-width: 34rem;
+  }
+  .work__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+  }
+  .work__lead {
+    font-size: var(--step-1);
+    line-height: 1.45;
+    color: color-mix(in oklab, var(--cm-cream) 82%, var(--cm-turquoise));
+    max-width: 32ch;
+  }
+  .work__hint {
+    color: var(--cm-orange);
+  }
+  .work__hint::before {
+    display: none;
+  }
+
+  /* Cartel de proyecto */
+  .work__poster {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: var(--space-l);
+    padding: calc(var(--header-h) + var(--space-m)) var(--gutter) var(--space-xl);
+    overflow: clip;
+  }
+  .work__num {
+    position: absolute;
+    left: -0.04em;
+    bottom: -0.12em;
+    font-size: clamp(14rem, 30vw, 34rem);
+    z-index: -1;
+    color: color-mix(in oklab, currentColor 9%, transparent);
+  }
+  .work__poster--gunmetal .work__num {
+    color: var(--cm-gunmetal-soft);
+  }
+  .work__text {
+    display: grid;
+    gap: var(--space-m);
+    align-content: center;
+  }
+  /* El nombre es cartel: escala de póster, siempre entero y por delante de la captura */
+  .work__text {
+    position: relative;
+    z-index: 3;
+  }
+  .work__name {
+    font-size: clamp(5rem, 12.4vw, 15rem);
+    line-height: 0.8;
+    width: max-content;
+    max-width: 60vw;
+  }
+  /* Capa crema que solo se ve donde el nombre cruza la captura (la recorta el JS) */
+  .work__name--swap {
+    position: absolute;
+    margin: 0;
+    color: var(--cm-cream);
+    pointer-events: none;
+    clip-path: inset(0 0 0 100%);
+  }
+  .work__poster--cream .work__name--swap {
+    color: var(--cm-cream);
+  }
+  .work__cat {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .work__poster--gunmetal .work__name {
+    color: var(--cm-orange);
+  }
+  .work__summary {
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .work__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .work__tags li {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-s);
+    box-shadow: inset 0 0 0 1px currentColor;
+  }
+  .work__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-2xs);
+  }
+
+  .work__media {
+    position: relative;
+    z-index: 2;
+    align-self: center;
+  }
+  /* Marcas de registro en las esquinas de la captura */
+  .work__media::before,
+  .work__media::after {
+    content: '';
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    background:
+      linear-gradient(currentColor, currentColor) center / 100% 1.2px no-repeat,
+      linear-gradient(currentColor, currentColor) center / 1.2px 100% no-repeat;
+    opacity: 0.7;
+  }
+  .work__media::before {
+    top: -2.4rem;
+    left: -1.6rem;
+  }
+  .work__media::after {
+    bottom: -2.2rem;
+    left: -1.2rem;
+  }
+  .work__browser {
+    margin: 0;
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    background: var(--cm-cream);
+    rotate: 2deg;
+    box-shadow: 0 40px 60px -30px rgb(29 39 48 / 0.6);
+  }
+  /* El dominio va a la derecha: el nombre-cartel puede cruzar el inicio de la barra */
+  .work__bar {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    padding: 0.55em 0.9em;
+    color: var(--cm-gunmetal);
+    border-bottom: 1px solid rgb(29 39 48 / 0.14);
+  }
+  .work__phone {
+    position: absolute;
+    margin: 0;
+    width: 22%;
+    right: -5%;
+    bottom: -14%;
+    border-radius: var(--radius-device);
+    overflow: hidden;
+    border: 5px solid var(--cm-gunmetal);
+    background: var(--cm-gunmetal);
+    rotate: 6deg;
+    box-shadow: 0 30px 40px -20px rgb(29 39 48 / 0.6);
+  }
+  .work__phone :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 18;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  /* Imprenta (mismo tratamiento que el hero) */
+  .print {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .print :global(img) {
+    width: 100%;
+    height: auto;
+    filter: grayscale(1) contrast(1.12);
+    transition: filter var(--dur-m) var(--ease-soft);
+  }
+  .print__plate {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-m) var(--ease-soft);
+  }
+  .print__plate--a {
+    background: var(--cm-orange);
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+  }
+  .print__plate--b {
+    background: var(--cm-turquoise-deep);
+    mix-blend-mode: screen;
+    opacity: 0.6;
+  }
+  @media (hover: hover) {
+    .work__browser:hover .print :global(img) {
+      filter: none;
+    }
+    .work__browser:hover .print__plate {
+      opacity: 0;
+    }
+  }
+
+  :global(html.has-hscroll) .work__intro {
+    width: 58vw;
+    height: 100svh;
+    min-height: 40rem;
+  }
+  :global(html.has-hscroll) .work__poster {
+    width: 88vw;
+    height: 100svh;
+    min-height: 40rem;
+  }
+
+  .work__progress {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    left: var(--gutter);
+    bottom: var(--space-m);
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--cm-gunmetal);
+    background: var(--cm-cream);
+    padding: 0.4rem 0.7rem;
+    border-radius: var(--radius-s);
+  }
+  :global(html.has-hscroll) .work__progress {
+    display: flex;
+  }
+  .work__bar-track {
+    width: 8rem;
+    height: 2px;
+    background: rgb(29 39 48 / 0.2);
+    overflow: hidden;
+  }
+  .work__bar-fill {
+    display: block;
+    height: 100%;
+    background: var(--cm-orange);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  /* Móvil: una columna, imagen arriba */
+  @media (max-width: 860px) {
+    .work__intro,
+    .work__poster {
+      min-height: 0;
+    }
+    .work__intro {
+      padding-top: var(--space-2xl);
+    }
+    .work__name {
+      font-size: 17vw;
+      width: auto;
+      max-width: none;
+      margin-right: 0;
+    }
+    .work__poster {
+      grid-template-columns: 1fr;
+      padding: var(--space-xl) var(--gutter) var(--space-2xl);
+    }
+    .work__media {
+      order: -1;
+      margin-bottom: var(--space-m);
+    }
+    .work__phone {
+      right: 1%;
+      bottom: -14%;
+      width: 26%;
+    }
+  }
+</style>

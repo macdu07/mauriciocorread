@@ -1,0 +1,72 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  items: string[];
+  surface?: 'orange' | 'turquoise' | 'gunmetal' | 'cream';
+  label?: string;
+}
+const { items, surface = 'orange' } = Astro.props;
+const run = [...items, ...items];
+---
+
+<section class="marquee grain" data-surface={surface} data-marquee aria-label={items.join(', ')}>
+  <div class="marquee__track" data-marquee-track aria-hidden="true">
+    {[0, 1].map(() => (
+      <div class="marquee__group">
+        {run.map((item) => (
+          <span class="marquee__item">
+            <span class="poster marquee__word">{item}</span>
+            <Icon name="star" size="0.9em" class="marquee__star" />
+          </span>
+        ))}
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .marquee {
+    overflow: clip;
+    padding-block: clamp(0.8rem, 1.6vw, 1.4rem);
+    border-block: 1.5px solid var(--cm-gunmetal);
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+  .marquee__group {
+    display: flex;
+    flex: none;
+  }
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2.4rem);
+    padding-right: clamp(1rem, 2.5vw, 2.4rem);
+  }
+  .marquee__word {
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    line-height: 0.86;
+    padding-top: 0.06em;
+  }
+  :global(.marquee__star) {
+    font-size: clamp(2rem, 4.5vw, 4.5rem);
+  }
+  [data-surface='orange'] :global(.marquee__star) {
+    color: var(--cm-cream);
+  }
+  [data-surface='gunmetal'] :global(.marquee__star) {
+    color: var(--cm-orange);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      flex-wrap: wrap;
+      width: auto;
+    }
+    .marquee__group + .marquee__group {
+      display: none;
+    }
+  }
+</style>

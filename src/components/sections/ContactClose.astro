@@ -1,0 +1,127 @@
+---
+import Button from '../ui/Button.astro';
+import Ticket from '../ui/Ticket.astro';
+import Stamp from '../ui/Stamp.astro';
+import { whatsappHref, type getPage, type getSettings } from '../../i18n';
+
+type Data = NonNullable<Awaited<ReturnType<typeof getPage>>['contact']>;
+interface Props {
+  contact: Data;
+  settings: Awaited<ReturnType<typeof getSettings>>;
+  index: string;
+  stamp: string;
+}
+const { contact, settings, index, stamp } = Astro.props;
+const wa = whatsappHref(settings.contact.whatsapp, settings.contact.whatsappMessage);
+const email = settings.contact.email;
+// El titular-cartel se ajusta al ancho según su número de letras (incluido el margen de respiración).
+const displaySize = `min(${(82 / (contact.display.length * 0.6)).toFixed(2)}vw, 24rem)`;
+---
+
+<section class="contact grain" id="contacto" data-surface="orange" data-contact aria-labelledby="contact-title">
+  <p class="contact__folio folio folio--corner">{index} · {contact.folio}</p>
+
+  <p class="contact__display poster" aria-hidden="true" data-split-chars data-breathe style={`font-size:${displaySize}`}>{contact.display}</p>
+
+  <div class="contact__grid">
+    <div class="contact__copy">
+      <h2 id="contact-title" class="contact__title" data-split-lines>{contact.title}</h2>
+      <p class="contact__body" data-reveal>{contact.body}</p>
+      <div class="contact__actions" data-reveal>
+        <Button href={wa} variant="ink" external cursor="WhatsApp">{contact.whatsappLabel}</Button>
+        {email && <Button href={`mailto:${email}`} variant="line" icon="arrow-up-right">{contact.emailLabel}</Button>}
+      </div>
+      <p class="contact__phone" data-reveal>
+        <span class="folio">WhatsApp</span>
+        <a href={wa} target="_blank" rel="noopener">{settings.contact.whatsappDisplay}</a>
+      </p>
+    </div>
+
+    <a class="contact__ticket" href={wa} target="_blank" rel="noopener" data-reveal data-ticket-wrap data-cursor="WhatsApp" aria-label={`${contact.whatsappLabel} (${settings.contact.whatsappDisplay})`}>
+      <Ticket rows={contact.ticket} />
+      <div class="contact__stamp"><Stamp text={stamp} tone="orange" size="7.5rem" /></div>
+    </a>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: clamp(4.5rem, 10svh, 7rem) var(--gutter) var(--space-2xl);
+    overflow: clip;
+  }
+  .contact__display {
+    line-height: 0.78;
+    color: var(--cm-cream);
+    margin-left: -0.04em;
+    white-space: nowrap;
+  }
+  .contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+    margin-top: var(--space-l);
+  }
+  .contact__copy {
+    display: grid;
+    gap: var(--space-m);
+  }
+  .contact__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+  }
+  .contact__body {
+    font-size: var(--step-1);
+    line-height: 1.4;
+    max-width: 34ch;
+  }
+  .contact__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .contact__phone {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+  }
+  .contact__phone a {
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .contact__ticket {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    rotate: -3deg;
+    max-width: 40rem;
+    justify-self: end;
+    width: 100%;
+  }
+  .contact__stamp {
+    position: absolute;
+    right: -1.5rem;
+    top: -4.5rem;
+    rotate: 8deg;
+  }
+  .contact__stamp :global(.stamp) {
+    box-shadow: inset 0 0 0 2px var(--cm-gunmetal);
+  }
+  @media (max-width: 860px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+    .contact__ticket {
+      justify-self: start;
+      rotate: -2deg;
+      margin-top: var(--space-l);
+    }
+    .contact__stamp {
+      right: 0;
+      top: -3.5rem;
+    }
+  }
+</style>

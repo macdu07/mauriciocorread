@@ -1,0 +1,224 @@
+---
+import Icon from '../ui/Icon.astro';
+import Stamp from '../ui/Stamp.astro';
+import type { getPage, getServices } from '../../i18n';
+
+type Data = NonNullable<Awaited<ReturnType<typeof getPage>>['capabilities']>;
+interface Props {
+  capabilities: Data;
+  services: Awaited<ReturnType<typeof getServices>>;
+  index: string;
+}
+const { capabilities, services, index } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="caps grain" data-surface="turquoise" data-caps aria-labelledby="caps-title">
+  <p class="folio folio--corner">{index} · {capabilities.folio}</p>
+
+  <div class="caps__head">
+    <h2 id="caps-title" class="caps__title" data-split-lines>{capabilities.title}</h2>
+    <p class="caps__lead" data-reveal>{capabilities.lead}</p>
+    <div class="caps__stamp" aria-hidden="true"><Stamp text={capabilities.stamp} size="clamp(6.5rem, 9vw, 9rem)" /></div>
+  </div>
+
+  <ol class="caps__stack" role="list">
+    {services.map((s, i) => (
+      <li class="caps__item" style={`--i:${i}`} data-cap>
+        <article class="cap" aria-labelledby={`cap-${s.slug}`}>
+          <div class="cap__main">
+            <p class="cap__num poster" aria-hidden="true">{pad(i + 1)}</p>
+            <h3 class="cap__title" id={`cap-${s.slug}`}>{s.title}</h3>
+            <p class="cap__desc">{s.description}</p>
+          </div>
+          <div class="cap__stub">
+            <p class="cap__label">{capabilities.receives}</p>
+            <ul role="list" class="cap__list">
+              {s.deliverables.map((d) => (
+                <li><Icon name="star" size="0.8em" class="cap__star" />{d}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      </li>
+    ))}
+  </ol>
+
+  <a class="caps__link" href={capabilities.link.href} data-reveal>
+    {capabilities.link.label}
+    <Icon name="arrow-up-right" size="1.1em" />
+  </a>
+</section>
+
+<style>
+  .caps {
+    padding: var(--space-2xl) var(--gutter);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+  .caps__head {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: var(--space-l);
+    align-items: end;
+  }
+  .caps__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    max-width: 14ch;
+  }
+  .caps__lead {
+    font-size: var(--step-1);
+    line-height: 1.45;
+    max-width: 34ch;
+  }
+  .caps__stamp {
+    position: absolute;
+    right: 0;
+    top: -2rem;
+    rotate: 10deg;
+  }
+
+  .caps__stack {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-l);
+  }
+  .caps__item {
+    position: sticky;
+    top: calc(var(--header-h) + 1rem + var(--i) * 1.6rem);
+  }
+  .cap {
+    --notch: 1rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    min-height: clamp(20rem, 52svh, 30rem);
+    background: var(--cm-cream);
+    color: var(--cm-gunmetal);
+    border-radius: var(--radius-m);
+    box-shadow: 0 30px 50px -30px rgb(29 39 48 / 0.55);
+    mask:
+      radial-gradient(circle var(--notch) at 61.5% 0, #0000 98%, #000) top / 100% 51% no-repeat,
+      radial-gradient(circle var(--notch) at 61.5% 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+    transform-origin: 50% 0;
+    will-change: transform;
+  }
+  .cap__main {
+    position: relative;
+    display: grid;
+    align-content: end;
+    gap: var(--space-s);
+    padding: clamp(1.5rem, 3vw, 3rem);
+    overflow: clip;
+  }
+  .cap__num {
+    position: absolute;
+    top: -0.06em;
+    right: 0.1em;
+    font-size: clamp(8rem, 16vw, 15rem);
+    color: color-mix(in oklab, var(--cm-turquoise) 30%, var(--cm-cream));
+  }
+  .cap__title {
+    position: relative;
+    font-size: var(--step-3);
+    letter-spacing: -0.035em;
+    max-width: 16ch;
+  }
+  .cap__desc {
+    position: relative;
+    font-size: var(--step-1);
+    line-height: 1.45;
+    max-width: 40ch;
+    color: var(--cm-ink-soft);
+  }
+  .cap__stub {
+    display: grid;
+    align-content: center;
+    gap: var(--space-s);
+    padding: clamp(1.5rem, 3vw, 3rem);
+    border-left: 2px dashed color-mix(in oklab, var(--cm-gunmetal) 35%, transparent);
+  }
+  .cap__label {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cm-ink-soft);
+  }
+  .cap__list {
+    display: grid;
+    gap: 0.65rem;
+    font-weight: 600;
+    font-size: var(--step-0);
+  }
+  .cap__list li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+  }
+  :global(.cap__star) {
+    color: var(--cm-orange);
+    flex: none;
+    translate: 0 0.1em;
+  }
+
+  .caps__link {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: var(--step-1);
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) left bottom / 100% 1.5px no-repeat;
+    padding-bottom: 0.2rem;
+    transition: background-size var(--dur-s) var(--ease-out);
+  }
+  .caps__link:hover {
+    background-size: 30% 1.5px;
+  }
+
+  @media (max-width: 860px) {
+    .caps__head {
+      grid-template-columns: 1fr;
+    }
+    .caps__stamp {
+      top: -3.5rem;
+      right: -0.5rem;
+      scale: 0.7;
+    }
+    .cap {
+      grid-template-columns: minmax(0, 1fr);
+      mask: none;
+    }
+    .cap__num {
+      font-size: 6rem;
+      top: 0.1em;
+    }
+    .cap__main {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .cap__title {
+      font-size: var(--step-2);
+      padding-right: 3.5rem;
+      hyphens: auto;
+      overflow-wrap: break-word;
+    }
+    .cap__stub {
+      border-left: 0;
+      border-top: 2px dashed color-mix(in oklab, var(--cm-gunmetal) 35%, transparent);
+    }
+    .caps__item {
+      position: relative;
+      top: auto;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .caps__item {
+      position: relative;
+      top: auto;
+    }
+  }
+</style>

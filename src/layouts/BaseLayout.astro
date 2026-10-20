@@ -1,0 +1,75 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Preloader from '../components/layout/Preloader.astro';
+import Cursor from '../components/ui/Cursor.astro';
+import { getSettings, toLocale } from '../i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  preloader?: { edition: string };
+  alternate?: { es: string; en: string };
+}
+const { title, description, preloader, alternate = { es: '/', en: '/en/' } } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+const settings = await getSettings(locale);
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const homeHref = locale === 'en' ? '/en/' : '/';
+---
+
+<!doctype html>
+<html lang={locale} class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es" href={new URL(alternate.es, Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(alternate.en, Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(alternate.es, Astro.site)} />
+    <meta name="theme-color" content="#1D2730" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'es_CO'} />
+    <script is:inline data-preloader={preloader ? "1" : "0"}>
+      // Preloader solo en la primera visita de la sesión y con movimiento permitido.
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove('no-js');
+        d.classList.add('js');
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var seen = false;
+        try { seen = sessionStorage.getItem('mc-seen') === '1'; } catch (e) {}
+        if (!reduce) {
+          d.classList.add('motion-pending');
+          setTimeout(function () { d.classList.remove('motion-pending'); }, 3500);
+        }
+        if (!reduce && !seen && document.currentScript && document.currentScript.dataset.preloader === '1') {
+          d.classList.add('is-loading');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">{settings.skipLink}</a>
+    {preloader && <Preloader edition={preloader.edition} name={settings.siteName} />}
+    <Header settings={settings} homeHref={homeHref} />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer settings={settings} />
+    <Cursor />
+    <script>
+      import { boot } from '../scripts/motion/main';
+      boot();
+    </script>
+  </body>
+</html>

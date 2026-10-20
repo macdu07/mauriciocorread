@@ -1,0 +1,30 @@
+{
+  "siteName": "Mauricio Correa",
+  "role": "UI/UX Web Designer & Web Developer",
+  "skipLink": "Saltar al contenido",
+  "nav": [
+    { "label": "Proyectos", "href": "/proyectos" },
+    { "label": "Servicios", "href": "/servicios" },
+    { "label": "Sobre mí", "href": "/sobre-mi" },
+    { "label": "Contacto", "href": "/contacto" }
+  ],
+  "navCta": { "label": "Hablemos", "href": "/#contacto" },
+  "langSwitch": { "label": "EN", "href": "/en/", "lang": "en" },
+  "menuLabel": { "open": "Abrir menú", "close": "Cerrar menú" },
+  "contact": {
+    "whatsapp": "573023725631",
+    "whatsappDisplay": "+57 302 372 5631",
+    "whatsappMessage": "Hola Mauricio, tengo un proyecto en mente.",
+    "email": ""
+  },
+  "social": [
+    { "label": "Instagram", "href": "https://www.instagram.com/mauriciocorread/" },
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/mcorread" },
+    { "label": "Facebook", "href": "https://web.facebook.com/MauricioCorreaD" }
+  ],
+  "footer": {
+    "closing": "Cada diseño cuenta una historia. ¿Cuál es la tuya?",
+    "copyright": "© 2026 Mauricio Correa",
+    "backToTop": "Volver arriba"
+  }
+}

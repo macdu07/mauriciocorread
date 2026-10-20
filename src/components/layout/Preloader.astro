@@ -1,0 +1,72 @@
+---
+interface Props {
+  edition: string;
+  name: string;
+}
+const { edition, name } = Astro.props;
+---
+
+<div class="preloader" data-preloader aria-hidden="true">
+  <div class="preloader__mark" data-preloader-mark>
+    <span class="preloader__half preloader__half--l" data-preloader-l></span>
+    <span class="preloader__half preloader__half--r" data-preloader-r></span>
+  </div>
+  <div class="preloader__meta">
+    <span>{name} — {edition}</span>
+    <span class="preloader__count" data-preloader-count>00</span>
+  </div>
+</div>
+
+<style>
+  .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: none;
+    place-items: center;
+    background: var(--cm-gunmetal);
+    color: var(--cm-cream);
+  }
+  :global(html.is-loading) .preloader {
+    display: grid;
+  }
+  .preloader__mark {
+    position: relative;
+    width: min(46vw, 22rem);
+    aspect-ratio: 880 / 695;
+  }
+  .preloader__half {
+    position: absolute;
+    inset: 0;
+    mask: url('/brand/m.svg') center / 100% 100% no-repeat;
+  }
+  .preloader__half--l {
+    background: var(--cm-orange);
+    clip-path: inset(0 50% 0 0);
+  }
+  .preloader__half--r {
+    background: var(--cm-turquoise);
+    clip-path: inset(0 0 0 50%);
+  }
+  .preloader__meta {
+    position: absolute;
+    inset: auto var(--gutter) var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .preloader__count {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-stretch: 62%;
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.8;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+    color: var(--cm-orange);
+  }
+</style>
