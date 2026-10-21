@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Mauricio Correa — Diseñador UI/UX y desarrollador web",
-    "description": "Diseño interfaces y construyo sitios web que convierten tu identidad en una experiencia clara, memorable y lista para crecer. Más de 10 años de experiencia."
+    "title": "Mauricio Correa — Diseño UI/UX, desarrollo web e IA aplicada",
+    "description": "Diseño y construyo sitios web que se entienden, se recuerdan y convierten, y los conecto con IA y automatización para que tu negocio trabaje mejor. Más de 10 años de experiencia."
   },
   "preloader": {
     "edition": "Edición 2026"
@@ -12,7 +12,7 @@
       "Correa"
     ],
     "title": "Transformo ideas en experiencias digitales.",
-    "lead": "Diseño interfaces y construyo sitios web que convierten tu identidad en una experiencia clara, memorable y lista para crecer.",
+    "lead": "Diseño y construyo sitios web que se entienden, se recuerdan y convierten. Y los conecto con IA y automatización para que tu negocio trabaje mejor, incluso cuando no estás.",
     "primaryCta": {
       "label": "Ver proyectos",
       "href": "/proyectos"
@@ -25,7 +25,7 @@
       "value": "+10 años",
       "label": "creando soluciones digitales para marcas y empresas."
     },
-    "stamp": "UI/UX · Web · Branding · +10 años · ",
+    "stamp": "UI/UX · Web · IA · Marca · +10 años · ",
     "scrollHint": "Desliza para entrar",
     "screens": [
       {
@@ -49,18 +49,20 @@
     "folio": "Mirada",
     "statement": "Diseñar es decidir qué merece ser visto.",
     "highlight": "merece ser visto.",
-    "body": "Cada proyecto empieza con una pregunta simple: ¿qué necesita entender tu cliente en los primeros segundos? Desde ahí ordeno, diseño y construyo."
+    "body": "Cada proyecto empieza con una pregunta simple: ¿qué necesita entender tu cliente en los primeros segundos? Desde ahí ordeno, diseño, construyo y automatizo lo que haga falta."
   },
   "marquee": [
     "Diseño",
     "Código",
-    "Dirección"
+    "IA",
+    "Automatización",
+    "Marca"
   ],
   "contact": {
     "folio": "Tu proyecto",
     "display": "Hablemos",
     "title": "¿Tienes un proyecto en mente?",
-    "body": "Conversemos sobre el objetivo, la experiencia y la forma más clara de llevarlo a la web.",
+    "body": "Cuéntame qué quieres lograr. Encontramos juntos la forma más clara de llevarlo a la web y de quitarte de encima el trabajo repetitivo.",
     "ticket": [
       {
         "label": "Pasajero",
@@ -68,7 +70,7 @@
       },
       {
         "label": "Destino",
-        "value": "Tu nueva web"
+        "value": "Tu próximo nivel"
       },
       {
         "label": "Salida",
@@ -87,7 +89,7 @@
   "work": {
     "folio": "Trabajo seleccionado",
     "title": "El trabajo habla primero.",
-    "lead": "Cada caso conecta el concepto, las decisiones de interfaz y el sitio real. Sin pasos ocultos.",
+    "lead": "Cada caso conecta el reto del negocio, las decisiones de diseño y el sitio real funcionando. Sin pasos ocultos.",
     "viewCase": "Ver caso",
     "visitSite": "Visitar sitio",
     "dragHint": "Desliza"
@@ -104,14 +106,14 @@
   },
   "capabilities": {
     "folio": "Capacidades",
-    "title": "Una idea. Tres formas de hacerla visible.",
-    "lead": "Tres capacidades conectadas para que una idea conserve su intención desde el primer boceto hasta el sitio publicado.",
+    "title": "Una idea. Cuatro formas de hacerla funcionar.",
+    "lead": "Diseño, desarrollo, IA y marca conectados para que tu idea se vea bien, funcione mejor y trabaje por ti desde el primer día.",
     "receives": "Lo que recibes",
     "link": {
       "label": "Ver servicios en detalle",
       "href": "/servicios"
     },
-    "stamp": "Diseño · Código · Dirección · "
+    "stamp": "Diseño · Código · IA · Marca · "
   },
   "process": {
     "folio": "Recorrido",
@@ -119,19 +121,19 @@
     "steps": [
       {
         "title": "Descubrir",
-        "body": "Entiendo tu negocio, tu público y lo que la web debe lograr."
+        "body": "Entiendo tu negocio, tu público y lo que la web debe lograr. También detecto qué tareas se pueden automatizar."
       },
       {
         "title": "Diseñar",
-        "body": "Estructura, prototipo y diseño visual en Figma, validados contigo antes de escribir código."
+        "body": "Estructura, prototipo y diseño visual, validados contigo antes de escribir una sola línea de código."
       },
       {
         "title": "Construir",
-        "body": "Desarrollo responsive, rápido y fácil de administrar."
+        "body": "Desarrollo rápido, responsive y fácil de administrar, con la tecnología que mejor encaja en tu proyecto."
       },
       {
         "title": "Lanzar",
-        "body": "Publicación, pruebas finales y acompañamiento para que tu sitio siga creciendo."
+        "body": "Publicación, pruebas finales y acompañamiento para que tu sitio y tus automatizaciones sigan creciendo."
       }
     ]
   },
@@ -144,12 +146,12 @@
         "label": "años diseñando y desarrollando para la web."
       },
       {
-        "value": 8,
+        "value": 9,
         "label": "proyectos publicados en este portafolio."
       },
       {
-        "value": 3,
-        "label": "capacidades conectadas: diseño, código y dirección de marca."
+        "value": 4,
+        "label": "capacidades conectadas: diseño, desarrollo, IA y marca."
       }
     ]
   },
@@ -157,13 +159,13 @@
     "folio": "Sobre mí",
     "title": "Hola, soy Mauricio Correa.",
     "body": [
-      "Diseñador gráfico y web con más de una década de experiencia transformando ideas en experiencias visuales impactantes y funcionales.",
-      "Mi objetivo es ayudarte a contar tu historia a través del diseño, con soluciones que reflejen la identidad única de tu marca y conecten con tu audiencia de forma significativa."
+      "Diseñador gráfico y web con más de una década transformando ideas en experiencias digitales que se ven bien y funcionan mejor.",
+      "Hoy sumo inteligencia artificial y automatización a ese oficio: tu marca cuenta su historia con claridad y tu web trabaja por ti, con menos tareas manuales y más tiempo para lo importante."
     ],
     "principles": [
       {
         "title": "Innovación creativa",
-        "body": "Diseños modernos y únicos que hacen destacar tu marca."
+        "body": "Ideas originales y la tecnología adecuada, IA incluida, para que tu marca destaque."
       },
       {
         "title": "Experiencia del usuario",
@@ -178,16 +180,16 @@
         "body": "Atención meticulosa a cada detalle para un resultado impecable."
       }
     ],
-    "toolsTitle": "Guía de herramientas",
+    "toolsTitle": "Guía de oficios",
     "tools": [
-      "Figma",
-      "WordPress",
-      "Bricks Builder",
-      "WooCommerce",
-      "Astro",
       "UI/UX",
-      "Diseño gráfico",
-      "Identidad corporativa"
+      "Diseño web",
+      "Desarrollo web",
+      "E-commerce",
+      "IA aplicada",
+      "Automatización",
+      "Identidad corporativa",
+      "Diseño gráfico"
     ],
     "link": {
       "label": "Conoce más",

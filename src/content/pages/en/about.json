@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "About — Mauricio Correa",
+    "description": "A graphic and web designer with more than a decade connecting brand identity, interface design, web development and, today, artificial intelligence."
+  },
+  "aboutPage": {
+    "title": "About",
+    "lead": "Graphic and web designer. More than a decade connecting identity, interface and code. Today, artificial intelligence too.",
+    "storyTitle": "From print to the web",
+    "story": [
+      "I started in graphic design and over the years brought that craft to the web: the same care for identity, hierarchy and detail, now applied to interfaces people use every day.",
+      "I worked as a web developer at Naikka, where I built online stores for motorcycle gear brands, and today I work independently with brands in Colombia and the United States.",
+      "Today I design the experience, build it with the technology that best fits each project and add AI and automation, so your website doesn't just look good: it works for your business."
+    ],
+    "storyFolio": "Story",
+    "storyFrom": "Print",
+    "storyTo": "Web"
+  }
+}

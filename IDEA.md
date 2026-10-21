@@ -257,7 +257,7 @@ Se mantienen los slugs de proyectos actuales (`autovenz`, `encanto-amatista`, `d
 - **Fondo:** turquesa a sangre (texto en gunmetal).
 - **Copy:**
   - Etiqueta: `LÁMINA 05 — CAPACIDADES`
-  - Titular: **Una idea. Tres formas de hacerla visible.**
+  - Titular: **Una idea. Cuatro formas de hacerla funcionar.** (desde oct. 2026 se suma IA y automatización como cuarto servicio)
   - Apoyo: *Tres capacidades conectadas para que una idea conserve su intención desde el primer boceto hasta el sitio publicado.*
 - **Tres tickets apilados** (cara frontal = servicio; talón = "lo que recibes"):
   1. **Diseño de interfaces web (UI/UX)** — *Interfaces intuitivas que equilibran estética y funcionalidad para una navegación fluida.* Recibes: arquitectura de contenido, wireframes, prototipo en Figma y diseño responsive. **[confirmar entregables]**

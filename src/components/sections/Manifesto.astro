@@ -15,7 +15,7 @@ const words = (text: string) => text.split(' ').filter(Boolean);
 ---
 
 <section class="manifesto grain" data-surface="gunmetal" data-manifesto aria-labelledby="manifesto-title">
-  <p class="manifesto__folio folio folio--corner">{index} · {manifesto.folio}</p>
+  <p class="manifesto__folio folio folio--corner">{index ? `${index} · ` : ''}{manifesto.folio}</p>
   <p class="manifesto__ghost poster" aria-hidden="true" data-breathe>{manifesto.folio}</p>
   <span class="mark mark--star-o" aria-hidden="true"><Icon name="star" size="100%" /></span>
   <span class="mark mark--star-t" aria-hidden="true"><Icon name="star" size="100%" /></span>

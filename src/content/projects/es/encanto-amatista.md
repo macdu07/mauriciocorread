@@ -4,7 +4,7 @@ order: 2
 featured: true
 year: null
 categories: ["Diseño Web", "E-Commerce"]
-stack: ["WordPress", "Bricks Builder", "WooCommerce", "Figma"]
+stack: ["Diseño UI/UX", "E-commerce", "Desarrollo web"]
 summary: "Una tienda de joyería que enamora desde el primer scroll."
 description: "Boutique de joyería en acero inoxidable y bañado en rodio para uso cotidiano. Diseño elegante y minimalista que traduce la identidad de la marca en una experiencia de compra envolvente."
 url: "https://encantoamatista.com"

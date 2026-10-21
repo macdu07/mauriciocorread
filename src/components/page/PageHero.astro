@@ -1,0 +1,91 @@
+---
+import type { Tone } from '../../i18n';
+
+interface Props {
+  title: string;
+  lead: string;
+  tone?: Tone;
+  /** Palabra o cifra tonal gigante detrás del título (decorativa). */
+  ghost?: string;
+}
+const { title, lead, tone = 'turquoise', ghost } = Astro.props;
+// Título-cartel ajustado a su palabra más larga: nunca se parte a mitad de palabra.
+const longest = Math.max(...title.split(' ').map((w) => w.length));
+const fit = (86 / (longest * 0.5)).toFixed(2);
+const hasAside = Astro.slots.has('default');
+---
+
+<header class:list={['phero', `phero--${tone}`, 'grain', hasAside && 'phero--aside']} data-surface={tone}>
+  {ghost && <p class="phero__ghost poster" aria-hidden="true">{ghost}</p>}
+  <div class="phero__text">
+    <h1 class="phero__title poster" data-case-name style={`--fit:${fit}vw`}>{title}</h1>
+    <p class="phero__lead" data-reveal>{lead}</p>
+  </div>
+  {hasAside && <div class="phero__aside"><slot /></div>}
+</header>
+
+<style>
+  .phero {
+    position: relative;
+    overflow: clip;
+    min-height: 82svh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: end;
+    gap: var(--space-xl);
+    padding: calc(var(--header-h) + var(--space-xl)) var(--gutter) var(--space-xl);
+  }
+  .phero--aside {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: end;
+  }
+  .phero__ghost {
+    position: absolute;
+    z-index: -1;
+    right: -0.04em;
+    top: calc(var(--header-h) - 0.1em);
+    font-size: clamp(12rem, 30vw, 34rem);
+    line-height: 0.78;
+    color: color-mix(in oklab, currentColor 9%, transparent);
+    white-space: nowrap;
+  }
+  .phero--gunmetal .phero__ghost {
+    color: var(--cm-gunmetal-soft);
+  }
+  .phero__text {
+    position: relative;
+    display: grid;
+    gap: var(--space-m);
+  }
+  .phero__title {
+    font-size: min(clamp(5.5rem, 17vw, 20rem), var(--fit));
+    line-height: 0.78;
+  }
+  .phero--aside .phero__title {
+    font-size: min(clamp(5rem, 12vw, 15rem), calc(var(--fit) * 0.6));
+  }
+  .phero--gunmetal .phero__title {
+    color: var(--cm-orange);
+  }
+  .phero__lead {
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    max-width: 28ch;
+  }
+  .phero__aside {
+    position: relative;
+  }
+  @media (max-width: 860px) {
+    .phero,
+    .phero--aside {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+      padding-top: calc(var(--header-h) + var(--space-2xl));
+    }
+    .phero--aside .phero__title {
+      font-size: min(17vw, var(--fit));
+    }
+  }
+</style>

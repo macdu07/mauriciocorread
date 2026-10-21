@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { getPage } from '../i18n';
+
+// Un solo 404 para todo el sitio (el servidor lo sirve en cualquier ruta): español primero, línea en inglés.
+const page = await getPage('es', 'notfound');
+const t = page.notFound!;
+---
+
+<BaseLayout title={page.meta.title} description={page.meta.description} headerOnDark>
+  <section class="lost grain" data-surface="gunmetal" aria-labelledby="lost-title">
+    <div class="lost__tv" aria-hidden="true">
+      <span class="lost__static"></span>
+      <span class="lost__bars"></span>
+    </div>
+    <div class="lost__text">
+      <p class="lost__code poster" aria-hidden="true">{t.display}</p>
+      <h1 id="lost-title" class="lost__title" data-split-lines>{t.title}</h1>
+      <p class="lost__body" data-reveal>{t.body}</p>
+      <div class="lost__actions" data-reveal>
+        <Button href="/" variant="orange" icon="arrow-up-right">{t.home}</Button>
+        <Button href="/proyectos" variant="line">{t.projects}</Button>
+      </div>
+      <p class="lost__alt" lang="en" data-reveal>{t.alt} <a href="/en/">{t.altHome}</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lost {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+    padding: calc(var(--header-h) + var(--space-xl)) var(--gutter) var(--space-xl);
+  }
+  /* La M de la marca como pantalla sin señal */
+  .lost__tv {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 880 / 695;
+    mask: url('/brand/m.svg') center / 100% 100% no-repeat;
+    background: var(--cm-gunmetal-soft);
+  }
+  .lost__static {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+    opacity: 0.55;
+    mix-blend-mode: screen;
+    animation: lost-static 0.35s steps(4) infinite;
+  }
+  .lost__bars {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--cm-cream) 0 12.5%,
+      var(--cm-orange) 12.5% 25%,
+      var(--cm-turquoise) 25% 37.5%,
+      var(--cm-gunmetal) 37.5% 50%,
+      var(--cm-cream) 50% 62.5%,
+      var(--cm-orange) 62.5% 75%,
+      var(--cm-turquoise) 75% 87.5%,
+      var(--cm-gunmetal) 87.5% 100%
+    );
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    animation: lost-roll 3.2s linear infinite;
+  }
+  @keyframes lost-static {
+    0% { background-position: 0 0; }
+    25% { background-position: -50px 30px; }
+    50% { background-position: 40px -60px; }
+    75% { background-position: -20px 70px; }
+    100% { background-position: 0 0; }
+  }
+  @keyframes lost-roll {
+    from { transform: translateY(-4%); }
+    50% { transform: translateY(4%); }
+    to { transform: translateY(-4%); }
+  }
+  .lost__text {
+    display: grid;
+    gap: var(--space-m);
+    justify-items: start;
+  }
+  .lost__code {
+    font-size: clamp(7rem, 18vw, 20rem);
+    line-height: 0.78;
+    color: var(--cm-orange);
+  }
+  .lost__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+  }
+  .lost__body {
+    font-size: var(--step-1);
+    line-height: 1.45;
+    max-width: 36ch;
+    color: color-mix(in oklab, var(--cm-cream) 82%, var(--cm-turquoise));
+  }
+  .lost__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .lost__alt {
+    font-size: var(--step--1);
+    color: color-mix(in oklab, var(--cm-cream) 75%, var(--cm-turquoise));
+  }
+  .lost__alt a {
+    color: var(--cm-cream);
+  }
+  @media (max-width: 860px) {
+    .lost {
+      grid-template-columns: minmax(0, 1fr);
+      align-content: center;
+    }
+    .lost__tv {
+      max-width: 13rem;
+    }
+    .lost__code {
+      font-size: 6rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lost__static,
+    .lost__bars {
+      animation: none;
+    }
+  }
+</style>

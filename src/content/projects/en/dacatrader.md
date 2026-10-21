@@ -4,7 +4,7 @@ order: 3
 featured: true
 year: 2024
 categories: ["Web Design", "UI/UX"]
-stack: ["WordPress", "Bricks Builder", "Figma", "UI/UX"]
+stack: ["UI/UX Design", "Web Development", "Motion"]
 summary: "B2B trust for importing engines from China and Dubai."
 description: "A digital presence for a company that imports new and used engines from China and Dubai. A modern design that conveys B2B trust and leadership."
 url: "https://dacatrader.com"

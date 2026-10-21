@@ -14,7 +14,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <section class="caps grain" data-surface="turquoise" data-caps aria-labelledby="caps-title">
-  <p class="folio folio--corner">{index} · {capabilities.folio}</p>
+  <p class="folio folio--corner">{index ? `${index} · ` : ''}{capabilities.folio}</p>
 
   <div class="caps__head">
     <h2 id="caps-title" class="caps__title" data-split-lines>{capabilities.title}</h2>

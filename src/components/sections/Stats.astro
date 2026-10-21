@@ -11,7 +11,7 @@ const { stats, index } = Astro.props;
 ---
 
 <section class="stats grain" data-surface="orange" data-stats aria-label={stats.folio}>
-  <p class="folio folio--corner">{index} · {stats.folio}</p>
+  <p class="folio folio--corner">{index ? `${index} · ` : ''}{stats.folio}</p>
 
   <dl class="stats__grid">
     {stats.items.map((item, i) => (

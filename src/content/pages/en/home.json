@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Mauricio Correa — UI/UX designer and web developer",
-    "description": "I design interfaces and build websites that turn your identity into a clear, memorable experience that is ready to grow. More than 10 years of experience."
+    "title": "Mauricio Correa — UI/UX design, web development and applied AI",
+    "description": "I design and build websites that are clear, memorable and built to convert, and connect them with AI and automation so your business works better. More than 10 years of experience."
   },
   "preloader": {
     "edition": "Edition 2026"
@@ -12,7 +12,7 @@
       "Correa"
     ],
     "title": "I turn ideas into digital experiences.",
-    "lead": "I design interfaces and build websites that turn your identity into a clear, memorable experience that is ready to grow.",
+    "lead": "I design and build websites that are clear, memorable and built to convert. Then I connect them with AI and automation so your business works better, even when you're not there.",
     "primaryCta": {
       "label": "See projects",
       "href": "/en/projects"
@@ -25,7 +25,7 @@
       "value": "10+ years",
       "label": "building digital solutions for brands and companies."
     },
-    "stamp": "UI/UX · Web · Branding · 10+ years · ",
+    "stamp": "UI/UX · Web · AI · Brand · 10+ years · ",
     "scrollHint": "Scroll to enter",
     "screens": [
       {
@@ -49,18 +49,20 @@
     "folio": "Point of view",
     "statement": "Design is deciding what deserves to be seen.",
     "highlight": "deserves to be seen.",
-    "body": "Every project starts with a simple question: what does your customer need to understand in the first few seconds? From there I organize, design and build."
+    "body": "Every project starts with a simple question: what does your customer need to understand in the first few seconds? From there I organize, design, build and automate whatever it takes."
   },
   "marquee": [
     "Design",
     "Code",
-    "Direction"
+    "AI",
+    "Automation",
+    "Brand"
   ],
   "contact": {
     "folio": "Your project",
     "display": "Let's talk",
     "title": "Have a project in mind?",
-    "body": "Let's talk about the goal, the experience and the clearest way to bring it to the web.",
+    "body": "Tell me what you want to achieve. Together we'll find the clearest way to bring it to the web and take the repetitive work off your plate.",
     "ticket": [
       {
         "label": "Passenger",
@@ -68,7 +70,7 @@
       },
       {
         "label": "Destination",
-        "value": "Your new website"
+        "value": "Your next level"
       },
       {
         "label": "Departure",
@@ -87,7 +89,7 @@
   "work": {
     "folio": "Selected work",
     "title": "The work speaks first.",
-    "lead": "Each case connects the concept, the interface decisions and the live site. No hidden steps.",
+    "lead": "Each case connects the business challenge, the design decisions and the real site at work. No hidden steps.",
     "viewCase": "View case",
     "visitSite": "Visit site",
     "dragHint": "Scroll"
@@ -104,14 +106,14 @@
   },
   "capabilities": {
     "folio": "Capabilities",
-    "title": "One idea. Three ways to make it visible.",
-    "lead": "Three connected capabilities so an idea keeps its intention from the first sketch to the published site.",
+    "title": "One idea. Four ways to make it work.",
+    "lead": "Design, development, AI and brand connected so your idea looks right, works better and works for you from day one.",
     "receives": "What you get",
     "link": {
       "label": "See services in detail",
       "href": "/en/services"
     },
-    "stamp": "Design · Code · Direction · "
+    "stamp": "Design · Code · AI · Brand · "
   },
   "process": {
     "folio": "Route",
@@ -119,19 +121,19 @@
     "steps": [
       {
         "title": "Discover",
-        "body": "I get to know your business, your audience and what the website needs to achieve."
+        "body": "I get to know your business, your audience and what the website needs to achieve. I also spot which tasks can be automated."
       },
       {
         "title": "Design",
-        "body": "Structure, prototype and visual design in Figma, approved with you before any code is written."
+        "body": "Structure, prototype and visual design, approved with you before a single line of code is written."
       },
       {
         "title": "Build",
-        "body": "Responsive development that is fast and easy to manage."
+        "body": "Fast, responsive development that is easy to manage, using the technology that best fits your project."
       },
       {
         "title": "Launch",
-        "body": "Publishing, final testing and ongoing support so your site keeps growing."
+        "body": "Publishing, final testing and ongoing support so your site and your automations keep growing."
       }
     ]
   },
@@ -144,12 +146,12 @@
         "label": "years designing and building for the web."
       },
       {
-        "value": 8,
+        "value": 9,
         "label": "published projects in this portfolio."
       },
       {
-        "value": 3,
-        "label": "connected capabilities: design, code and brand direction."
+        "value": 4,
+        "label": "connected capabilities: design, development, AI and brand."
       }
     ]
   },
@@ -157,13 +159,13 @@
     "folio": "About",
     "title": "Hi, I'm Mauricio Correa.",
     "body": [
-      "A graphic and web designer with more than a decade of experience turning ideas into striking, functional visual experiences.",
-      "My goal is to help you tell your story through design, with solutions that reflect your brand's unique identity and connect with your audience in a meaningful way."
+      "A graphic and web designer with more than a decade turning ideas into digital experiences that look good and work even better.",
+      "Today I bring artificial intelligence and automation into that craft: your brand tells its story clearly and your website works for you, with fewer manual tasks and more time for what matters."
     ],
     "principles": [
       {
         "title": "Creative innovation",
-        "body": "Modern, original designs that make your brand stand out."
+        "body": "Original ideas and the right technology, AI included, to make your brand stand out."
       },
       {
         "title": "User experience",
@@ -178,16 +180,16 @@
         "body": "Careful attention to every detail for a flawless result."
       }
     ],
-    "toolsTitle": "Tool guide",
+    "toolsTitle": "Craft guide",
     "tools": [
-      "Figma",
-      "WordPress",
-      "Bricks Builder",
-      "WooCommerce",
-      "Astro",
       "UI/UX",
-      "Graphic design",
-      "Corporate identity"
+      "Web design",
+      "Web development",
+      "E-commerce",
+      "Applied AI",
+      "Automation",
+      "Corporate identity",
+      "Graphic design"
     ],
     "link": {
       "label": "Learn more",

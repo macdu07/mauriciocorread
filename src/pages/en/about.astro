@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import Story from '../../components/page/Story.astro';
+import About from '../../components/sections/About.astro';
+import Stats from '../../components/sections/Stats.astro';
+import Process from '../../components/sections/Process.astro';
+import ContactClose from '../../components/sections/ContactClose.astro';
+import { getPage, getSettings, toLocale } from '../../i18n';
+
+const locale = toLocale(Astro.currentLocale);
+const page = await getPage(locale, 'about');
+const home = await getPage(locale, 'home');
+const settings = await getSettings(locale);
+const t = page.aboutPage!;
+---
+
+<BaseLayout title={page.meta.title} description={page.meta.description} alternate={{ es: '/sobre-mi', en: '/en/about' }}>
+  <PageHero title={t.title} lead={t.lead} tone="orange" ghost="+10" />
+  <Story title={t.storyTitle} paragraphs={t.story} folio={t.storyFolio} from={t.storyFrom} to={t.storyTo} />
+  {home.about && <About about={home.about} index="" showLink={false} />}
+  {home.stats && <Stats stats={home.stats} index="" />}
+  {home.process && <Process process={home.process} index="" />}
+  {home.contact && <ContactClose contact={home.contact} settings={settings} stamp={home.hero?.stamp ?? ''} />}
+</BaseLayout>

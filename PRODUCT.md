@@ -16,15 +16,15 @@ Business owners and independent professionals (Latin America and the US) who nee
 
 ## Product Purpose
 
-Personal site and portfolio of **Mauricio Correa — UI/UX Web Designer & Web Developer**. It presents his three connected services (UI/UX web interface design, creative website development, corporate identity), proves them with real case studies, and turns visits into conversations on WhatsApp or email. The site itself is the main portfolio piece. Success: contact clicks, time spent in case studies, Lighthouse ≥ 90 across the board.
+Personal site and portfolio of **Mauricio Correa — UI/UX design, web development and applied AI**. It presents his four connected services (UI/UX experience design, website and store development, AI and automation, corporate identity), proves them with real case studies, and turns visits into conversations on WhatsApp or email. The site itself is the main portfolio piece. Success: contact clicks, time spent in case studies, Lighthouse ≥ 90 across the board.
 
 ## Positioning
 
-One person connects brand identity, interface design and development end to end, so an idea keeps its intention from the first sketch to the published site ("Una idea. Tres formas de hacerla visible."). More than ten years in graphic and web design.
+One person connects brand identity, interface design and development end to end, so an idea keeps its intention from the first sketch to the published site, and then makes that site work for the business with AI and automation ("Una idea. Cuatro formas de hacerla funcionar."). More than ten years in graphic and web design. Copy is tool-agnostic on purpose: it sells outcomes (clear, fast, converting, less manual work), never a specific stack, because Mauricio picks the technology per project. Projects list their scope (UI/UX, e-commerce, bilingual site…), not tools.
 
 ## Operating Context
 
-Bilingual: Spanish (default, `/`) and English (`/en`). Replaces maurouix.com ("MauroUIX"), which will 301-redirect to mauriciocorread.com, project slugs preserved. Mauricio builds client sites mostly with Figma, WordPress, Bricks Builder and WooCommerce.
+Bilingual: Spanish (default, `/`) and English (`/en`). Replaces maurouix.com ("MauroUIX"), which will 301-redirect to mauriciocorread.com, project slugs preserved. Mauricio picks the technology per project; the site does not name tools. No AI/automation case study exists yet: that service has no related projects until there is real evidence.
 
 ## Capabilities and Constraints
 
@@ -44,7 +44,7 @@ Bilingual: Spanish (default, `/`) and English (`/en`). Replaces maurouix.com ("M
 
 ## Evidence on Hand
 
-- 8 real case studies with full copy (Project / Challenge / What we built) on maurouix.com: AutoVenz, Encanto Amatista, Daca Trader, Spartan Helmets, Chanell Clean Co, X Sports Helmets, TDB Uniforms, We Care Master Service. Spartan and X Sports were built while working at Naikka. Live sites exist for each.
+- 9 real case studies: 8 with full copy (Project / Challenge / What we built) from maurouix.com (AutoVenz, Encanto Amatista, Daca Trader, Spartan Helmets, Chanell Clean Co, X Sports Helmets, TDB Uniforms, We Care Master Service) plus Hacienda Adrenalina (haciendadrenalina.com, WordPress + Bricks; case copy drafted from the live site, pending Mauricio's validation). Spartan and X Sports were built while working at Naikka. Live sites exist for each.
 - Project cover images on maurouix.com.
 - "+10 years" of experience (stated by Mauricio).
 - No testimonials, client counts, or result metrics exist. Never fabricate them.

@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/page/PageHero.astro';
+import ServicesList from '../../components/page/ServicesList.astro';
+import Faq from '../../components/page/Faq.astro';
+import Process from '../../components/sections/Process.astro';
+import ContactClose from '../../components/sections/ContactClose.astro';
+import { getPage, getProjects, getServices, getSettings, toLocale } from '../../i18n';
+
+const locale = toLocale(Astro.currentLocale);
+const page = await getPage(locale, 'services');
+const home = await getPage(locale, 'home');
+const settings = await getSettings(locale);
+const services = await getServices(locale);
+const projects = await getProjects(locale);
+const t = page.servicesPage!;
+---
+
+<BaseLayout title={page.meta.title} description={page.meta.description} alternate={{ es: '/servicios', en: '/en/services' }}>
+  <PageHero title={t.title} lead={t.lead} tone="turquoise" ghost="03" />
+  <ServicesList services={services} projects={projects} labels={t} locale={locale} />
+  <Faq title={t.faqTitle} items={t.faq} />
+  {home.process && <Process process={home.process} index="" />}
+  {home.contact && <ContactClose contact={home.contact} settings={settings} stamp={home.hero?.stamp ?? ''} />}
+</BaseLayout>

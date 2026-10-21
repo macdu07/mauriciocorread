@@ -16,7 +16,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <section class="archive grain" data-surface="cream" data-archive aria-labelledby="archive-title">
-  <p class="folio folio--corner">{index} · {archive.folio}</p>
+  <p class="folio folio--corner">{index ? `${index} · ` : ''}{archive.folio}</p>
 
   <div class="archive__head">
     <h2 id="archive-title" class="archive__title" data-split-lines>{archive.title}</h2>

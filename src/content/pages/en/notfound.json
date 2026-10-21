@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "title": "Page not found — Mauricio Correa",
+    "description": "This page got lost in transmission."
+  },
+  "notFound": {
+    "display": "404",
+    "title": "Signal lost",
+    "body": "This page got lost in transmission. The link may have changed or it no longer exists.",
+    "home": "Back to home",
+    "projects": "See projects",
+    "alt": "Señal perdida — esta página se perdió en la transmisión.",
+    "altHome": "Volver al inicio"
+  }
+}

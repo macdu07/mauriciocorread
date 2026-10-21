@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactClose from '../components/sections/ContactClose.astro';
+import Channels from '../components/page/Channels.astro';
+import { getPage, getSettings, toLocale } from '../i18n';
+
+const locale = toLocale(Astro.currentLocale);
+const page = await getPage(locale, 'contact');
+const home = await getPage(locale, 'home');
+const settings = await getSettings(locale);
+---
+
+<BaseLayout title={page.meta.title} description={page.meta.description} alternate={{ es: '/contacto', en: '/en/contact' }}>
+  {home.contact && <ContactClose contact={home.contact} settings={settings} stamp={home.hero?.stamp ?? ''} headingLevel="h1" />}
+  {page.contactPage && <Channels labels={page.contactPage} settings={settings} />}
+</BaseLayout>

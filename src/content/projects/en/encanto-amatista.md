@@ -4,7 +4,7 @@ order: 2
 featured: true
 year: null
 categories: ["Web Design", "E-Commerce"]
-stack: ["WordPress", "Bricks Builder", "WooCommerce", "Figma"]
+stack: ["UI/UX Design", "E-commerce", "Web Development"]
 summary: "A jewelry store that wins people over from the first scroll."
 description: "A boutique of everyday stainless steel and rhodium-plated jewelry. An elegant, minimal design that turns the brand identity into an immersive shopping experience."
 url: "https://encantoamatista.com"

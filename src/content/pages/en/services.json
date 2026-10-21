@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "Services — Mauricio Correa",
+    "description": "UI/UX design, website and store development, AI and automation, and corporate identity: four connected capabilities so your brand looks right, makes sense and works for you."
+  },
+  "servicesPage": {
+    "title": "Services",
+    "lead": "Four connected capabilities so your brand looks right, makes sense fast and works for you, even when you're not there.",
+    "forWho": "Who it's for",
+    "receives": "What you get",
+    "related": "Related projects",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "Do you work with clients outside Colombia?",
+        "a": "Yes. I've worked with brands in Colombia and the United States, and the whole process can be done remotely."
+      },
+      {
+        "q": "Will I be able to update my site myself?",
+        "a": "If you need to, yes. I choose the technology with that in mind: if you'll be changing text, images or products often, your site gets an easy-to-use dashboard and I show you how to use it."
+      },
+      {
+        "q": "How can AI help my business?",
+        "a": "We start with the tasks that take up most of your time. From there I propose concrete solutions: an assistant that answers frequent questions, forms that send every lead to your inbox or CRM, or workflows that move data between your tools without copy and paste."
+      },
+      {
+        "q": "What do I need to get started?",
+        "a": "A clear idea of your business and what you want to achieve. If you already have a logo, copy or photos, great; if not, we define them together."
+      },
+      {
+        "q": "Do you handle everything or just one part?",
+        "a": "Whatever suits you. I can run the whole project or just the part you need: design, development, automation or identity."
+      }
+    ]
+  }
+}

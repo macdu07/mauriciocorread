@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "Contact — Mauricio Correa",
+    "description": "Tell me about your project: message me on WhatsApp or social media and let's talk about your website, store, automations or identity."
+  },
+  "contactPage": {
+    "channelsTitle": "Where to find me",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "social": "Social",
+    "briefTitle": "To move faster, tell me:",
+    "brief": [
+      "What your business does and who it sells to.",
+      "What you need: a new website, improving your current one, a store, automating processes or your identity.",
+      "Whether you already have a logo, copy or photos.",
+      "One or two websites you like as a reference."
+    ]
+  }
+}

@@ -4,7 +4,7 @@ order: 5
 featured: true
 year: null
 categories: ["Diseño Web", "Servicios Locales"]
-stack: ["WordPress", "Bricks Builder", "Figma", "UI/UX"]
+stack: ["Diseño UI/UX", "Desarrollo web", "SEO local"]
 summary: "Orden, confianza y contacto directo para clientes en Chicagoland."
 description: "Empresa de limpieza comercial y residencial con cobertura en el área de Chicagoland. Diseño de una presencia web profesional que transmite confianza, orden y una propuesta de servicio clara para clientes locales."
 url: "https://chanellcleanco.com"

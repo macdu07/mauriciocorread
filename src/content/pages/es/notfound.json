@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "title": "Página no encontrada — Mauricio Correa",
+    "description": "Esta página se perdió en la transmisión."
+  },
+  "notFound": {
+    "display": "404",
+    "title": "Señal perdida",
+    "body": "Esta página se perdió en la transmisión. Puede que el enlace haya cambiado o que ya no exista.",
+    "home": "Volver al inicio",
+    "projects": "Ver proyectos",
+    "alt": "Signal lost — this page got lost in transmission.",
+    "altHome": "Back to home"
+  }
+}

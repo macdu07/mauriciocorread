@@ -122,9 +122,46 @@ function setupNameSwap(panel: HTMLElement) {
   for (const attr of name.getAttributeNames()) if (attr.startsWith('data-astro-cid')) swap.setAttribute(attr, '');
   name.after(swap);
 
-  return () => {
+  // La copia no adivina los saltos de línea por ancho (un redondeo de píxel bastaba para
+  // partir distinto): lee las líneas que el navegador hizo en el nombre y las reproduce tal cual.
+  swap.style.whiteSpace = 'nowrap';
+  swap.style.width = 'auto';
+  swap.style.maxWidth = 'none';
+  let lastLines = '';
+  const readLines = () => {
+    const text = name.firstChild;
+    if (!text || text.nodeType !== Node.TEXT_NODE) return [name.textContent ?? ''];
+    const value = text.textContent ?? '';
+    const lines: string[] = [];
+    let lineTop: number | null = null;
+    let current = '';
+    const range = document.createRange();
+    let start = 0;
+    for (const word of value.split(' ')) {
+      range.setStart(text, start);
+      range.setEnd(text, start + word.length);
+      const top = Math.round(range.getBoundingClientRect().top);
+      if (lineTop === null || Math.abs(top - lineTop) < 4) current = current ? `${current} ${word}` : word;
+      else {
+        lines.push(current);
+        current = word;
+      }
+      lineTop = lineTop === null || Math.abs(top - lineTop) >= 4 ? top : lineTop;
+      start += word.length + 1;
+    }
+    lines.push(current);
+    return lines;
+  };
+
+  const update = () => {
     swap.style.left = `${name.offsetLeft}px`;
     swap.style.top = `${name.offsetTop}px`;
+    const lines = readLines();
+    const key = lines.join('\n');
+    if (key !== lastLines) {
+      lastLines = key;
+      swap.replaceChildren(...lines.flatMap((line, i) => (i ? [document.createElement('br'), line] : [line])));
+    }
     const n = name.getBoundingClientRect();
     const f = frame.getBoundingClientRect();
     const top = Math.max(0, f.top - n.top);
@@ -133,6 +170,9 @@ function setupNameSwap(panel: HTMLElement) {
     const bottom = Math.max(0, n.bottom - f.bottom);
     swap.style.clipPath = left >= n.width || top >= n.height ? 'inset(0 0 0 100%)' : `inset(${top}px ${right}px ${bottom}px ${left}px)`;
   };
+  // Si el nombre cambia de tamaño (respiración del ancho, carga de fuentes), la copia lo sigue.
+  new ResizeObserver(update).observe(name);
+  return update;
 }
 
 /* ---------- 04 · Archivo: la captura sigue al cursor ---------- */

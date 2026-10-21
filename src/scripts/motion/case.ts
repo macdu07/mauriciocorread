@@ -18,7 +18,7 @@ export function prepareCaseIntro() {
   if (!name) return null;
   const tl = gsap.timeline({ paused: true, defaults: { ease: 'mc-out' } });
   // words + chars: cada palabra queda indivisible al ajustar líneas
-  const chars = SplitText.create(name, { type: 'words,chars', mask: 'chars' }).chars;
+  const chars = SplitText.create(name, { type: 'words,chars', mask: 'chars', charsClass: 'ch' }).chars;
   tl.from(chars, { yPercent: 105, duration: 1.1, stagger: 0.03 }, 0);
 
   const cover = $('[data-case-cover]');

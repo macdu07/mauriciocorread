@@ -4,7 +4,7 @@ order: 3
 featured: true
 year: 2024
 categories: ["Diseño Web", "UI/UX"]
-stack: ["WordPress", "Bricks Builder", "Figma", "UI/UX"]
+stack: ["Diseño UI/UX", "Desarrollo web", "Animación"]
 summary: "Confianza B2B para importar motores desde China y Dubái."
 description: "Presencia digital para empresa especializada en importación de motores nuevos y usados desde China y Dubái. Diseño moderno que proyecta confianza y liderazgo B2B."
 url: "https://dacatrader.com"

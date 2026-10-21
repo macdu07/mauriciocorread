@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "Servicios — Mauricio Correa",
+    "description": "Diseño UI/UX, desarrollo de sitios web y tiendas, IA y automatización, e imagen corporativa: cuatro capacidades conectadas para que tu marca se vea, se entienda y trabaje por ti."
+  },
+  "servicesPage": {
+    "title": "Servicios",
+    "lead": "Cuatro capacidades conectadas para que tu marca se vea bien, se entienda rápido y trabaje por ti, incluso cuando no estás.",
+    "forWho": "Para quién es",
+    "receives": "Lo que recibes",
+    "related": "Proyectos relacionados",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "q": "¿Trabajas con clientes fuera de Colombia?",
+        "a": "Sí. He trabajado con marcas en Colombia y en Estados Unidos, y todo el proceso se puede hacer en remoto."
+      },
+      {
+        "q": "¿Podré actualizar mi sitio yo mismo?",
+        "a": "Si lo necesitas, sí. Elijo la tecnología pensando en eso: si vas a cambiar textos, imágenes o productos con frecuencia, tu sitio tendrá un panel fácil de usar y te enseño a manejarlo."
+      },
+      {
+        "q": "¿Cómo puede ayudarle la IA a mi negocio?",
+        "a": "Empezamos por las tareas que más tiempo te quitan. Desde ahí propongo soluciones concretas: un asistente que responde las preguntas frecuentes, formularios que llevan cada contacto a tu correo o CRM, o flujos que mueven datos entre tus herramientas sin copiar y pegar."
+      },
+      {
+        "q": "¿Qué necesito para empezar?",
+        "a": "Una idea clara de tu negocio y de lo que quieres lograr. Si ya tienes logo, textos o fotos, mejor; si no, los definimos juntos."
+      },
+      {
+        "q": "¿Te encargas de todo o solo de una parte?",
+        "a": "Como prefieras. Puedo llevar el proyecto completo o solo la parte que necesites: diseño, desarrollo, automatización o identidad."
+      }
+    ]
+  }
+}

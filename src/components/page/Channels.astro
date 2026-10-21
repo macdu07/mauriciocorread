@@ -1,0 +1,151 @@
+---
+import Icon from '../ui/Icon.astro';
+import { whatsappHref, type getPage, type getSettings } from '../../i18n';
+
+type Labels = NonNullable<Awaited<ReturnType<typeof getPage>>['contactPage']>;
+interface Props {
+  labels: Labels;
+  settings: Awaited<ReturnType<typeof getSettings>>;
+}
+const { labels: t, settings } = Astro.props;
+const wa = whatsappHref(settings.contact.whatsapp, settings.contact.whatsappMessage);
+const email = settings.contact.email;
+---
+
+<section class="channels grain" data-surface="cream" aria-labelledby="channels-title">
+  <div class="channels__col">
+    <h2 id="channels-title" class="channels__title" data-split-lines>{t.channelsTitle}</h2>
+    <ul role="list" class="channels__list">
+      <li data-reveal>
+        <span class="channels__label">{t.whatsapp}</span>
+        <a href={wa} target="_blank" rel="noopener" class="channels__link">{settings.contact.whatsappDisplay}<Icon name="arrow-up-right" size="0.9em" /></a>
+      </li>
+      {email && (
+        <li data-reveal>
+          <span class="channels__label">{t.email}</span>
+          <a href={`mailto:${email}`} class="channels__link">{email}<Icon name="arrow-up-right" size="0.9em" /></a>
+        </li>
+      )}
+      <li data-reveal>
+        <span class="channels__label">{t.social}</span>
+        <span class="channels__social">
+          {settings.social.map((s) => (
+            <a href={s.href} target="_blank" rel="noopener" class="channels__link">{s.label}<Icon name="arrow-up-right" size="0.9em" /></a>
+          ))}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="channels__brief" data-reveal>
+    <p class="channels__brief-title">{t.briefTitle}</p>
+    <ol role="list">
+      {t.brief.map((item, i) => (
+        <li><span class="channels__n">{String(i + 1).padStart(2, '0')}</span>{item}</li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .channels {
+    padding: var(--space-2xl) var(--gutter);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: start;
+  }
+  .channels__col {
+    display: grid;
+    gap: var(--space-l);
+  }
+  .channels__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    max-width: 12ch;
+  }
+  .channels__list {
+    border-top: 1.5px solid var(--cm-gunmetal);
+  }
+  .channels__list li {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: var(--space-s);
+    align-items: baseline;
+    padding: var(--space-m) 0;
+    border-bottom: 1.5px solid var(--cm-gunmetal);
+  }
+  .channels__label {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cm-ink-soft);
+  }
+  .channels__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-m);
+  }
+  .channels__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-weight: 700;
+    font-size: var(--step-1);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(currentColor, currentColor) left bottom / 0 1.5px no-repeat;
+    transition: background-size var(--dur-s) var(--ease-out);
+  }
+  .channels__link:hover {
+    background-size: 100% 1.5px;
+  }
+  /* Etiqueta de papel, como la guía de herramientas */
+  .channels__brief {
+    background: var(--cm-cream-deep);
+    color: var(--cm-gunmetal);
+    border-radius: var(--radius-s);
+    padding: var(--space-l);
+    rotate: -1.5deg;
+    box-shadow: 0 18px 30px -22px rgb(29 39 48 / 0.5);
+  }
+  .channels__brief-title {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 0.8rem;
+    margin-bottom: var(--space-m);
+    border-bottom: 1.5px dashed color-mix(in oklab, var(--cm-gunmetal) 40%, transparent);
+  }
+  .channels__brief ol {
+    display: grid;
+    gap: var(--space-s);
+  }
+  .channels__brief li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    font-size: var(--step-1);
+    line-height: 1.4;
+  }
+  .channels__n {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--cm-orange);
+    padding-top: 0.2em;
+  }
+  @media (max-width: 860px) {
+    .channels {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .channels__list li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2xs);
+    }
+    .channels__brief {
+      rotate: -0.75deg;
+    }
+  }
+</style>

@@ -8,24 +8,27 @@ type Data = NonNullable<Awaited<ReturnType<typeof getPage>>['contact']>;
 interface Props {
   contact: Data;
   settings: Awaited<ReturnType<typeof getSettings>>;
-  index: string;
+  index?: string;
   stamp: string;
+  /** En la página de Contacto el titular es el h1 de la página. */
+  headingLevel?: 'h1' | 'h2';
 }
-const { contact, settings, index, stamp } = Astro.props;
+const { contact, settings, index, stamp, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
 const wa = whatsappHref(settings.contact.whatsapp, settings.contact.whatsappMessage);
 const email = settings.contact.email;
 // El titular-cartel se ajusta al ancho según su número de letras (incluido el margen de respiración).
 const displaySize = `min(${(82 / (contact.display.length * 0.6)).toFixed(2)}vw, 24rem)`;
 ---
 
-<section class="contact grain" id="contacto" data-surface="orange" data-contact aria-labelledby="contact-title">
-  <p class="contact__folio folio folio--corner">{index} · {contact.folio}</p>
+<section class:list={['contact', 'grain', headingLevel === 'h1' && 'contact--page']} id="contacto" data-surface="orange" data-contact aria-labelledby="contact-title">
+  <p class="contact__folio folio folio--corner">{index ? `${index} · ` : ''}{contact.folio}</p>
 
   <p class="contact__display poster" aria-hidden="true" data-split-chars data-breathe style={`font-size:${displaySize}`}>{contact.display}</p>
 
   <div class="contact__grid">
     <div class="contact__copy">
-      <h2 id="contact-title" class="contact__title" data-split-lines>{contact.title}</h2>
+      <Heading id="contact-title" class="contact__title" data-split-lines>{contact.title}</Heading>
       <p class="contact__body" data-reveal>{contact.body}</p>
       <div class="contact__actions" data-reveal>
         <Button href={wa} variant="ink" external cursor="WhatsApp">{contact.whatsappLabel}</Button>
@@ -54,6 +57,13 @@ const displaySize = `min(${(82 / (contact.display.length * 0.6)).toFixed(2)}vw, 
     color: var(--cm-cream);
     margin-left: -0.04em;
     white-space: nowrap;
+  }
+  /* Como portada de la página Contacto: deja sitio al encabezado */
+  .contact--page {
+    padding-top: calc(var(--header-h) + var(--space-xl));
+  }
+  .contact--page .folio--corner {
+    top: calc(var(--header-h) + var(--space-s));
   }
   .contact__grid {
     display: grid;

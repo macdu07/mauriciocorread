@@ -260,6 +260,12 @@ html.motion-pending [data-case-name] {
   visibility: hidden;
 }
 
+/* Las máscaras de letras dejan aire arriba para tildes y eñes (Í, É, Ñ) */
+.ch-mask {
+  padding-top: 0.24em;
+  margin-top: -0.24em;
+}
+
 /* ---------- Transiciones entre páginas (View Transitions entre documentos) ---------- */
 @view-transition {
   navigation: auto;

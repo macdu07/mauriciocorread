@@ -78,6 +78,41 @@ const pages = defineCollection({
         })
         .optional(),
       case: z.record(z.string(), z.string()).optional(),
+      servicesPage: z
+        .object({
+          title: z.string(),
+          lead: z.string(),
+          forWho: z.string(),
+          receives: z.string(),
+          related: z.string(),
+          faqTitle: z.string(),
+          faq: z.array(z.object({ q: z.string(), a: z.string() })),
+        })
+        .optional(),
+      aboutPage: z
+        .object({ title: z.string(), lead: z.string(), storyTitle: z.string(), story: z.array(z.string()), storyFolio: z.string(), storyFrom: z.string(), storyTo: z.string() })
+        .optional(),
+      contactPage: z
+        .object({
+          channelsTitle: z.string(),
+          whatsapp: z.string(),
+          email: z.string(),
+          social: z.string(),
+          briefTitle: z.string(),
+          brief: z.array(z.string()),
+        })
+        .optional(),
+      notFound: z
+        .object({
+          display: z.string(),
+          title: z.string(),
+          body: z.string(),
+          home: z.string(),
+          projects: z.string(),
+          alt: z.string(),
+          altHome: z.string(),
+        })
+        .optional(),
       work: z
         .object({
           folio: z.string(),
@@ -164,6 +199,8 @@ const services = defineCollection({
     short: z.string(),
     description: z.string(),
     deliverables: z.array(z.string()),
+    forWho: z.string().optional(),
+    related: z.array(z.string()).optional(),
   }),
 });
 

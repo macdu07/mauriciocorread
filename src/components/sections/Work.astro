@@ -22,7 +22,7 @@ const total = pad(featured.length);
   <div class="work__pin" data-work-pin>
     <div class="work__track" data-work-track>
       <div class="work__intro grain" data-surface="gunmetal">
-        <p class="folio folio--corner">{index} · {work.folio}</p>
+        <p class="folio folio--corner">{index ? `${index} · ` : ''}{work.folio}</p>
         <p class="work__count poster" aria-hidden="true">{total}</p>
         <div class="work__intro-copy">
           <h2 id="work-title" class="work__title" data-split-lines>{work.title}</h2>

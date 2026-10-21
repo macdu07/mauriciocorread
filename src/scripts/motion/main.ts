@@ -294,7 +294,7 @@ function initReveals() {
 
   $$('[data-split-chars]').forEach((el) => {
     if (el.closest('[data-hero]')) return;
-    const chars = SplitText.create(el, { type: 'chars', mask: 'chars' }).chars;
+    const chars = SplitText.create(el, { type: 'chars', mask: 'chars', charsClass: 'ch' }).chars;
     gsap.from(chars, {
       yPercent: 100,
       duration: 1.2,

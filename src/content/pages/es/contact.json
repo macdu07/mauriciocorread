@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "Contacto — Mauricio Correa",
+    "description": "Cuéntame tu proyecto: escríbeme por WhatsApp o por redes y conversemos sobre tu web, tu tienda, tus automatizaciones o tu identidad."
+  },
+  "contactPage": {
+    "channelsTitle": "Dónde encontrarme",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "social": "Redes",
+    "briefTitle": "Para avanzar más rápido, cuéntame:",
+    "brief": [
+      "Qué hace tu negocio y a quién le vende.",
+      "Qué necesitas: una web nueva, mejorar la actual, una tienda, automatizar procesos o tu identidad.",
+      "Si ya tienes logo, textos o fotos.",
+      "Uno o dos sitios web que te gusten como referencia."
+    ]
+  }
+}

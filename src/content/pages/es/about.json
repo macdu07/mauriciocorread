@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "Sobre mí — Mauricio Correa",
+    "description": "Diseñador gráfico y web con más de una década conectando identidad de marca, diseño de interfaces, desarrollo web y, hoy, inteligencia artificial."
+  },
+  "aboutPage": {
+    "title": "Sobre mí",
+    "lead": "Diseñador gráfico y web. Más de una década conectando identidad, interfaz y código. Hoy, también inteligencia artificial.",
+    "storyTitle": "De la gráfica a la web",
+    "story": [
+      "Empecé en el diseño gráfico y con los años llevé ese oficio a la web: la misma atención a la identidad, la jerarquía y el detalle, ahora aplicada a interfaces que la gente usa todos los días.",
+      "Trabajé como desarrollador web en Naikka, donde construí tiendas en línea para marcas de equipamiento para motociclistas, y hoy trabajo de forma independiente con marcas en Colombia y Estados Unidos.",
+      "Hoy diseño la experiencia, la construyo con la tecnología que mejor encaja en cada proyecto y le sumo IA y automatización, para que tu web no solo se vea bien: también trabaje por tu negocio."
+    ],
+    "storyFolio": "Historia",
+    "storyFrom": "Gráfica",
+    "storyTo": "Web"
+  }
+}

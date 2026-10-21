@@ -17,7 +17,7 @@ const common = projects.length ? projects[0].categories[0] : '';
 const titleLongest = Math.max(...t.title.split(' ').map((w) => w.length));
 const titleFit = (88 / (titleLongest * 0.5)).toFixed(2);
 // Rotación de carteles: anchos distintos por fila, como una edición impresa.
-const spans = [7, 5, 5, 7, 12, 4, 4, 4];
+const spans = [7, 5, 5, 7, 12, 4, 4, 4, 12];
 const categories = [...new Set(projects.flatMap((p) => p.categories))].filter(
   (c) => !projects.every((p) => p.categories.includes(c)),
 );

@@ -4,7 +4,7 @@ order: 1
 featured: true
 year: null
 categories: ["Diseño Web", "Imagen Corporativa"]
-stack: ["WordPress", "Bricks Builder", "Figma", "Branding"]
+stack: ["Diseño UI/UX", "Desarrollo web", "Identidad de marca", "Sitio bilingüe"]
 summary: "Presencia digital B2B para una empresa que impulsa el mercado automotriz e industrial."
 description: "Empresa que impulsa el futuro del mercado automotriz e industrial con soluciones innovadoras. Desarrollo de una presencia web que refleja su visión de futuro y liderazgo en el sector."
 url: "https://autovenz.com"
