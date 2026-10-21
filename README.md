@@ -23,15 +23,15 @@ Bilingüe: español por defecto (`/`) e inglés (`/en`). Reemplaza a maurouix.co
 - **CSS nativo con tokens** (`src/styles/tokens.css`), con estilos acotados a cada componente `.astro`. Sin Tailwind ni framework de UI.
 - **GSAP 3** (ScrollTrigger, SplitText, Flip, CustomEase) y **Lenis** para el scroll suave.
 - Fuentes auto-alojadas en `public/fonts/`: Geist, Geist Mono y Archivo variable.
-- Despliegue previsto en **Cloudflare Pages**.
+- Despliegue en **Coolify** con Docker.
 
 ## Puesta en marcha
 
-Requisitos: Node.js y npm.
+Requisitos: Node.js 22.22+ y pnpm (`corepack enable`).
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 El sitio queda en <http://localhost:4321>.
@@ -40,10 +40,10 @@ El sitio queda en <http://localhost:4321>.
 
 | Comando | Qué hace |
 |---|---|
-| `npm run dev` | Servidor de desarrollo en `localhost:4321`. |
-| `npm run build` | Build estático en `dist/`. Debe terminar sin errores. |
-| `npm run preview` | Sirve el build generado para revisarlo tal como irá a producción. |
-| `npm run check` | Verificación de tipos de Astro. |
+| `pnpm dev` | Servidor de desarrollo en `localhost:4321`. |
+| `pnpm build` | Build estático en `dist/`. Debe terminar sin errores. |
+| `pnpm preview` | Sirve el build generado para revisarlo tal como irá a producción. |
+| `pnpm check` | Verificación de tipos de Astro. |
 
 ## Estructura
 
@@ -88,17 +88,22 @@ Esto permite conectar más adelante un CMS (Strapi) cambiando solo los *loaders*
 
 ## Calidad antes de dar algo por terminado
 
-- `npm run build` sin errores.
+- `pnpm build` sin errores.
 - Revisión en navegador a 1440 px y 390 px, y con movimiento reducido.
 - Contraste AA, foco visible, navegación por teclado y `alt` en las imágenes.
 - Objetivo: Lighthouse ≥ 90 en las cuatro categorías.
 
 ## Despliegue
 
-- Build: `npm run build`.
+- Build: `pnpm build`.
 - Carpeta de salida: `dist/`.
-- Destino: Cloudflare Pages.
-- Dominio `mauriciocorread.com` y acceso a Cloudflare: **pendientes de confirmar por Mauricio** (ver [PRODUCT.md](PRODUCT.md), sección *Operating Context*).
+- Destino: **Coolify**, tipo de build *Dockerfile*. El `Dockerfile` instala con pnpm, ejecuta `pnpm build` y sirve `dist/` con nginx (`nginx.conf`) en el puerto **80**.
+- Probar la imagen en local:
+
+  ```bash
+  docker build -t mauriciocorread .
+  docker run --rm -p 8080:80 mauriciocorread
+  ```
 - Tras el lanzamiento, maurouix.com debe redirigir con 301 a mauriciocorread.com conservando los slugs de los proyectos.
 
 ## Git

@@ -21,15 +21,16 @@ Documentos rectores (leer antes de cambiar algo relevante):
 - **CSS nativo con tokens** (`src/styles/tokens.css`); estilos con alcance en componentes `.astro`. Sin Tailwind ni framework de UI.
 - **GSAP 3** (ScrollTrigger, SplitText, Flip, CustomEase) + **Lenis** para el scroll suave.
 - Fuentes auto-alojadas en `public/fonts/`: Geist, Geist Mono y Archivo variable (ejes `wdth` 62–125 y `wght`).
-- Deploy previsto: Cloudflare Pages.
+- Gestor de paquetes: **pnpm** (no usar npm ni yarn; el único lockfile es `pnpm-lock.yaml`).
+- Deploy: **Coolify** con el `Dockerfile` del repo (build con pnpm → nginx sirviendo `dist/` en el puerto 80; config en `nginx.conf`).
 
 ## Comandos
 
 ```bash
-npm run dev       # servidor de desarrollo (http://localhost:4321)
-npm run build     # build estático en dist/
-npm run preview   # sirve el build
-npm run check     # verificación de tipos de Astro
+pnpm dev       # servidor de desarrollo (http://localhost:4321)
+pnpm build     # build estático en dist/
+pnpm preview   # sirve el build
+pnpm check     # verificación de tipos de Astro
 ```
 
 ## Estructura
@@ -79,7 +80,7 @@ src/
 
 ## Calidad mínima antes de dar algo por terminado
 
-- `npm run build` sin errores.
+- `pnpm build` sin errores.
 - Revisar en navegador a 1440 px y 390 px, más el modo de movimiento reducido.
 - Contraste AA, foco visible, navegación por teclado y `alt` en las imágenes.
 - Objetivo: Lighthouse ≥ 90 en las cuatro categorías.

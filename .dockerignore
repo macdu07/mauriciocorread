@@ -1,0 +1,15 @@
+node_modules
+dist
+.astro
+.git
+.github
+.claude
+.impeccable
+.DS_Store
+.env*
+docs
+scripts
+*.md
+!README.md
+Dockerfile
+.dockerignore

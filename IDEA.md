@@ -354,7 +354,7 @@ Cada caso se presenta como un **cartel que se abre en reportaje**:
 - **i18n nativo de Astro** (`es` por defecto sin prefijo, `en` con prefijo `/en`).
 - **`astro:assets`** para imágenes: AVIF/WebP, tamaños responsivos y lazy loading.
 - **Fuentes:** Geist y Geist Mono (paquete oficial `geist` o Fontsource) y Archivo variable con eje `wdth` (Fontsource). Auto-alojadas, con subset y precarga de las críticas.
-- **Deploy:** Cloudflare Pages (la web actual ya usa Cloudflare). Redirecciones 301 desde maurouix.com.
+- **Deploy:** Coolify con Docker (build con pnpm + nginx). Redirecciones 301 desde maurouix.com.
 - **Analítica:** Cloudflare Web Analytics (sin cookies), con eventos en clics de contacto.
 
 ### 9.2 Contenido sin CMS, listo para CMS
@@ -371,7 +371,7 @@ Todo el contenido editable vive en **archivos locales** cargados con el **Conten
 **Para integrar Strapi más adelante:**
 1. Crear en Strapi los tipos de contenido con los mismos campos que los esquemas Zod.
 2. Sustituir el *loader* de cada colección (`glob`/`file` → loader propio que consulta `GET /api/<tipo>?locale=es&populate=*`). Los esquemas y los componentes no cambian.
-3. Elegir la estrategia de publicación: reconstrucción del sitio estático por **webhook** de Strapi → Cloudflare Pages (recomendado), o modo híbrido/SSR si se necesita contenido en tiempo real.
+3. Elegir la estrategia de publicación: reconstrucción del sitio estático por **webhook** de Strapi → redeploy en Coolify (recomendado), o modo híbrido/SSR si se necesita contenido en tiempo real.
 4. Configurar el dominio de medios de Strapi para `astro:assets` (imágenes remotas).
 
 ### 9.3 Estructura de carpetas propuesta
@@ -453,7 +453,7 @@ mauriciocorread/
 
 **Pendientes de Mauricio**
 - [ ] Email de contacto definitivo (en la web actual aparece oculto).
-- [ ] Confirmar la compra o el acceso del dominio mauriciocorread.com y el acceso a Cloudflare.
+- [ ] Confirmar la compra o el acceso del dominio mauriciocorread.com y su DNS apuntando al servidor de Coolify.
 - [ ] Confirmar la cuenta de Instagram (@mauriciocorread vs @maurouix).
 - [ ] Años de cada proyecto (solo Daca Trader indica 2024).
 - [ ] Validar los entregables de servicios (`src/content/services/`), los textos del proceso y las preguntas frecuentes.

@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Astro (static output) + TypeScript, GSAP 3 + Lenis for motion. No CMS for now; all editable content lives in Astro Content Layer collections with Zod schemas so a Strapi loader can replace the local loaders later without touching components. Deploy target: Cloudflare Pages. Confirmed by Mauricio on 2026-10-20.
+Astro (static output) + TypeScript, GSAP 3 + Lenis for motion. No CMS for now; all editable content lives in Astro Content Layer collections with Zod schemas so a Strapi loader can replace the local loaders later without touching components. Deploy target: Coolify (Docker image: pnpm build + nginx), changed from Cloudflare Pages on 2026-10-21. Confirmed by Mauricio on 2026-10-20.
 
 ## Users
 
@@ -30,7 +30,7 @@ Bilingual: Spanish (default, `/`) and English (`/en`). Replaces maurouix.com ("M
 
 - Pages: Home, Projects index, 8 case studies, Services, About, Contact, 404 (ES + EN).
 - Contact channels: WhatsApp +57 302 372 5631; email pending confirmation; Instagram @mauriciocorread (confirmed in the content brief), LinkedIn /in/mcorread, Facebook /MauricioCorreaD.
-- Undecided: final email, domain purchase/Cloudflare access, project years (only Daca Trader = 2024), service deliverables, process wording, FAQ, optional brief form.
+- Undecided: final email, domain purchase/DNS, project years (only Daca Trader = 2024), service deliverables, process wording, FAQ, optional brief form.
 
 ## Brand Commitments
 
