@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { CustomEase } from 'gsap/CustomEase';
 import Lenis from 'lenis';
+import { initCase, initProjectsIndex, prepareCaseIntro } from './case';
 import { initAboutDepth, initArchive, initCapabilities, initProcess, initStats, initWork } from './sections';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase);
@@ -29,6 +30,8 @@ export function boot() {
   initMenu();
   initHeader();
   initCopy();
+  // Los filtros del índice funcionan también con movimiento reducido.
+  initProjectsIndex(reduce);
 
   if (reduce) {
     html.classList.remove('is-loading', 'motion-pending');
@@ -47,7 +50,7 @@ export function boot() {
     : Promise.resolve();
 
   document.fonts.ready.then(() => {
-    const intro = prepareHeroIntro();
+    const intro = prepareHeroIntro() ?? prepareCaseIntro();
     // Los pines se crean en orden de página antes que los demás disparadores.
     initPortal();
     initWork();
@@ -58,6 +61,7 @@ export function boot() {
     initProcess();
     initStats();
     initAboutDepth();
+    initCase();
     initMarquee();
     initStamps();
     initBreathe();

@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "{title} — A project by Mauricio Correa",
+    "description": "{summary}"
+  },
+  "case": {
+    "back": "Back to projects",
+    "caseLabel": "Case",
+    "sheetTitle": "Project sheet",
+    "client": "Client",
+    "category": "Category",
+    "year": "Year",
+    "stack": "Tools",
+    "credit": "Context",
+    "links": "Links",
+    "visit": "Visit site",
+    "figma": "View in Figma",
+    "project": "Project",
+    "challenge": "Challenge",
+    "built": "What we built",
+    "views": "Designed for every screen.",
+    "viewsLead": "Desktop and mobile, designed together from the first sketch.",
+    "desktopAlt": "{title} desktop view",
+    "mobileAlt": "{title} mobile view",
+    "ctaTitle": "Have a similar project?",
+    "ctaBody": "Let's talk. Let's make it happen.",
+    "ctaButton": "Message me on WhatsApp",
+    "next": "Next project",
+    "ctaDisplay": "Let's talk",
+    "ticketRef": "Reference",
+    "ticketDest": "Destination",
+    "ticketDestValue": "Your new website",
+    "ticketGate": "Gate",
+    "ticketGateValue": "WhatsApp"
+  }
+}

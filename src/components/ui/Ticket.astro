@@ -4,11 +4,13 @@ import Icon from './Icon.astro';
 interface Props {
   rows: { label: string; value: string }[];
   code?: string;
+  /** Una columna y valores más pequeños (fichas técnicas con textos largos). */
+  compact?: boolean;
 }
-const { rows, code = 'MC/26' } = Astro.props;
+const { rows, code = 'MC/26', compact = false } = Astro.props;
 ---
 
-<div class="ticket" data-ticket>
+<div class:list={['ticket', compact && 'ticket--compact']} data-ticket>
   <dl class="ticket__body">
     {rows.map((row) => (
       <div class="ticket__row">
@@ -66,6 +68,14 @@ const { rows, code = 'MC/26' } = Astro.props;
     .ticket__row dd {
       font-size: var(--step-1);
     }
+  }
+  .ticket--compact .ticket__body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .ticket--compact .ticket__row dd {
+    font-size: var(--step-1);
+    letter-spacing: -0.02em;
   }
   .ticket__stub {
     width: 6.5rem;

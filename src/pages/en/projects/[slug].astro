@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CaseStudy from '../../../components/case/CaseStudy.astro';
+import { fill, getPage, getProjects, getSettings, projectTone, type Locale } from '../../../i18n';
+
+const LOCALE: Locale = 'en';
+
+export async function getStaticPaths() {
+  const projects = await getProjects('en');
+  return projects.map((project, i) => ({
+    params: { slug: project.slug },
+    props: { project, next: projects[(i + 1) % projects.length], total: projects.length },
+  }));
+}
+
+const { project, next, total } = Astro.props;
+const page = await getPage(LOCALE, 'case');
+const settings = await getSettings(LOCALE);
+const labels = page.case ?? {};
+const vars = { title: project.title, summary: project.summary };
+const meta = { title: fill(page.meta.title, vars), description: fill(page.meta.description, vars) };
+---
+
+<BaseLayout title={meta.title} description={meta.description} alternate={{ es: `/proyectos/${project.slug}`, en: `/en/projects/${project.slug}` }} headerOnDark={projectTone(project.order) === 'gunmetal'}>
+  <CaseStudy project={project} next={next} total={total} labels={labels} settings={settings} locale={LOCALE} />
+</BaseLayout>

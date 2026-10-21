@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectsIndex from '../../../components/case/ProjectsIndex.astro';
+import { getPage, getProjects, toLocale } from '../../../i18n';
+
+const locale = toLocale(Astro.currentLocale);
+const page = await getPage(locale, 'projects');
+const projects = await getProjects(locale);
+---
+
+<BaseLayout title={page.meta.title} description={page.meta.description} alternate={{ es: '/proyectos', en: '/en/projects' }} headerOnDark>
+  {page.index && <ProjectsIndex labels={page.index} projects={projects} locale={locale} />}
+</BaseLayout>

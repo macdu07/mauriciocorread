@@ -6,11 +6,13 @@ import type { getSettings } from '../../i18n';
 interface Props {
   settings: Awaited<ReturnType<typeof getSettings>>;
   homeHref: string;
+  langHref?: string;
+  onDark?: boolean;
 }
-const { settings, homeHref } = Astro.props;
+const { settings, homeHref, langHref = settings.langSwitch.href, onDark = false } = Astro.props;
 ---
 
-<header class="header" data-header>
+<header class:list={["header", onDark && "header--on-dark"]} data-header>
   <a class="header__brand" href={homeHref} aria-label={`${settings.siteName}, inicio`}>
     <span class="header__logo" aria-hidden="true"></span>
     <span class="header__name">{settings.siteName}</span>
@@ -25,7 +27,7 @@ const { settings, homeHref } = Astro.props;
   </nav>
 
   <div class="header__actions">
-    <a class="header__lang" href={settings.langSwitch.href} hreflang={settings.langSwitch.lang} lang={settings.langSwitch.lang}>
+    <a class="header__lang" href={langHref} hreflang={settings.langSwitch.lang} lang={settings.langSwitch.lang}>
       {settings.langSwitch.label}
     </a>
     <Button href={settings.navCta.href} variant="orange" class="header__cta">{settings.navCta.label}</Button>
@@ -44,7 +46,7 @@ const { settings, homeHref } = Astro.props;
       </ul>
     </nav>
     <p class="menu__foot">
-      <a href={settings.langSwitch.href} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}</a>
+      <a href={langHref} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}</a>
       <span>{settings.role}</span>
     </p>
   </div>
@@ -66,6 +68,13 @@ const { settings, homeHref } = Astro.props;
       transform var(--dur-m) var(--ease-out),
       background-color var(--dur-s) var(--ease-soft),
       color var(--dur-s) var(--ease-soft);
+  }
+  .header--on-dark:not(:global(.is-solid)) {
+    color: var(--cm-cream);
+  }
+  .header--on-dark:not(:global(.is-solid)) .header__menu {
+    background: var(--cm-cream);
+    color: var(--cm-gunmetal);
   }
   :global(.header.is-solid) {
     background: color-mix(in oklab, var(--cm-cream) 94%, transparent);

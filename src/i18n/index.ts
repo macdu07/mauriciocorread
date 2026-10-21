@@ -36,3 +36,19 @@ export async function getServices(locale: Locale) {
 export function projectHref(locale: Locale, slug: string) {
   return locale === 'en' ? `/en/projects/${slug}` : `/proyectos/${slug}`;
 }
+
+export function projectsHref(locale: Locale) {
+  return locale === 'en' ? '/en/projects' : '/proyectos';
+}
+
+/** Color de lámina de cada proyecto (mismo orden que los carteles del Inicio). */
+export const tones = ['orange', 'turquoise', 'cream', 'gunmetal'] as const;
+export type Tone = (typeof tones)[number];
+export function projectTone(order: number): Tone {
+  const sequence: Tone[] = ['orange', 'turquoise', 'cream', 'gunmetal', 'orange', 'turquoise', 'cream', 'gunmetal'];
+  return sequence[(order - 1) % sequence.length];
+}
+
+export function fill(template: string, values: Record<string, string>) {
+  return template.replace(/\{(\w+)\}/g, (_, k) => values[k] ?? '');
+}

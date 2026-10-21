@@ -1,0 +1,621 @@
+---
+import { Image } from 'astro:assets';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import Ticket from '../ui/Ticket.astro';
+import Stamp from '../ui/Stamp.astro';
+import {
+  fill,
+  projectHref,
+  projectsHref,
+  projectTone,
+  whatsappHref,
+  type getProjects,
+  type getSettings,
+  type Locale,
+} from '../../i18n';
+
+type Project = Awaited<ReturnType<typeof getProjects>>[number];
+interface Props {
+  project: Project;
+  next: Project;
+  total: number;
+  labels: Record<string, string>;
+  settings: Awaited<ReturnType<typeof getSettings>>;
+  locale: Locale;
+}
+const { project: p, next, total, labels: t, settings, locale } = Astro.props;
+const tone = projectTone(p.order);
+const nextTone = projectTone(next.order);
+const nextLongest = Math.max(...next.title.split(' ').map((w) => w.length));
+const nextFit = (52 / (nextLongest * 0.5)).toFixed(2);
+const pad = (n: number) => String(n).padStart(2, '0');
+const host = new URL(p.url).hostname.replace('www.', '');
+const wa = whatsappHref(settings.contact.whatsapp, settings.contact.whatsappMessage);
+// El nombre-cartel se ajusta a su palabra más larga: nunca se parte a mitad de palabra.
+const longest = Math.max(...p.title.split(' ').map((w) => w.length));
+const fitDesktop = (37 / (longest * 0.5)).toFixed(2);
+const fitMobile = (88 / (longest * 0.5)).toFixed(2);
+
+const sheet = [
+  { label: t.client, value: p.title },
+  { label: t.category, value: p.categories.join(' · ') },
+  ...(p.year ? [{ label: t.year, value: String(p.year) }] : []),
+  { label: t.stack, value: p.stack.join(' · ') },
+];
+---
+
+<article class="case" data-case>
+  <!-- Portada-cartel -->
+  <header class={`case-hero case-hero--${tone} grain`} data-surface={tone} data-case-hero>
+    <a class="case-hero__back" href={projectsHref(locale)}>
+      <Icon name="arrow-down-right" size="1em" class="case-hero__back-icon" />
+      {t.back}
+    </a>
+    <p class="folio folio--corner">{t.caseLabel} {pad(p.order)} / {pad(total)}</p>
+    <p class="case-hero__num poster" aria-hidden="true">{pad(p.order)}</p>
+
+    <div class="case-hero__text">
+      <h1 class="case-hero__name poster" data-case-name style={`--fit:${fitDesktop}vw; --fit-m:${fitMobile}vw`}>{p.title}</h1>
+      <p class="case-hero__summary" data-reveal>{p.summary}</p>
+      <p class="case-hero__cat" data-reveal>{p.categories.join(' · ')}{p.credit && <span> — {p.credit}</span>}</p>
+    </div>
+
+    <div class="case-hero__media">
+      <figure class="case-hero__browser" style={`view-transition-name: cover-${p.slug}`} data-case-cover>
+        <figcaption class="case-hero__bar">{host}</figcaption>
+        <div class="print" data-print>
+          <Image src={p.cover} alt={`${p.title} — ${p.summary}`} widths={[800, 1200, 1600]} sizes="(min-width: 861px) 62vw, 92vw" loading="eager" fetchpriority="high" />
+          <span class="print__plate print__plate--a" aria-hidden="true"></span>
+          <span class="print__plate print__plate--b" aria-hidden="true"></span>
+        </div>
+      </figure>
+    </div>
+  </header>
+
+  <!-- Ficha + Proyecto + Desafío -->
+  <section class="case-brief grain" data-surface="cream" aria-labelledby="case-project">
+    <aside class="case-brief__sheet" data-reveal aria-label={t.sheetTitle}>
+      <Ticket rows={sheet} compact code={`${t.caseLabel.slice(0, 2).toUpperCase()}/${pad(p.order)}`} />
+      <div class="case-brief__links">
+        <Button href={p.url} variant="ink" external>{t.visit}</Button>
+        {p.figma && <Button href={p.figma} variant="line" external>{t.figma}</Button>}
+      </div>
+    </aside>
+
+    <div class="case-brief__copy">
+      <h2 id="case-project" class="case-brief__h" data-split-lines>{t.project}</h2>
+      <p class="case-brief__lead" data-reveal>{p.project}</p>
+      <h2 class="case-brief__h" data-split-lines>{t.challenge}</h2>
+      <p class="case-brief__body" data-reveal>{p.challenge}</p>
+    </div>
+  </section>
+
+  <!-- Lo que construimos -->
+  <section class="case-built grain" data-surface="gunmetal" aria-labelledby="case-built">
+    <p class="case-built__ghost poster" aria-hidden="true" data-breathe>{t.built}</p>
+    <h2 id="case-built" class="case-built__title" data-split-lines>{t.built}</h2>
+    <ol class="case-built__list" role="list" data-built-list>
+      {p.built.map((item, i) => (
+        <li class="case-built__item">
+          <span class="case-built__n">{pad(i + 1)}</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- Vistas -->
+  <section class={`case-views case-views--${tone === 'turquoise' ? 'orange' : 'turquoise'} grain`} data-surface={tone === 'turquoise' ? 'orange' : 'turquoise'} aria-labelledby="case-views">
+    <div class="case-views__head">
+      <h2 id="case-views" class="case-views__title" data-split-lines>{t.views}</h2>
+      <p class="case-views__lead" data-reveal>{t.viewsLead}</p>
+    </div>
+    <div class="case-views__stage">
+      <figure class="case-views__desktop" data-views-desktop>
+        <figcaption class="case-hero__bar">{host}</figcaption>
+        <div class="case-views__clip">
+          <Image src={p.detail} alt={fill(t.desktopAlt, { title: p.title })} widths={[800, 1200, 1600]} sizes="(min-width: 861px) 68vw, 92vw" data-views-img />
+        </div>
+      </figure>
+      <figure class="case-views__phone" data-views-phone>
+        <Image src={p.mobile} alt={fill(t.mobileAlt, { title: p.title })} widths={[280, 420]} sizes="(min-width: 861px) 18vw, 40vw" />
+      </figure>
+      <div class="case-views__stamp" aria-hidden="true"><Stamp text={`${p.title} · ${host} · `} size="clamp(6rem, 9vw, 9rem)" tone="ink" /></div>
+    </div>
+  </section>
+
+  <!-- Llamada a la acción -->
+  <section class="case-cta grain" data-surface="gunmetal" aria-labelledby="case-cta">
+    <p class="case-cta__display poster" aria-hidden="true" data-breathe style={`font-size:min(${(82 / (t.ctaDisplay.length * 0.6)).toFixed(2)}vw, 22rem)`}>{t.ctaDisplay}</p>
+    <div class="case-cta__grid">
+      <div class="case-cta__copy">
+        <h2 id="case-cta" class="case-cta__title" data-split-lines>{t.ctaTitle}</h2>
+        <p class="case-cta__body" data-reveal>{t.ctaBody}</p>
+        <div data-reveal><Button href={wa} variant="orange" external cursor="WhatsApp">{t.ctaButton}</Button></div>
+      </div>
+      <a class="case-cta__ticket" href={wa} target="_blank" rel="noopener" data-reveal data-ticket-wrap data-cursor="WhatsApp" aria-label={`${t.ctaButton} (${settings.contact.whatsappDisplay})`}>
+        <Ticket rows={[
+          { label: t.ticketRef, value: p.title },
+          { label: t.ticketDest, value: t.ticketDestValue },
+          { label: t.ticketGate, value: t.ticketGateValue },
+        ]} code={`MC/${pad(p.order)}`} />
+      </a>
+    </div>
+  </section>
+
+  <!-- Proyecto siguiente -->
+  <a class={`case-next case-next--${nextTone} grain`} data-surface={nextTone} href={projectHref(locale, next.slug)} data-cursor={t.next} data-case-next>
+    <span class="folio folio--corner">{t.next} · {pad(next.order)} / {pad(total)}</span>
+    <span class="case-next__text">
+      <span class="case-next__name poster" data-breathe style={`--fit:${nextFit}vw`}>{next.title}</span>
+      <span class="case-next__summary">{next.summary}</span>
+    </span>
+    <span class="case-next__media" style={`view-transition-name: cover-${next.slug}`}>
+      <Image src={next.cover} alt="" widths={[480, 800]} sizes="(min-width: 861px) 34vw, 80vw" />
+      <span class="print__plate print__plate--a" aria-hidden="true"></span>
+      <span class="print__plate print__plate--b" aria-hidden="true"></span>
+    </span>
+    <span class="case-next__go" aria-hidden="true"><Icon name="arrow-up-right" size="2rem" /></span>
+  </a>
+</article>
+
+<style>
+  /* ---------- Portada ---------- */
+  .case-hero {
+    position: relative;
+    overflow: clip;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: var(--space-l);
+    padding: calc(var(--header-h) + var(--space-xl)) var(--gutter) var(--space-xl);
+  }
+  .case-hero__back {
+    position: absolute;
+    top: calc(var(--header-h) + var(--space-s));
+    left: var(--gutter);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  :global(.case-hero__back-icon) {
+    rotate: 135deg;
+    transition: translate var(--dur-s) var(--ease-out);
+  }
+  .case-hero__back:hover :global(.case-hero__back-icon) {
+    translate: -0.25rem 0;
+  }
+  .case-hero .folio--corner {
+    top: calc(var(--header-h) + var(--space-s));
+  }
+  .case-hero__num {
+    position: absolute;
+    right: -0.04em;
+    bottom: -0.14em;
+    z-index: -1;
+    font-size: clamp(16rem, 36vw, 42rem);
+    color: color-mix(in oklab, currentColor 9%, transparent);
+  }
+  .case-hero--gunmetal .case-hero__num {
+    color: var(--cm-gunmetal-soft);
+  }
+  .case-hero__text {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: var(--space-m);
+  }
+  .case-hero__name {
+    font-size: min(clamp(4.5rem, 11vw, 14rem), var(--fit));
+    line-height: 0.8;
+  }
+  .case-hero--gunmetal .case-hero__name {
+    color: var(--cm-orange);
+  }
+  .case-hero__summary {
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    max-width: 24ch;
+  }
+  .case-hero__cat {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .case-hero__media {
+    position: relative;
+    z-index: 1;
+  }
+  .case-hero__browser {
+    margin: 0;
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    background: var(--cm-cream);
+    rotate: 1.5deg;
+    box-shadow: 0 40px 70px -30px rgb(29 39 48 / 0.6);
+  }
+  .case-hero__bar {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    padding: 0.55em 0.9em;
+    text-align: right;
+    color: var(--cm-gunmetal);
+    border-bottom: 1px solid rgb(29 39 48 / 0.14);
+  }
+
+  /* Imprenta: duotono que se registra y pasa a color al pasar el cursor */
+  .print {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .print :global(img) {
+    width: 100%;
+    height: auto;
+    filter: grayscale(1) contrast(1.12);
+    transition: filter var(--dur-m) var(--ease-soft);
+  }
+  .print__plate {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-m) var(--ease-soft);
+  }
+  .print__plate--a {
+    background: var(--cm-orange);
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+  }
+  .print__plate--b {
+    background: var(--cm-turquoise-deep);
+    mix-blend-mode: screen;
+    opacity: 0.6;
+  }
+  @media (hover: hover) {
+    .case-hero__browser:hover .print :global(img) {
+      filter: none;
+    }
+    .case-hero__browser:hover .print__plate {
+      opacity: 0;
+    }
+  }
+
+  /* ---------- Ficha y relato ---------- */
+  .case-brief {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+    gap: var(--space-xl);
+    padding: var(--space-2xl) var(--gutter);
+    align-items: start;
+  }
+  .case-brief__sheet {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-m));
+    display: grid;
+    gap: var(--space-m);
+  }
+  .case-brief__sheet-title {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .case-brief__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .case-brief__copy {
+    display: grid;
+    gap: var(--space-m);
+    align-content: start;
+  }
+  .case-brief__h {
+    font-size: var(--step-3);
+    letter-spacing: -0.035em;
+  }
+  .case-brief__h:not(:first-child) {
+    margin-top: var(--space-l);
+  }
+  .case-brief__lead {
+    font-size: var(--step-2);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    max-width: 34ch;
+  }
+  .case-brief__body {
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--cm-ink-soft);
+    max-width: 52ch;
+  }
+
+  /* ---------- Lo que construimos ---------- */
+  .case-built {
+    position: relative;
+    overflow: clip;
+    padding: var(--space-2xl) var(--gutter);
+    display: grid;
+    gap: var(--space-xl);
+  }
+  .case-built__ghost {
+    position: absolute;
+    z-index: -1;
+    right: -0.04em;
+    bottom: -0.12em;
+    font-size: clamp(7rem, 17vw, 20rem);
+    line-height: 0.78;
+    color: var(--cm-gunmetal-soft);
+    white-space: nowrap;
+  }
+  .case-built__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    max-width: 12ch;
+  }
+  .case-built__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--space-xl);
+    counter-reset: built;
+  }
+  .case-built__item {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: var(--space-s);
+    padding: var(--space-m) 0;
+    border-top: 1px solid color-mix(in oklab, var(--cm-cream) 22%, transparent);
+    font-size: var(--step-1);
+    line-height: 1.35;
+  }
+  .case-built__n {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--cm-orange);
+    padding-top: 0.25em;
+  }
+
+  /* ---------- Vistas ---------- */
+  .case-views {
+    position: relative;
+    overflow: clip;
+    padding: var(--space-2xl) var(--gutter);
+    display: grid;
+    gap: var(--space-xl);
+  }
+  .case-views__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-l);
+    align-items: end;
+  }
+  .case-views__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    max-width: 14ch;
+  }
+  .case-views__lead {
+    font-size: var(--step-1);
+    line-height: 1.45;
+    max-width: 34ch;
+  }
+  .case-views__stage {
+    position: relative;
+    padding-right: 14%;
+  }
+  .case-views__desktop {
+    margin: 0;
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    background: var(--cm-cream);
+    box-shadow: 0 40px 70px -30px rgb(29 39 48 / 0.55);
+  }
+  .case-views__clip {
+    overflow: hidden;
+  }
+  .case-views__clip :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .case-views__phone {
+    position: absolute;
+    margin: 0;
+    right: 0;
+    bottom: -8%;
+    width: 22%;
+    border-radius: var(--radius-device);
+    overflow: hidden;
+    border: 6px solid var(--cm-gunmetal);
+    background: var(--cm-gunmetal);
+    rotate: 4deg;
+    box-shadow: 0 30px 50px -20px rgb(29 39 48 / 0.6);
+  }
+  .case-views__phone :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 18;
+    object-fit: cover;
+    object-position: top;
+  }
+  .case-views__stamp {
+    position: absolute;
+    left: -2rem;
+    top: -3rem;
+    rotate: -10deg;
+  }
+
+  /* ---------- CTA ---------- */
+  .case-cta {
+    padding: var(--space-2xl) var(--gutter);
+    display: grid;
+    gap: var(--space-l);
+    overflow: clip;
+  }
+  .case-cta__display {
+    color: var(--cm-orange);
+    line-height: 0.78;
+    white-space: nowrap;
+    margin-left: -0.04em;
+  }
+  .case-cta__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .case-cta__copy {
+    display: grid;
+    gap: var(--space-m);
+    justify-items: start;
+  }
+  .case-cta__ticket {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    rotate: -3deg;
+    max-width: 36rem;
+    justify-self: end;
+    width: 100%;
+  }
+  .case-cta__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.04em;
+    max-width: 16ch;
+  }
+  .case-cta__body {
+    font-size: var(--step-2);
+    color: var(--cm-orange);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- Proyecto siguiente ---------- */
+  .case-next {
+    position: relative;
+    overflow: clip;
+    min-height: 80svh;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    align-items: center;
+    gap: var(--space-xl);
+    padding: var(--space-2xl) var(--gutter);
+    text-decoration: none;
+  }
+  .case-next__text {
+    display: grid;
+    gap: var(--space-m);
+  }
+  .case-next__media {
+    position: relative;
+    display: block;
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    isolation: isolate;
+    aspect-ratio: 3 / 2;
+    rotate: 3deg;
+    box-shadow: 0 30px 50px -25px rgb(29 39 48 / 0.55);
+    transition: rotate var(--dur-m) var(--ease-out);
+  }
+  .case-next__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(1) contrast(1.12);
+  }
+  .case-next:hover .case-next__media {
+    rotate: 0deg;
+  }
+  .case-next__name {
+    font-size: min(clamp(5rem, 15vw, 18rem), var(--fit));
+    line-height: 0.8;
+    transition: transform var(--dur-m) var(--ease-out);
+  }
+  .case-next--gunmetal .case-next__name {
+    color: var(--cm-orange);
+  }
+  .case-next__summary {
+    font-size: var(--step-1);
+    font-weight: 600;
+    max-width: 36ch;
+  }
+  .case-next__go {
+    position: absolute;
+    right: var(--gutter);
+    bottom: var(--space-xl);
+    display: grid;
+    place-items: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: var(--radius-s);
+    box-shadow: inset 0 0 0 1.5px currentColor;
+    transition:
+      transform var(--dur-m) var(--ease-out),
+      background-color var(--dur-s) var(--ease-soft);
+  }
+  @media (hover: hover) {
+    .case-next:hover .case-next__name {
+      transform: translateX(1.5rem);
+    }
+    .case-next:hover .case-next__go {
+      transform: rotate(45deg);
+      background: color-mix(in oklab, currentColor 12%, transparent);
+    }
+  }
+
+  /* ---------- Móvil ---------- */
+  @media (max-width: 860px) {
+    .case-hero {
+      grid-template-columns: minmax(0, 1fr);
+      align-content: start;
+      padding-top: calc(var(--header-h) + 4rem);
+    }
+    .case-hero__name {
+      font-size: min(17vw, var(--fit-m));
+    }
+    .case-brief,
+    .case-views__head,
+    .case-built__list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .case-brief__sheet {
+      position: relative;
+      top: auto;
+    }
+    .case-views__stage {
+      padding-right: 0;
+    }
+    .case-views__phone {
+      width: 34%;
+      right: -2%;
+      bottom: -12%;
+    }
+    .case-views__stamp {
+      display: none;
+    }
+    .case-next__go {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+    .case-next,
+    .case-cta__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .case-cta__ticket {
+      justify-self: start;
+      rotate: -2deg;
+    }
+  }
+</style>

@@ -63,6 +63,21 @@ const pages = defineCollection({
         })
         .optional(),
       marquee: z.array(z.string()).optional(),
+      index: z
+        .object({
+          folio: z.string(),
+          title: z.string(),
+          lead: z.string(),
+          all: z.string(),
+          filterLabel: z.string(),
+          viewLabel: z.string(),
+          grid: z.string(),
+          list: z.string(),
+          viewCase: z.string(),
+          empty: z.string(),
+        })
+        .optional(),
+      case: z.record(z.string(), z.string()).optional(),
       work: z
         .object({
           folio: z.string(),

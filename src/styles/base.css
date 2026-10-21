@@ -255,8 +255,50 @@ p {
 }
 
 /* Mientras el motor de movimiento prepara la intro, el hero no parpadea. */
-html.motion-pending .hero__stage > * {
+html.motion-pending .hero__stage > *,
+html.motion-pending [data-case-name] {
   visibility: hidden;
+}
+
+/* ---------- Transiciones entre páginas (View Transitions entre documentos) ---------- */
+@view-transition {
+  navigation: auto;
+}
+/* La página nueva entra como una lámina que sube desde abajo; la anterior se queda quieta. */
+::view-transition-old(root) {
+  animation: vt-hold var(--dur-m) linear both;
+}
+::view-transition-new(root) {
+  animation: vt-plate-in var(--dur-m) var(--ease-in-out) both;
+}
+/* La captura del proyecto viaja del cartel a la portada del caso */
+::view-transition-group(*) {
+  animation-duration: var(--dur-m);
+  animation-timing-function: var(--ease-in-out);
+}
+::view-transition-group(site-header) {
+  animation: none;
+}
+.header {
+  view-transition-name: site-header;
+}
+@keyframes vt-plate-in {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes vt-hold {
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
 }
 
 /* Con el Portal M activo, el manifiesto entra encima del último fotograma del portal. */

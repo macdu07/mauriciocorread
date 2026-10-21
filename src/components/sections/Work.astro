@@ -52,7 +52,7 @@ const total = pad(featured.length);
             </div>
 
             <div class="work__media">
-              <figure class="work__browser" data-work-media>
+              <figure class="work__browser" data-work-media style={`view-transition-name: cover-${p.slug}`}>
                 <figcaption class="work__bar">{new URL(p.url).hostname.replace('www.', '')}</figcaption>
                 <div class="print" data-print>
                   <Image src={p.cover} alt={`${p.title} — ${p.summary}`} widths={[640, 960, 1280]} sizes="(min-width: 861px) 44vw, 88vw" />

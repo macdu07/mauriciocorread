@@ -12,12 +12,15 @@ interface Props {
   description: string;
   preloader?: { edition: string };
   alternate?: { es: string; en: string };
+  /** La portada de la página es oscura: el encabezado arranca en crema. */
+  headerOnDark?: boolean;
 }
-const { title, description, preloader, alternate = { es: '/', en: '/en/' } } = Astro.props;
+const { title, description, preloader, alternate = { es: '/', en: '/en/' }, headerOnDark = false } = Astro.props;
 const locale = toLocale(Astro.currentLocale);
 const settings = await getSettings(locale);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const homeHref = locale === 'en' ? '/en/' : '/';
+const langHref = locale === 'en' ? alternate.es : alternate.en;
 ---
 
 <!doctype html>
@@ -52,6 +55,10 @@ const homeHref = locale === 'en' ? '/en/' : '/';
           d.classList.add('motion-pending');
           setTimeout(function () { d.classList.remove('motion-pending'); }, 3500);
         }
+        // Una transición entre páginas omitida (recarga, pestaña oculta) no es un error.
+        var quiet = function (e) { if (e.viewTransition) e.viewTransition.finished.catch(function () {}); };
+        window.addEventListener('pagereveal', quiet);
+        window.addEventListener('pageswap', quiet);
         if (!reduce && !seen && document.currentScript && document.currentScript.dataset.preloader === '1') {
           d.classList.add('is-loading');
         }
@@ -61,11 +68,11 @@ const homeHref = locale === 'en' ? '/en/' : '/';
   <body>
     <a class="skip-link" href="#contenido">{settings.skipLink}</a>
     {preloader && <Preloader edition={preloader.edition} name={settings.siteName} />}
-    <Header settings={settings} homeHref={homeHref} />
+    <Header settings={settings} homeHref={homeHref} langHref={langHref} onDark={headerOnDark} />
     <main id="contenido">
       <slot />
     </main>
-    <Footer settings={settings} />
+    <Footer settings={settings} langHref={langHref} />
     <Cursor />
     <script>
       import { boot } from '../scripts/motion/main';

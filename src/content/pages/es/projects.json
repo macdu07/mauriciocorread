@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "title": "Proyectos — Mauricio Correa",
+    "description": "Casos reales de diseño web UI/UX, desarrollo y e-commerce: cada proyecto con su contexto, decisiones de interfaz y sitio publicado."
+  },
+  "index": {
+    "folio": "Proyectos",
+    "title": "Proyectos",
+    "lead": "Casos reales con su contexto, las decisiones de interfaz y el sitio publicado.",
+    "all": "Todos",
+    "filterLabel": "Filtrar por categoría",
+    "viewLabel": "Vista",
+    "grid": "Cuadrícula",
+    "list": "Lista",
+    "viewCase": "Ver caso",
+    "empty": "No hay proyectos en esta categoría."
+  }
+}

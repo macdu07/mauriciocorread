@@ -1,0 +1,388 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import { projectHref, projectTone, type getPage, type getProjects, type Locale } from '../../i18n';
+
+type Labels = NonNullable<Awaited<ReturnType<typeof getPage>>['index']>;
+interface Props {
+  labels: Labels;
+  projects: Awaited<ReturnType<typeof getProjects>>;
+  locale: Locale;
+}
+const { labels: t, projects, locale } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
+// "Diseño Web" está en todos los proyectos: no sirve como filtro.
+const common = projects.length ? projects[0].categories[0] : '';
+// El título-cartel se ajusta a su palabra más larga (nunca se parte a mitad de palabra).
+const titleLongest = Math.max(...t.title.split(' ').map((w) => w.length));
+const titleFit = (88 / (titleLongest * 0.5)).toFixed(2);
+// Rotación de carteles: anchos distintos por fila, como una edición impresa.
+const spans = [7, 5, 5, 7, 12, 4, 4, 4];
+const categories = [...new Set(projects.flatMap((p) => p.categories))].filter(
+  (c) => !projects.every((p) => p.categories.includes(c)),
+);
+---
+
+<section class="pindex grain" data-surface="gunmetal" data-pindex aria-labelledby="pindex-title">
+  <div class="pindex__hero">
+    <p class="pindex__count poster" aria-hidden="true">{pad(projects.length)}</p>
+    <h1 id="pindex-title" class="pindex__title poster" data-case-name style={`--fit:${titleFit}vw`}>{t.title}</h1>
+    <p class="pindex__lead" data-reveal>{t.lead}</p>
+  </div>
+
+  <div class="pindex__controls" data-reveal>
+    <div class="pindex__filters" role="group" aria-label={t.filterLabel}>
+      <button type="button" class="chip is-active" aria-pressed="true" data-filter="*">{t.all}</button>
+      {categories.map((c) => (
+        <button type="button" class="chip" aria-pressed="false" data-filter={c}>{c}</button>
+      ))}
+    </div>
+    <div class="pindex__views" role="group" aria-label={t.viewLabel}>
+      <button type="button" class="chip is-active" aria-pressed="true" data-view="grid">{t.grid}</button>
+      <button type="button" class="chip" aria-pressed="false" data-view="list">{t.list}</button>
+    </div>
+  </div>
+
+  <ul class="pindex__grid" role="list" data-pindex-list data-layout="grid">
+    {projects.map((p, i) => {
+      const tone = projectTone(p.order);
+      const span = spans[i % spans.length];
+      return (
+        <li class={`pcard pcard--span-${span}`} data-flip-id={p.slug} data-cats={JSON.stringify(p.categories)}>
+          <a class={`pcard__link pcard--${tone}`} data-surface={tone} href={projectHref(locale, p.slug)} data-cursor={t.viewCase} data-index-row={p.slug}>
+            <span class="pcard__num">{pad(p.order)}</span>
+            <figure class="pcard__media" style={`view-transition-name: cover-${p.slug}`}>
+              <Image src={p.cover} alt="" widths={[480, 800]} sizes="(min-width: 861px) 44vw, 92vw" />
+              <span class="pcard__plate pcard__plate--a" aria-hidden="true"></span>
+              <span class="pcard__plate pcard__plate--b" aria-hidden="true"></span>
+            </figure>
+            <span class="pcard__body">
+              <span class="pcard__name poster">{p.title}</span>
+              <span class="pcard__summary">{p.summary}</span>
+              <span class="pcard__cat">{p.categories.filter((c) => c !== common).join(' · ')}</span>
+            </span>
+            <span class="pcard__go" aria-hidden="true"><Icon name="arrow-up-right" size="1.4rem" /></span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+  <p class="pindex__empty" data-pindex-empty hidden>{t.empty}</p>
+
+  <!-- Vista lista: la captura sigue al cursor (solo puntero fino) -->
+  <div class="pindex__float" data-index-float aria-hidden="true">
+    {projects.map((p) => (
+      <figure class="pindex__shot" data-index-shot={p.slug}>
+        <Image src={p.cover} alt="" widths={[480]} sizes="24vw" />
+      </figure>
+    ))}
+  </div>
+</section>
+
+<style>
+  .pindex {
+    min-height: 100svh;
+    padding: calc(var(--header-h) + var(--space-xl)) var(--gutter) var(--space-2xl);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    overflow: clip;
+  }
+  .pindex__hero {
+    position: relative;
+    display: grid;
+    gap: var(--space-m);
+    padding-top: var(--space-l);
+  }
+  .pindex__hero .folio--corner {
+    top: 0;
+    right: 0;
+  }
+  .pindex__count {
+    position: absolute;
+    right: -0.05em;
+    top: -0.1em;
+    z-index: -1;
+    font-size: clamp(12rem, 30vw, 34rem);
+    color: var(--cm-gunmetal-soft);
+  }
+  .pindex__title {
+    font-size: min(clamp(5.5rem, 17vw, 20rem), var(--fit));
+    color: var(--cm-orange);
+    line-height: 0.78;
+  }
+  .pindex__lead {
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    max-width: 28ch;
+  }
+
+  .pindex__controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-s);
+    padding-block: var(--space-s);
+    border-block: 1px solid color-mix(in oklab, var(--cm-cream) 22%, transparent);
+  }
+  .pindex__filters,
+  .pindex__views {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.55rem 0.85rem;
+    border-radius: var(--radius-s);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--cm-cream) 45%, transparent);
+    transition:
+      background-color var(--dur-s) var(--ease-soft),
+      color var(--dur-s) var(--ease-soft);
+  }
+  .chip:hover {
+    box-shadow: inset 0 0 0 1px var(--cm-cream);
+  }
+  .chip.is-active {
+    background: var(--cm-orange);
+    color: var(--cm-gunmetal);
+    box-shadow: none;
+  }
+
+  /* Cuadrícula */
+  .pindex__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: var(--space-l);
+  }
+  .pcard--span-7 { grid-column: span 7; }
+  .pcard--span-5 { grid-column: span 5; }
+  .pcard--span-4 { grid-column: span 4; }
+  .pcard--span-12 { grid-column: span 12; }
+  /* El cartel ancho se compone en horizontal: imagen y texto lado a lado */
+  .pcard--span-12 .pcard__link {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    align-items: center;
+  }
+  .pcard--span-12 .pcard__name {
+    font-size: clamp(3.6rem, 8vw, 9rem);
+  }
+  .pcard--span-5 .pcard__link,
+  .pcard--span-4 .pcard__link {
+    align-content: start;
+  }
+  .pcard--span-7 .pcard__name {
+    font-size: clamp(3.4rem, 6vw, 7rem);
+  }
+  .pcard--span-4 .pcard__name {
+    font-size: clamp(2.6rem, 3.6vw, 4rem);
+  }
+  .pcard[hidden] {
+    display: none;
+  }
+  .pcard__link {
+    position: relative;
+    display: grid;
+    gap: var(--space-m);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    text-decoration: none;
+    height: 100%;
+    transition: transform var(--dur-m) var(--ease-out);
+  }
+  .pcard__num {
+    position: absolute;
+    top: var(--space-m);
+    right: var(--space-m);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    z-index: 2;
+  }
+  .pcard__media {
+    position: relative;
+    margin: 0;
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    isolation: isolate;
+    aspect-ratio: 3 / 2;
+    box-shadow: 0 24px 40px -24px rgb(29 39 48 / 0.55);
+  }
+  .pcard__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(1) contrast(1.12);
+    transition:
+      filter var(--dur-m) var(--ease-soft),
+      transform var(--dur-l) var(--ease-out);
+  }
+  .pcard__plate {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-m) var(--ease-soft);
+  }
+  .pcard__plate--a {
+    background: var(--cm-orange);
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+  }
+  .pcard__plate--b {
+    background: var(--cm-turquoise-deep);
+    mix-blend-mode: screen;
+    opacity: 0.6;
+  }
+  .pcard__body {
+    display: grid;
+    gap: 0.5rem;
+    padding-right: 3.5rem;
+  }
+  .pcard__name {
+    font-size: clamp(2.8rem, 4.6vw, 5.5rem);
+    line-height: 0.84;
+    overflow-wrap: normal;
+  }
+  .pcard--gunmetal {
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--cm-cream) 18%, transparent);
+  }
+  .pcard--gunmetal .pcard__name {
+    color: var(--cm-orange);
+  }
+  .pcard__summary {
+    font-weight: 600;
+    font-size: var(--step-1);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    max-width: 34ch;
+  }
+  .pcard__cat {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .pcard__go {
+    position: absolute;
+    right: var(--space-m);
+    bottom: var(--space-m);
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-s);
+    box-shadow: inset 0 0 0 1.5px currentColor;
+    transition: transform var(--dur-s) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .pcard__link:hover .pcard__media :global(img) {
+      filter: none;
+      transform: scale(1.04);
+    }
+    .pcard__link:hover .pcard__plate {
+      opacity: 0;
+    }
+    .pcard__link:hover .pcard__go {
+      transform: rotate(45deg);
+    }
+  }
+
+  /* Lista */
+  .pindex__grid[data-layout='list'] {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  [data-layout='list'] .pcard {
+    grid-column: 1 / -1;
+  }
+  [data-layout='list'] .pcard__link {
+    grid-template-columns: 3rem minmax(0, 1fr) 3rem;
+    align-items: center;
+    border-radius: 0;
+    padding: var(--space-s) var(--space-s);
+    background: transparent;
+    color: var(--cm-cream);
+    border-bottom: 1px solid color-mix(in oklab, var(--cm-cream) 22%, transparent);
+    box-shadow: none;
+  }
+  [data-layout='list'] .pcard__num {
+    position: static;
+  }
+  [data-layout='list'] .pcard__media {
+    aspect-ratio: 3 / 2;
+  }
+  [data-layout='list'] .pcard__body {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+  }
+  [data-layout='list'] .pcard__name {
+    color: var(--cm-cream);
+    font-size: clamp(2.6rem, 5vw, 5rem);
+  }
+  [data-layout='list'] .pcard__media {
+    display: none;
+  }
+  .pindex__float {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 40;
+    width: clamp(16rem, 24vw, 24rem);
+    aspect-ratio: 3 / 2;
+    pointer-events: none;
+    display: none;
+  }
+  :global(html.has-cursor) [data-layout='list'] ~ .pindex__float {
+    display: block;
+  }
+  .pindex__shot {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    opacity: 0;
+    box-shadow: 0 30px 50px -25px rgb(0 0 0 / 0.55);
+  }
+  .pindex__shot :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  [data-layout='list'] .pcard__summary {
+    display: none;
+  }
+  [data-layout='list'] .pcard__go {
+    position: static;
+  }
+  .pindex__empty {
+    font-size: var(--step-1);
+  }
+
+  @media (max-width: 860px) {
+    .pindex__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .pcard {
+      grid-column: 1 / -1 !important;
+    }
+    .pcard--span-12 .pcard__link {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    [data-layout='list'] .pcard__link {
+      grid-template-columns: 2rem minmax(0, 1fr);
+    }
+    [data-layout='list'] .pcard__body {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    [data-layout='list'] .pcard__go {
+      display: none;
+    }
+  }
+</style>

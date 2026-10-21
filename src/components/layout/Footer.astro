@@ -4,8 +4,9 @@ import type { getSettings } from '../../i18n';
 
 interface Props {
   settings: Awaited<ReturnType<typeof getSettings>>;
+  langHref?: string;
 }
-const { settings } = Astro.props;
+const { settings, langHref = settings.langSwitch.href } = Astro.props;
 ---
 
 <footer class="footer grain" data-surface="gunmetal" data-footer>
@@ -25,7 +26,7 @@ const { settings } = Astro.props;
       </ul>
       <ul role="list">
         <li>{settings.role}</li>
-        <li><a href={settings.langSwitch.href} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}</a></li>
+        <li><a href={langHref} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}</a></li>
         <li><a href="#top">{settings.footer.backToTop}</a></li>
       </ul>
     </div>

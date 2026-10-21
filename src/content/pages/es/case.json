@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "{title} — Proyecto de Mauricio Correa",
+    "description": "{summary}"
+  },
+  "case": {
+    "back": "Volver a proyectos",
+    "caseLabel": "Caso",
+    "sheetTitle": "Ficha técnica",
+    "client": "Cliente",
+    "category": "Categoría",
+    "year": "Año",
+    "stack": "Herramientas",
+    "credit": "Contexto",
+    "links": "Enlaces",
+    "visit": "Visitar sitio",
+    "figma": "Ver en Figma",
+    "project": "Proyecto",
+    "challenge": "Desafío",
+    "built": "Lo que construimos",
+    "views": "Diseñado para cada pantalla.",
+    "viewsLead": "Escritorio y móvil, pensados juntos desde el primer boceto.",
+    "desktopAlt": "Vista de escritorio de {title}",
+    "mobileAlt": "Vista móvil de {title}",
+    "ctaTitle": "¿Tienes un proyecto similar?",
+    "ctaBody": "Hablemos. Hagámoslo realidad.",
+    "ctaButton": "Escríbeme por WhatsApp",
+    "next": "Proyecto siguiente",
+    "ctaDisplay": "Hablemos",
+    "ticketRef": "Referencia",
+    "ticketDest": "Destino",
+    "ticketDestValue": "Tu nueva web",
+    "ticketGate": "Puerta",
+    "ticketGateValue": "WhatsApp"
+  }
+}
