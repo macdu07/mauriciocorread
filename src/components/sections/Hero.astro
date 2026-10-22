@@ -39,7 +39,7 @@ const screenLayout = ['a', 'b', 'c'];
           <figure class={`hero__screen hero__screen--${screenLayout[i] ?? 'a'}`} data-depth={0.35 + i * 0.15}>
             <figcaption class="hero__screen-bar">{screen.name}</figcaption>
             <div class="print" data-print>
-              <Image src={screen.image} alt={screen.alt} widths={[480, 800]} sizes="(min-width: 861px) 34vw, 70vw" loading="eager" />
+              <Image src={screen.image} alt={screen.alt} widths={[320, 480, 800]} sizes="(min-width: 861px) 34vw, 40vw" loading="eager" />
               <span class="print__plate print__plate--a" aria-hidden="true"></span>
               <span class="print__plate print__plate--b" aria-hidden="true"></span>
             </div>

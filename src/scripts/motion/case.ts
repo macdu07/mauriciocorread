@@ -3,11 +3,8 @@
    ========================================================================== */
 
 import gsap from 'gsap';
-import { Flip } from 'gsap/Flip';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
-
-gsap.registerPlugin(Flip);
 
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -102,8 +99,11 @@ export function initProjectsIndex(reduce: boolean) {
   const cards = $$('[data-flip-id]', list);
   const empty = $('[data-pindex-empty]', root);
 
-  const animate = (change: () => void) => {
+  // Flip solo se descarga cuando alguien usa un filtro o cambia la vista.
+  const animate = async (change: () => void) => {
     if (reduce) return change();
+    const { Flip } = await import('gsap/Flip');
+    gsap.registerPlugin(Flip);
     const state = Flip.getState(cards, { props: 'borderRadius' });
     change();
     Flip.from(state, {
