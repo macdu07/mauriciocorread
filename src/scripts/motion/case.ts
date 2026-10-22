@@ -9,6 +9,8 @@ import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(Flip);
 
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
 const $ = (sel: string, root: ParentNode = document) => root.querySelector<HTMLElement>(sel);
 const $$ = (sel: string, root: ParentNode = document) => Array.from(root.querySelectorAll<HTMLElement>(sel));
 
@@ -25,9 +27,12 @@ export function prepareCaseIntro() {
   const print = cover?.querySelector<HTMLElement>('[data-print]');
   if (cover && print) {
     const [a, b] = $$('.print__plate', print);
-    tl.from(print.querySelector('img'), { scale: 1.15, duration: 1.6 }, 0)
-      .from(a, { xPercent: -16, yPercent: 5, duration: 1.4 }, 0.2)
-      .from(b, { xPercent: 16, yPercent: -5, duration: 1.4 }, 0.2);
+    // Solo escritorio: escala y planchas con blend repintan la imagen en cada frame.
+    if (finePointer) {
+      tl.from(print.querySelector('img'), { scale: 1.15, duration: 1.6 }, 0)
+        .from(a, { xPercent: -16, yPercent: 5, duration: 1.4 }, 0.2)
+        .from(b, { xPercent: 16, yPercent: -5, duration: 1.4 }, 0.2);
+    }
   }
   return tl;
 }
@@ -63,7 +68,7 @@ export function initCase() {
       scrollTrigger: { trigger: desktop, start: 'top 80%', once: true },
     });
   }
-  if (img) {
+  if (img && finePointer) {
     gsap.fromTo(
       img,
       { yPercent: -6, scale: 1.12 },

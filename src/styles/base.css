@@ -195,6 +195,16 @@ p {
   filter: invert(1);
 }
 
+/* Táctil: el grano queda estático y sin mezcla; animar background-position repinta cada lámina en cada paso. */
+@media (hover: none), (pointer: coarse) {
+  .grain::before {
+    animation: none;
+  }
+  .grain:not([data-surface='gunmetal'])::before {
+    mix-blend-mode: normal;
+  }
+}
+
 @keyframes grain-shift {
   0% { background-position: 0 0; }
   20% { background-position: -40px 60px; }

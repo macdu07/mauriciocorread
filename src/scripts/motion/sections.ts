@@ -15,6 +15,10 @@ const finePointer = () => window.matchMedia('(hover: hover) and (pointer: fine)'
 function printIn(print: HTMLElement, trigger: ScrollTrigger.Vars) {
   const [a, b] = $$('.print__plate', print);
   const frame = print.closest<HTMLElement>('figure') ?? print;
+  // Táctil: fundido simple; clip-path + escala + planchas con blend repintan la imagen en cada frame.
+  if (!finePointer()) {
+    return gsap.from(frame, { autoAlpha: 0, y: 24, duration: 0.8, ease: 'mc-out', scrollTrigger: { ...trigger, once: true } });
+  }
   const tl = gsap.timeline({ defaults: { ease: 'mc-out' }, scrollTrigger: { ...trigger, once: true } });
   tl.from(frame, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.2, ease: 'mc-inout', clearProps: 'clipPath' }, 0)
     .from(print.querySelector('img'), { scale: 1.2, duration: 1.6 }, 0)
@@ -278,16 +282,19 @@ export function initStats() {
 
 /* ---------- 08 · Sobre mí: el collage se separa por capas ---------- */
 export function initAboutDepth() {
-  $$('[data-depth-scroll]').forEach((el) => {
-    const depth = parseFloat(el.dataset.depthScroll || '0');
-    gsap.fromTo(
-      el,
-      { yPercent: depth * 100 },
-      {
-        yPercent: depth * -100,
-        ease: 'none',
-        scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
-      },
-    );
+  // Parallax con scrub en varias capas: solo escritorio (en móvil pesa más de lo que aporta).
+  gsap.matchMedia().add('(min-width: 861px)', () => {
+    $$('[data-depth-scroll]').forEach((el) => {
+      const depth = parseFloat(el.dataset.depthScroll || '0');
+      gsap.fromTo(
+        el,
+        { yPercent: depth * 100 },
+        {
+          yPercent: depth * -100,
+          ease: 'none',
+          scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
+        },
+      );
+    });
   });
 }

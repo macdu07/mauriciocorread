@@ -38,7 +38,10 @@ export function boot() {
     return;
   }
 
-  initLenis();
+  // El scroll nativo táctil ya es fluido; Lenis solo aporta en escritorio y cuesta CPU en móvil.
+  if (finePointer) initLenis();
+  else initNativeVelocity();
+  ScrollTrigger.config({ ignoreMobileResize: true });
   if (finePointer) {
     initCursor();
     initMagnetic();
@@ -104,6 +107,25 @@ function initLenis() {
   });
 }
 
+/* Velocidad de scroll sin Lenis (táctil): se lee del scroll nativo. */
+function initNativeVelocity() {
+  let last = window.scrollY;
+  gsap.ticker.add(() => {
+    const y = window.scrollY;
+    velocity = gsap.utils.interpolate(velocity, y - last, 0.2);
+    last = y;
+  });
+}
+
+/* Ejecuta `fn` en cada frame solo mientras `el` está en pantalla. */
+function tickWhileVisible(el: Element, fn: (time: number, delta: number) => void) {
+  let visible = true;
+  new IntersectionObserver(([entry]) => (visible = entry.isIntersecting), { rootMargin: '100px' }).observe(el);
+  gsap.ticker.add((time, delta) => {
+    if (visible) fn(time, delta);
+  });
+}
+
 /* ---------- Preloader: la M se arma, contador y cortina ---------- */
 function runPreloader(done: () => void) {
   const root = $('[data-preloader]');
@@ -124,6 +146,24 @@ function runPreloader(done: () => void) {
       lenis?.start();
     },
   });
+
+  // Táctil: versión corta y sin el portal (escalar 26× una máscara SVG a pantalla completa es lo más caro del arranque).
+  if (!finePointer) {
+    tl.from(left, { xPercent: -40, yPercent: -30, autoAlpha: 0, duration: 0.6, ease: 'mc-out' }, 0)
+      .from(right, { xPercent: 40, yPercent: -30, autoAlpha: 0, duration: 0.6, ease: 'mc-out' }, 0.08)
+      .to(counter, {
+        v: 100,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          if (count) count.textContent = String(Math.round(counter.v)).padStart(2, '0');
+        },
+      }, 0)
+      .add(done, 0.8)
+      .to(root, { autoAlpha: 0, duration: 0.3, ease: 'power1.out' }, 0.85);
+    return;
+  }
+
   tl.from(left, { xPercent: -40, yPercent: -30, autoAlpha: 0, duration: 0.9, ease: 'mc-out' }, 0.1)
     .from(right, { xPercent: 40, yPercent: -30, autoAlpha: 0, duration: 0.9, ease: 'mc-out' }, 0.22)
     .to(counter, {
@@ -159,16 +199,18 @@ function prepareHeroIntro() {
   const inner = $('[data-portal-inner]', hero);
   if (win && inner) {
     tl.fromTo(win, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'mc-inout', clearProps: 'clipPath' }, 0);
-    tl.from(inner, { scale: 1.15, duration: 1.6 }, 0);
+    if (finePointer) tl.from(inner, { scale: 1.15, duration: 1.6 }, 0);
   }
 
   // Imprenta: las planchas de color llegan desregistradas y se alinean
   $$('[data-print]', hero).forEach((print, i) => {
     const [a, b] = $$('.print__plate', print);
     const at = 0.55 + i * 0.12;
-    tl.from(print.parentElement, { y: 60, rotate: `+=${i % 2 ? 6 : -6}`, autoAlpha: 0, duration: 1.2 }, at)
-      .from(a, { xPercent: -18, yPercent: 6, duration: 1.4 }, at)
-      .from(b, { xPercent: 18, yPercent: -6, duration: 1.4 }, at);
+    tl.from(print.parentElement, { y: 60, rotate: `+=${i % 2 ? 6 : -6}`, autoAlpha: 0, duration: 1.2 }, at);
+    // Las planchas llevan mix-blend-mode: animarlas obliga a recomponer la imagen en cada frame (solo escritorio).
+    if (finePointer) {
+      tl.from(a, { xPercent: -18, yPercent: 6, duration: 1.4 }, at).from(b, { xPercent: 18, yPercent: -6, duration: 1.4 }, at);
+    }
   });
 
   const stamp = $('[data-hero-stamp]', hero);
@@ -320,7 +362,9 @@ function initMarquee() {
     if (!track) return;
     const loop = gsap.to(track, { xPercent: -50, duration: 28, ease: 'none', repeat: -1 });
     const skew = gsap.quickTo(track, 'skewX', { duration: 0.5, ease: 'power3.out' });
-    gsap.ticker.add(() => {
+    // Fuera de pantalla el bucle se pausa y el ticker no trabaja.
+    new IntersectionObserver(([entry]) => (entry.isIntersecting ? loop.resume() : loop.pause()), { rootMargin: '100px' }).observe(root);
+    tickWhileVisible(root, () => {
       const v = gsap.utils.clamp(-40, 40, velocity);
       loop.timeScale(v < -0.5 ? -1 - Math.abs(v) / 8 : 1 + Math.abs(v) / 8);
       skew(gsap.utils.clamp(-8, 8, -v / 4));
@@ -332,22 +376,35 @@ function initMarquee() {
 function initStamps() {
   $$('[data-stamp-ring]').forEach((ring) => {
     let rot = 0;
-    gsap.ticker.add((_, delta) => {
+    gsap.set(ring, { transformOrigin: '50% 50%' });
+    const setRot = gsap.quickSetter(ring, 'rotate', 'deg');
+    tickWhileVisible(ring, (_, delta) => {
       rot += (delta / 1000) * (14 + Math.abs(velocity) * 6);
-      gsap.set(ring, { rotate: rot, transformOrigin: '50% 50%' });
+      setRot(rot);
     });
   });
 }
 
 /* ---------- Tipografía que respira (eje de ancho) ---------- */
 function initBreathe() {
+  // Cambiar el eje de ancho re-maqueta el texto en cada frame: solo escritorio, solo en pantalla y solo si el valor cambió.
+  if (!finePointer) return;
   const els = $$('[data-breathe]');
   if (!els.length) return;
+  const visible = new Set<HTMLElement>();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => (e.isIntersecting ? visible.add(e.target as HTMLElement) : visible.delete(e.target as HTMLElement)));
+  }, { rootMargin: '100px' });
+  els.forEach((el) => io.observe(el));
   let current = 62;
+  let written = -1;
   gsap.ticker.add(() => {
     const target = 62 + gsap.utils.clamp(0, 10, Math.abs(velocity) * 0.9);
     current += (target - current) * 0.08;
-    els.forEach((el) => (el.style.fontStretch = `${current.toFixed(1)}%`));
+    const value = Math.round(current * 10) / 10;
+    if (value === written) return;
+    written = value;
+    visible.forEach((el) => (el.style.fontStretch = `${value}%`));
   });
 }
 
@@ -394,10 +451,12 @@ function initTicket() {
 function initFooter() {
   const inner = $('[data-footer-inner]');
   if (!inner) return;
-  gsap.from(inner, {
-    yPercent: -35,
-    ease: 'none',
-    scrollTrigger: { trigger: inner.parentElement, start: 'top bottom', end: 'bottom bottom', scrub: true },
+  gsap.matchMedia().add('(min-width: 861px)', () => {
+    gsap.from(inner, {
+      yPercent: -35,
+      ease: 'none',
+      scrollTrigger: { trigger: inner.parentElement, start: 'top bottom', end: 'bottom bottom', scrub: true },
+    });
   });
 }
 
