@@ -88,3 +88,7 @@ src/
 ## Git
 
 No hacer commit ni push salvo que Mauricio lo pida.
+
+## Contexto de la carpeta de trabajo
+
+Ruta de recursos externos (Drive) y reglas para usarlos: ver `../AGENTS.md`.
