@@ -338,6 +338,12 @@ const screenLayout = ['a', 'b', 'c'];
   }
 
   /* Pantallas medianas: el bloque de copy se acomoda */
+  /* Las capas siguen al ratón en cada fotograma: con capa propia se mueven sin repintar. */
+  @media (hover: hover) and (pointer: fine) {
+    [data-depth] {
+      will-change: transform;
+    }
+  }
   @media (max-width: 1180px) and (min-width: 861px) {
     .hero {
       --name-offset: 12vw;

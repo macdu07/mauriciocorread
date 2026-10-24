@@ -62,7 +62,7 @@ export function initWork() {
         pin,
         start: 'top top',
         end: () => `+=${distance()}`,
-        scrub: 0.6,
+        scrub: 0.4,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const idx = Math.min(panels.length, Math.max(1, Math.round(self.progress * panels.length + 0.4)));
@@ -120,7 +120,6 @@ function setupNameSwap(panel: HTMLElement) {
   const swap = document.createElement('p');
   swap.className = `${name.className} work__name--swap`;
   swap.setAttribute('aria-hidden', 'true');
-  swap.setAttribute('data-breathe', '');
   swap.removeAttribute('id');
   swap.textContent = name.textContent;
   for (const attr of name.getAttributeNames()) if (attr.startsWith('data-astro-cid')) swap.setAttribute(attr, '');
@@ -174,7 +173,7 @@ function setupNameSwap(panel: HTMLElement) {
     const bottom = Math.max(0, n.bottom - f.bottom);
     swap.style.clipPath = left >= n.width || top >= n.height ? 'inset(0 0 0 100%)' : `inset(${top}px ${right}px ${bottom}px ${left}px)`;
   };
-  // Si el nombre cambia de tamaño (respiración del ancho, carga de fuentes), la copia lo sigue.
+  // Si el nombre cambia de tamaño (carga de fuentes, ancho de ventana), la copia lo sigue.
   new ResizeObserver(update).observe(name);
   return update;
 }

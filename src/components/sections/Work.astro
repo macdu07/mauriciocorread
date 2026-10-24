@@ -39,7 +39,7 @@ const total = pad(featured.length);
             <p class="folio folio--corner work__folio" aria-hidden="true">{pad(i + 1)} / {total}</p>
 
             <div class="work__text">
-              <h3 class="work__name poster" id={`work-${p.slug}`} data-work-name data-breathe>{p.title}</h3>
+              <h3 class="work__name poster" id={`work-${p.slug}`} data-work-name>{p.title}</h3>
               <p class="work__summary">{p.summary}</p>
               <p class="work__cat">{p.categories.join(' · ')}{p.credit && <span> — {p.credit}</span>}</p>
               <ul class="work__tags" role="list">

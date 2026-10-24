@@ -337,6 +337,7 @@ const categories = [...new Set(projects.flatMap((p) => p.categories))].filter(
     aspect-ratio: 3 / 2;
     pointer-events: none;
     display: none;
+    will-change: transform;
   }
   :global(html.has-cursor) [data-layout='list'] ~ .pindex__float {
     display: block;

@@ -82,7 +82,8 @@ export function boot() {
 
 /* ---------- Scroll suave ---------- */
 function initLenis() {
-  lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 1, smoothWheel: true });
+  // lerp 0.1: suave pero sin la sensación de ir detrás de la rueda.
+  lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, smoothWheel: true });
   lenis.on('scroll', (e: Lenis) => {
     ScrollTrigger.update();
     velocity = gsap.utils.interpolate(velocity, e.velocity, 0.2);
@@ -264,7 +265,8 @@ function portalTimeline(hero: HTMLElement, stage: HTMLElement, win: HTMLElement,
       trigger: hero,
       start: 'top top',
       end: '+=115%',
-      scrub: 0.8,
+      // Lenis ya suaviza el scroll: un scrub corto evita el doble retardo.
+      scrub: 0.5,
       pin: stage,
       invalidateOnRefresh: true,
     },
@@ -401,8 +403,9 @@ function initBreathe() {
   gsap.ticker.add(() => {
     const target = 62 + gsap.utils.clamp(0, 10, Math.abs(velocity) * 0.9);
     current += (target - current) * 0.08;
-    const value = Math.round(current * 10) / 10;
-    if (value === written) return;
+    // Pasos de 0.25 %: cada cambio re-maqueta el titular; así se escribe solo cuando se nota.
+    const value = Math.round(current * 4) / 4;
+    if (value === written || !visible.size) return;
     written = value;
     visible.forEach((el) => (el.style.fontStretch = `${value}%`));
   });
@@ -506,16 +509,24 @@ function initMagnetic() {
 function initHeader() {
   const header = $('[data-header]');
   if (!header) return;
+  const menu = header.querySelector<HTMLElement>('[data-menu]');
   let last = window.scrollY;
-  const onScroll = () => {
+  let queued = false;
+  // Una lectura por fotograma aunque el navegador dispare varios eventos de scroll.
+  const update = () => {
+    queued = false;
     const y = window.scrollY;
     header.classList.toggle('is-solid', y > 40);
-    const menuOpen = header.querySelector('[data-menu]:not([hidden])');
+    const menuOpen = !!menu && !menu.hidden;
     header.classList.toggle('is-hidden', !menuOpen && y > last && y > window.innerHeight * 0.4);
     last = y;
   };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.addEventListener('scroll', () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+  update();
 }
 
 /* ---------- Menú móvil ---------- */
