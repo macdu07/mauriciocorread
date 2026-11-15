@@ -49,6 +49,11 @@ video {
   max-width: 100%;
 }
 
+/* <picture> no genera caja: el <img> interno conserva el layout de antes */
+picture {
+  display: contents;
+}
+
 h1,
 h2,
 h3,

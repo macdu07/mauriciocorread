@@ -3,25 +3,27 @@
    Paleta CM, tipografía, espaciado y movimiento.
    ========================================================================== */
 
+/* Geist y Geist Mono: subconjunto latino (Latin-1, puntuación, €, flechas). */
 @font-face {
   font-family: 'Geist';
-  src: url('/fonts/Geist-Variable.woff2') format('woff2-variations');
+  src: url('/fonts/Geist-Variable-latin.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Geist Mono';
-  src: url('/fonts/GeistMono-Variable.woff2') format('woff2-variations');
+  src: url('/fonts/GeistMono-Variable-latin.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
+/* Archivo: peso fijo 900 (el de los titulares-cartel) y eje wdth 62–100 para la "respiración". */
 @font-face {
   font-family: 'Archivo';
-  src: url('/fonts/archivo-latin-wdth-normal.woff2') format('woff2-variations');
-  font-weight: 100 900;
-  font-stretch: 62% 125%;
+  src: url('/fonts/Archivo-900-wdth62-100-latin.woff2') format('woff2-variations');
+  font-weight: 900;
+  font-stretch: 62% 100%;
   font-style: normal;
   font-display: swap;
 }

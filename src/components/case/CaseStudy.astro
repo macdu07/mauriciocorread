@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import Ticket from '../ui/Ticket.astro';
@@ -65,7 +65,7 @@ const sheet = [
       <figure class="case-hero__browser" style={`view-transition-name: cover-${p.slug}`} data-case-cover>
         <figcaption class="case-hero__bar">{host}</figcaption>
         <div class="print" data-print>
-          <Image src={p.cover} alt={`${p.title} — ${p.summary}`} widths={[800, 1200, 1600]} sizes="(min-width: 861px) 62vw, 92vw" loading="eager" fetchpriority="high" />
+          <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p.cover} alt={`${p.title} — ${p.summary}`} widths={[800, 1200, 1600]} sizes="(min-width: 861px) 62vw, 92vw" loading="eager" fetchpriority="high" />
           <span class="print__plate print__plate--a" aria-hidden="true"></span>
           <span class="print__plate print__plate--b" aria-hidden="true"></span>
         </div>
@@ -115,11 +115,11 @@ const sheet = [
       <figure class="case-views__desktop" data-views-desktop>
         <figcaption class="case-hero__bar">{host}</figcaption>
         <div class="case-views__clip">
-          <Image src={p.detail} alt={fill(t.desktopAlt, { title: p.title })} widths={[800, 1200, 1600]} sizes="(min-width: 861px) 68vw, 92vw" data-views-img />
+          <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p.detail} alt={fill(t.desktopAlt, { title: p.title })} widths={[800, 1200, 1600]} sizes="(min-width: 861px) 68vw, 92vw" data-views-img />
         </div>
       </figure>
       <figure class="case-views__phone" data-views-phone>
-        <Image src={p.mobile} alt={fill(t.mobileAlt, { title: p.title })} widths={[280, 420]} sizes="(min-width: 861px) 18vw, 40vw" />
+        <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p.mobile} alt={fill(t.mobileAlt, { title: p.title })} widths={[280, 420]} sizes="(min-width: 861px) 18vw, 40vw" />
       </figure>
       <div class="case-views__stamp" aria-hidden="true"><Stamp text={`${p.title} · ${host} · `} size="clamp(6rem, 9vw, 9rem)" tone="ink" /></div>
     </div>
@@ -152,7 +152,7 @@ const sheet = [
       <span class="case-next__summary">{next.summary}</span>
     </span>
     <span class="case-next__media" style={`view-transition-name: cover-${next.slug}`}>
-      <Image src={next.cover} alt="" widths={[480, 800]} sizes="(min-width: 861px) 34vw, 80vw" />
+      <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={next.cover} alt="" widths={[480, 800]} sizes="(min-width: 861px) 34vw, 80vw" />
       <span class="print__plate print__plate--a" aria-hidden="true"></span>
       <span class="print__plate print__plate--b" aria-hidden="true"></span>
     </span>

@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import { projectHref, type getPage, type getProjects, type getServices, type Locale } from '../../i18n';
 
@@ -56,7 +56,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
               <li data-reveal>
                 <a class="svc__project" href={projectHref(locale, p!.slug)} data-cursor={p!.title}>
                   <span class="svc__shot">
-                    <Image src={p!.cover} alt="" widths={[400, 640]} sizes="(min-width: 861px) 28vw, 90vw" />
+                    <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p!.cover} alt="" widths={[400, 640]} sizes="(min-width: 861px) 28vw, 90vw" />
                     <span class="svc__plate svc__plate--a" aria-hidden="true"></span>
                     <span class="svc__plate svc__plate--b" aria-hidden="true"></span>
                   </span>

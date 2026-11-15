@@ -264,7 +264,7 @@ CM-RED (#EB3D40) is part of the brand palette, marked "occasional", and is decla
 
 ## Typography
 
-**Display Font:** Archivo variable (wdth 62–125), falling back to Geist
+**Display Font:** Archivo, subset to weight 900 and wdth 62–100 (self-hosted, Latin subset), falling back to Geist
 **Body Font:** Geist variable (with ui-sans-serif, system-ui)
 **Label/Mono Font:** Geist Mono variable (with ui-monospace)
 

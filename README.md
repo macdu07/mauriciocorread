@@ -22,7 +22,7 @@ Bilingüe: español por defecto (`/`) e inglés (`/en`). Reemplaza a maurouix.co
 - **Astro 7** en salida estática + **TypeScript**.
 - **CSS nativo con tokens** (`src/styles/tokens.css`), con estilos acotados a cada componente `.astro`. Sin Tailwind ni framework de UI.
 - **GSAP 3** (ScrollTrigger, SplitText, Flip, CustomEase) y **Lenis** para el scroll suave.
-- Fuentes auto-alojadas en `public/fonts/`: Geist, Geist Mono y Archivo variable.
+- Fuentes auto-alojadas en `public/fonts/`: Geist, Geist Mono y Archivo (peso 900, eje `wdth` 62–100), con subconjunto latino.
 - Despliegue en **Coolify** con Docker.
 
 ## Puesta en marcha

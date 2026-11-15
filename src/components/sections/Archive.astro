@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import { projectHref, type getPage, type getProjects, type Locale } from '../../i18n';
 
@@ -48,7 +48,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
   <div class="archive__float" data-archive-float aria-hidden="true">
     {rest.map((p) => (
       <figure class="archive__shot" data-archive-shot={p.slug}>
-        <Image src={p.cover} alt="" widths={[480, 720]} sizes="26vw" />
+        <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p.cover} alt="" widths={[480, 720]} sizes="26vw" />
       </figure>
     ))}
   </div>

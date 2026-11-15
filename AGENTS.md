@@ -20,7 +20,7 @@ Documentos rectores (leer antes de cambiar algo relevante):
 - **Astro 7** (salida estática) + **TypeScript**.
 - **CSS nativo con tokens** (`src/styles/tokens.css`); estilos con alcance en componentes `.astro`. Sin Tailwind ni framework de UI.
 - **GSAP 3** (ScrollTrigger, SplitText, Flip, CustomEase) + **Lenis** para el scroll suave.
-- Fuentes auto-alojadas en `public/fonts/`: Geist, Geist Mono y Archivo variable (ejes `wdth` 62–125 y `wght`).
+- Fuentes auto-alojadas en `public/fonts/`: Geist, Geist Mono y Archivo (peso 900 fijo, eje `wdth` 62–100). Todas con subconjunto latino.
 - Gestor de paquetes: **pnpm** (no usar npm ni yarn; el único lockfile es `pnpm-lock.yaml`).
 - Deploy: **Coolify** con el `Dockerfile` del repo (build con pnpm → nginx sirviendo `dist/` en el puerto 80; config en `nginx.conf`).
 

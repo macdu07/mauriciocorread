@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Icon from '../ui/Icon.astro';
 import { projectHref, projectTone, type getPage, type getProjects, type Locale } from '../../i18n';
 
@@ -52,7 +52,7 @@ const categories = [...new Set(projects.flatMap((p) => p.categories))].filter(
           <a class={`pcard__link pcard--${tone}`} data-surface={tone} href={projectHref(locale, p.slug)} data-cursor={t.viewCase} data-index-row={p.slug}>
             <span class="pcard__num">{pad(p.order)}</span>
             <figure class="pcard__media" style={`view-transition-name: cover-${p.slug}`}>
-              <Image src={p.cover} alt="" widths={[480, 800]} sizes="(min-width: 861px) 44vw, 92vw" />
+              <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p.cover} alt="" widths={[480, 800]} sizes="(min-width: 861px) 44vw, 92vw" />
               <span class="pcard__plate pcard__plate--a" aria-hidden="true"></span>
               <span class="pcard__plate pcard__plate--b" aria-hidden="true"></span>
             </figure>
@@ -73,7 +73,7 @@ const categories = [...new Set(projects.flatMap((p) => p.categories))].filter(
   <div class="pindex__float" data-index-float aria-hidden="true">
     {projects.map((p) => (
       <figure class="pindex__shot" data-index-shot={p.slug}>
-        <Image src={p.cover} alt="" widths={[480]} sizes="24vw" />
+        <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p.cover} alt="" widths={[480]} sizes="24vw" />
       </figure>
     ))}
   </div>

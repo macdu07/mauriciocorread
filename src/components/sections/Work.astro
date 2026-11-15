@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import { projectHref, type getPage, type getProjects, type Locale } from '../../i18n';
@@ -55,13 +55,13 @@ const total = pad(featured.length);
               <figure class="work__browser" data-work-media style={`view-transition-name: cover-${p.slug}`}>
                 <figcaption class="work__bar">{new URL(p.url).hostname.replace('www.', '')}</figcaption>
                 <div class="print" data-print>
-                  <Image src={p.cover} alt={`${p.title} — ${p.summary}`} widths={[640, 960, 1280]} sizes="(min-width: 861px) 44vw, 88vw" />
+                  <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p.cover} alt={`${p.title} — ${p.summary}`} widths={[640, 960, 1280]} sizes="(min-width: 861px) 44vw, 88vw" />
                   <span class="print__plate print__plate--a" aria-hidden="true"></span>
                   <span class="print__plate print__plate--b" aria-hidden="true"></span>
                 </div>
               </figure>
               <figure class="work__phone" data-work-phone>
-                <Image src={p.mobile} alt="" widths={[240, 360]} sizes="(min-width: 861px) 12vw, 30vw" />
+                <Picture formats={['avif', 'webp']} fallbackFormat="webp" src={p.mobile} alt="" widths={[240, 360]} sizes="(min-width: 861px) 12vw, 30vw" />
               </figure>
             </div>
           </article>
