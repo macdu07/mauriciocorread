@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://mauriciocorread.com',
+  // Todas las URL con barra final: coincide con dist/<ruta>/index.html y con las 301 de nginx.conf.
+  trailingSlash: 'always',
   i18n: {
     locales: ['es', 'en'],
     defaultLocale: 'es',

@@ -16,7 +16,7 @@ const projects = await getProjects(locale);
 const t = page.servicesPage!;
 ---
 
-<BaseLayout title={page.meta.title} description={page.meta.description} alternate={{ es: '/servicios', en: '/en/services' }}>
+<BaseLayout title={page.meta.title} description={page.meta.description} alternate={{ es: '/servicios/', en: '/en/services/' }}>
   <PageHero title={t.title} lead={t.lead} tone="turquoise" ghost="03" />
   <ServicesList services={services} projects={projects} labels={t} locale={locale} />
   <Faq title={t.faqTitle} items={t.faq} />

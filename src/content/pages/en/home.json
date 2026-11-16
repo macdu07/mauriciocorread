@@ -15,7 +15,7 @@
     "lead": "I design and build websites that are clear, memorable and built to convert. Then I connect them with AI and automation so your business works better, even when you're not there.",
     "primaryCta": {
       "label": "See projects",
-      "href": "/en/projects"
+      "href": "/en/projects/"
     },
     "secondaryCta": {
       "label": "Let's talk",
@@ -101,7 +101,7 @@
     "openCase": "Open case",
     "all": {
       "label": "See all projects",
-      "href": "/en/projects"
+      "href": "/en/projects/"
     }
   },
   "capabilities": {
@@ -111,7 +111,7 @@
     "receives": "What you get",
     "link": {
       "label": "See services in detail",
-      "href": "/en/services"
+      "href": "/en/services/"
     },
     "stamp": "Design · Code · AI · Brand · "
   },
@@ -193,7 +193,7 @@
     ],
     "link": {
       "label": "Learn more",
-      "href": "/en/about"
+      "href": "/en/about/"
     },
     "cards": {
       "palette": "Brand",

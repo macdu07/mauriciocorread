@@ -21,6 +21,6 @@ const vars = { title: project.title, summary: project.summary };
 const meta = { title: fill(page.meta.title, vars), description: fill(page.meta.description, vars) };
 ---
 
-<BaseLayout title={meta.title} description={meta.description} alternate={{ es: `/proyectos/${project.slug}`, en: `/en/projects/${project.slug}` }} headerOnDark={projectTone(project.order) === 'gunmetal'}>
+<BaseLayout title={meta.title} description={meta.description} alternate={{ es: `/proyectos/${project.slug}/`, en: `/en/projects/${project.slug}/` }} headerOnDark={projectTone(project.order) === 'gunmetal'}>
   <CaseStudy project={project} next={next} total={total} labels={labels} settings={settings} locale={LOCALE} />
 </BaseLayout>

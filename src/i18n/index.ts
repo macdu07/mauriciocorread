@@ -34,11 +34,11 @@ export async function getServices(locale: Locale) {
 }
 
 export function projectHref(locale: Locale, slug: string) {
-  return locale === 'en' ? `/en/projects/${slug}` : `/proyectos/${slug}`;
+  return locale === 'en' ? `/en/projects/${slug}/` : `/proyectos/${slug}/`;
 }
 
 export function projectsHref(locale: Locale) {
-  return locale === 'en' ? '/en/projects' : '/proyectos';
+  return locale === 'en' ? '/en/projects/' : '/proyectos/';
 }
 
 /** Color de lámina de cada proyecto (mismo orden que los carteles del Inicio). */

@@ -8,7 +8,7 @@ const page = await getPage('es', 'notfound');
 const t = page.notFound!;
 ---
 
-<BaseLayout title={page.meta.title} description={page.meta.description} headerOnDark>
+<BaseLayout title={page.meta.title} description={page.meta.description} headerOnDark noindex>
   <section class="lost grain" data-surface="gunmetal" aria-labelledby="lost-title">
     <div class="lost__tv" aria-hidden="true">
       <span class="lost__static"></span>
@@ -20,7 +20,7 @@ const t = page.notFound!;
       <p class="lost__body" data-reveal>{t.body}</p>
       <div class="lost__actions" data-reveal>
         <Button href="/" variant="orange" icon="arrow-up-right">{t.home}</Button>
-        <Button href="/proyectos" variant="line">{t.projects}</Button>
+        <Button href="/proyectos/" variant="line">{t.projects}</Button>
       </div>
       <p class="lost__alt" lang="en" data-reveal>{t.alt} <a href="/en/">{t.altHome}</a></p>
     </div>

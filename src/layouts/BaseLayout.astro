@@ -14,8 +14,10 @@ interface Props {
   alternate?: { es: string; en: string };
   /** La portada de la página es oscura: el encabezado arranca en crema. */
   headerOnDark?: boolean;
+  /** Páginas fuera del índice (404): sin canonical ni hreflang. */
+  noindex?: boolean;
 }
-const { title, description, preloader, alternate = { es: '/', en: '/en/' }, headerOnDark = false } = Astro.props;
+const { title, description, preloader, alternate = { es: '/', en: '/en/' }, headerOnDark = false, noindex = false } = Astro.props;
 const locale = toLocale(Astro.currentLocale);
 const settings = await getSettings(locale);
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -30,10 +32,16 @@ const langHref = locale === 'en' ? alternate.es : alternate.en;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="es" href={new URL(alternate.es, Astro.site)} />
-    <link rel="alternate" hreflang="en" href={new URL(alternate.en, Astro.site)} />
-    <link rel="alternate" hreflang="x-default" href={new URL(alternate.es, Astro.site)} />
+    {noindex ? (
+      <meta name="robots" content="noindex" />
+    ) : (
+      <>
+        <link rel="canonical" href={canonical} />
+        <link rel="alternate" hreflang="es" href={new URL(alternate.es, Astro.site)} />
+        <link rel="alternate" hreflang="en" href={new URL(alternate.en, Astro.site)} />
+        <link rel="alternate" hreflang="x-default" href={new URL(alternate.es, Astro.site)} />
+      </>
+    )}
     <meta name="theme-color" content="#1D2730" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/Archivo-900-wdth62-100-latin.woff2" as="font" type="font/woff2" crossorigin />

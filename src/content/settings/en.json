@@ -5,19 +5,19 @@
   "nav": [
     {
       "label": "Projects",
-      "href": "/en/projects"
+      "href": "/en/projects/"
     },
     {
       "label": "Services",
-      "href": "/en/services"
+      "href": "/en/services/"
     },
     {
       "label": "About",
-      "href": "/en/about"
+      "href": "/en/about/"
     },
     {
       "label": "Contact",
-      "href": "/en/contact"
+      "href": "/en/contact/"
     }
   ],
   "navCta": {

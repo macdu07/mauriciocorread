@@ -15,7 +15,7 @@
     "lead": "Diseño y construyo sitios web que se entienden, se recuerdan y convierten. Y los conecto con IA y automatización para que tu negocio trabaje mejor, incluso cuando no estás.",
     "primaryCta": {
       "label": "Ver proyectos",
-      "href": "/proyectos"
+      "href": "/proyectos/"
     },
     "secondaryCta": {
       "label": "Hablemos",
@@ -101,7 +101,7 @@
     "openCase": "Abrir caso",
     "all": {
       "label": "Ver todos los proyectos",
-      "href": "/proyectos"
+      "href": "/proyectos/"
     }
   },
   "capabilities": {
@@ -111,7 +111,7 @@
     "receives": "Lo que recibes",
     "link": {
       "label": "Ver servicios en detalle",
-      "href": "/servicios"
+      "href": "/servicios/"
     },
     "stamp": "Diseño · Código · IA · Marca · "
   },
@@ -193,7 +193,7 @@
     ],
     "link": {
       "label": "Conoce más",
-      "href": "/sobre-mi"
+      "href": "/sobre-mi/"
     },
     "cards": {
       "palette": "Marca",

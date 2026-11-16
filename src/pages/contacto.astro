@@ -10,7 +10,7 @@ const home = await getPage(locale, 'home');
 const settings = await getSettings(locale);
 ---
 
-<BaseLayout title={page.meta.title} description={page.meta.description} alternate={{ es: '/contacto', en: '/en/contact' }}>
+<BaseLayout title={page.meta.title} description={page.meta.description} alternate={{ es: '/contacto/', en: '/en/contact/' }}>
   {home.contact && <ContactClose contact={home.contact} settings={settings} stamp={home.hero?.stamp ?? ''} headingLevel="h1" />}
   {page.contactPage && <Channels labels={page.contactPage} settings={settings} />}
 </BaseLayout>
