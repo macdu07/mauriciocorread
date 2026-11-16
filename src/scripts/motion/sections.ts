@@ -10,6 +10,9 @@ const $ = (sel: string, root: ParentNode = document) => root.querySelector<HTMLE
 const $$ = (sel: string, root: ParentNode = document) => Array.from(root.querySelectorAll<HTMLElement>(sel));
 const html = document.documentElement;
 const finePointer = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+// Pin horizontal, portal y parallax por capas: solo escritorio con puntero fino (un iPad en horizontal no).
+export const DESKTOP_FX = '(min-width: 861px) and (hover: hover) and (pointer: fine)';
+export const NOT_DESKTOP_FX = 'not all and (min-width: 861px) and (hover: hover) and (pointer: fine)';
 
 /* ---------- Imprenta: las planchas se registran al entrar ---------- */
 function printIn(print: HTMLElement, trigger: ScrollTrigger.Vars) {
@@ -47,7 +50,7 @@ export function initWork(scrollTo: (y: number) => void) {
 
   const mm = gsap.matchMedia();
 
-  mm.add('(min-width: 861px)', () => {
+  mm.add(DESKTOP_FX, () => {
     html.classList.add('has-hscroll');
     const swaps = panels.map((panel) => setupNameSwap(panel)).filter(Boolean) as (() => void)[];
     const updateSwaps = () => swaps.forEach((fn) => fn());
@@ -117,7 +120,7 @@ export function initWork(scrollTo: (y: number) => void) {
     };
   });
 
-  mm.add('(max-width: 860px)', () => {
+  mm.add(NOT_DESKTOP_FX, () => {
     panels.forEach((panel) => {
       const print = $('[data-print]', panel);
       if (print) printIn(print, { trigger: panel, start: 'top 80%' });
@@ -299,7 +302,7 @@ export function initStats() {
 /* ---------- 08 · Sobre mí: el collage se separa por capas ---------- */
 export function initAboutDepth() {
   // Parallax con scrub en varias capas: solo escritorio (en móvil pesa más de lo que aporta).
-  gsap.matchMedia().add('(min-width: 861px)', () => {
+  gsap.matchMedia().add(DESKTOP_FX, () => {
     $$('[data-depth-scroll]').forEach((el) => {
       const depth = parseFloat(el.dataset.depthScroll || '0');
       gsap.fromTo(

@@ -10,7 +10,7 @@ import { SplitText } from 'gsap/SplitText';
 import { CustomEase } from 'gsap/CustomEase';
 import Lenis from 'lenis';
 import { initCase, initProjectsIndex, prepareCaseIntro } from './case';
-import { initAboutDepth, initArchive, initCapabilities, initProcess, initStats, initWork } from './sections';
+import { DESKTOP_FX, NOT_DESKTOP_FX, initAboutDepth, initArchive, initCapabilities, initProcess, initStats, initWork } from './sections';
 import { showOnFocus } from './focus';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase);
@@ -248,8 +248,8 @@ function initPortal() {
 
   const mm = gsap.matchMedia();
 
-  // Móvil: sin pin; la ventana y el nombre se separan con un parallax suave.
-  mm.add('(max-width: 860px)', () => {
+  // Móvil y táctil: sin pin; la ventana y el nombre se separan con un parallax suave.
+  mm.add(NOT_DESKTOP_FX, () => {
     gsap.to(frame, {
       yPercent: -10,
       ease: 'none',
@@ -258,7 +258,7 @@ function initPortal() {
     gsap.to($$('[data-hero-name-inverse], [data-hero-name-field]', hero), { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: '+=80', scrub: true } });
   });
 
-  mm.add('(min-width: 861px)', () => portalTimeline(hero, stage, win, frame, veil, portalScale));
+  mm.add(DESKTOP_FX, () => portalTimeline(hero, stage, win, frame, veil, portalScale));
 }
 
 function portalTimeline(hero: HTMLElement, stage: HTMLElement, win: HTMLElement, frame: HTMLElement, veil: HTMLElement | null, portalScale: () => number) {
@@ -458,7 +458,7 @@ function initTicket() {
 function initFooter() {
   const inner = $('[data-footer-inner]');
   if (!inner) return;
-  gsap.matchMedia().add('(min-width: 861px)', () => {
+  gsap.matchMedia().add(DESKTOP_FX, () => {
     gsap.from(inner, {
       yPercent: -35,
       ease: 'none',
@@ -539,9 +539,18 @@ function initMenu() {
   const menu = $('[data-menu]');
   const label = $('[data-menu-label]');
   if (!toggle || !menu) return;
+  // Todo lo que el panel tapa queda inerte: el foco no sale del menú ni del botón que lo cierra.
+  const behind = () => [
+    ...$$('body > *').filter((el) => !el.contains(menu)),
+    ...$$('[data-header] > *').filter((el) => el !== menu && !el.contains(toggle)),
+    ...$$('.header__actions > *').filter((el) => el !== toggle),
+  ];
 
   const setOpen = (open: boolean) => {
     toggle.setAttribute('aria-expanded', String(open));
+    behind().forEach((el) => el.toggleAttribute('inert', open));
+    // Sin Lenis (táctil) el fondo seguiría desplazándose bajo el panel.
+    html.classList.toggle('menu-open', open);
     if (label) label.textContent = (open ? label.dataset.close : label.dataset.open) ?? '';
     if (open) {
       menu.hidden = false;

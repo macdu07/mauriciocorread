@@ -33,6 +33,12 @@
     "open": "Abrir menú",
     "close": "Cerrar menú"
   },
+  "a11y": {
+    "home": "inicio",
+    "navMain": "Principal",
+    "navMenu": "Menú",
+    "navFooter": "Pie de página"
+  },
   "contact": {
     "whatsapp": "573023725631",
     "whatsappDisplay": "+57 302 372 5631",

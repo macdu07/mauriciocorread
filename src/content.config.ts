@@ -20,6 +20,7 @@ const settings = defineCollection({
     navCta: link,
     langSwitch: z.object({ label: z.string(), href: z.string(), lang: z.string() }),
     menuLabel: z.object({ open: z.string(), close: z.string() }),
+    a11y: z.object({ home: z.string(), navMain: z.string(), navMenu: z.string(), navFooter: z.string() }),
     contact: z.object({
       whatsapp: z.string(),
       whatsappDisplay: z.string(),

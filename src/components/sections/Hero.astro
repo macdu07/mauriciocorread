@@ -334,7 +334,11 @@ const screenLayout = ['a', 'b', 'c'];
   .hero__hint {
     position: absolute;
     z-index: 5;
-    right: 0.6rem;
+    /*
+     * En el margen izquierdo, sobre crema (~14:1). A la derecha caía sobre la pierna de la M
+     * (gunmetal sobre gunmetal) o sobre la parte baja del degradado (< 4,5:1).
+     */
+    left: 0.6rem;
     top: 50%;
     writing-mode: vertical-rl;
     color: var(--cm-gunmetal);

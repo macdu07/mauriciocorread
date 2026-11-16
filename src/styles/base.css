@@ -117,6 +117,20 @@ p {
 [data-surface='cream'] :focus-visible {
   outline-color: var(--cm-gunmetal);
 }
+/* El header flota fuera de las láminas: gunmetal sobre crema y turquesa; crema cuando va sobre portada oscura. */
+.header :focus-visible {
+  outline-color: var(--cm-gunmetal);
+}
+.header--on-dark:not(.is-solid) :focus-visible:not(.menu *) {
+  outline-color: var(--cm-cream);
+}
+.header .header__menu[aria-expanded='true']:focus-visible {
+  outline-color: var(--cm-gunmetal);
+}
+
+html.menu-open {
+  overflow: hidden;
+}
 
 ::-webkit-scrollbar {
   width: 10px;

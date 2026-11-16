@@ -13,12 +13,12 @@ const { settings, homeHref, langHref = settings.langSwitch.href, onDark = false 
 ---
 
 <header class:list={["header", onDark && "header--on-dark"]} data-header>
-  <a class="header__brand" href={homeHref} aria-label={`${settings.siteName}, inicio`}>
+  <a class="header__brand" href={homeHref} aria-label={`${settings.siteName}, ${settings.a11y.home}`}>
     <span class="header__logo" aria-hidden="true"></span>
     <span class="header__name">{settings.siteName}</span>
   </a>
 
-  <nav class="header__nav" aria-label="Principal">
+  <nav class="header__nav" aria-label={settings.a11y.navMain}>
     <ul role="list">
       {settings.nav.map((item) => (
         <li><a href={item.href} data-cursor-hover>{item.label}</a></li>
@@ -33,12 +33,13 @@ const { settings, homeHref, langHref = settings.langSwitch.href, onDark = false 
     <Button href={settings.navCta.href} variant="orange" class="header__cta">{settings.navCta.label}</Button>
     <button class="header__menu" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
       <span class="visually-hidden" data-menu-label data-open={settings.menuLabel.open} data-close={settings.menuLabel.close}>{settings.menuLabel.open}</span>
-      <Icon name="menu" size="1.5rem" />
+      <Icon name="menu" size="1.5rem" class="header__icon-menu" />
+      <Icon name="close" size="1.5rem" class="header__icon-close" />
     </button>
   </div>
 
   <div class="menu grain" id="menu" data-surface="orange" data-menu hidden>
-    <nav aria-label="Móvil">
+    <nav aria-label={settings.a11y.navMenu}>
       <ul role="list">
         {settings.nav.map((item) => (
           <li><a class="poster menu__link" href={item.href}>{item.label}</a></li>
@@ -137,6 +138,13 @@ const { settings, homeHref, langHref = settings.langSwitch.href, onDark = false 
   .header :global(.header__cta .btn__icon) {
     width: 1.6rem;
     height: 1.6rem;
+  }
+  .header__menu :global(.header__icon-close),
+  .header__menu[aria-expanded='true'] :global(.header__icon-menu) {
+    display: none;
+  }
+  .header__menu[aria-expanded='true'] :global(.header__icon-close) {
+    display: block;
   }
   .header__menu {
     display: none;

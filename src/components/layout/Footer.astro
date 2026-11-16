@@ -14,7 +14,7 @@ const { settings, langHref = settings.langSwitch.href } = Astro.props;
     <p class="footer__closing">{settings.footer.closing}</p>
 
     <div class="footer__grid">
-      <nav aria-label="Pie de página">
+      <nav aria-label={settings.a11y.navFooter}>
         <ul role="list">
           {settings.nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
         </ul>
