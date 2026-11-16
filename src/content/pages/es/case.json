@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{title} — Proyecto de Mauricio Correa",
-    "description": "{summary}"
+    "description": "{description}"
   },
   "case": {
     "back": "Volver a proyectos",

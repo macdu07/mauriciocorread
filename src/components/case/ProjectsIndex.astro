@@ -56,11 +56,11 @@ const categories = [...new Set(projects.flatMap((p) => p.categories))].filter(
               <span class="pcard__plate pcard__plate--a" aria-hidden="true"></span>
               <span class="pcard__plate pcard__plate--b" aria-hidden="true"></span>
             </figure>
-            <span class="pcard__body">
-              <span class="pcard__name poster">{p.title}</span>
+            <div class="pcard__body">
+              <h2 class="pcard__name poster">{p.title}</h2>
               <span class="pcard__summary">{p.summary}</span>
               <span class="pcard__cat">{p.categories.filter((c) => c !== common).join(' · ')}</span>
-            </span>
+            </div>
             <span class="pcard__go" aria-hidden="true"><Icon name="arrow-up-right" size="1.4rem" /></span>
           </a>
         </li>

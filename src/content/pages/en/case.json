@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{title} — A project by Mauricio Correa",
-    "description": "{summary}"
+    "description": "{description}"
   },
   "case": {
     "back": "Back to projects",
