@@ -115,7 +115,13 @@ const screenLayout = ['a', 'b', 'c'];
   }
 
   /* Nombre-cartel */
+  /*
+   * Además del ancho, el alto limita el cartel: el copy va anclado abajo y en
+   * portátiles bajos (1440×790, 1366×768, 1280×720) el nombre lo tapaba.
+   * 62svh − 20rem deja ~25 px sobre el H1 y no actúa desde ~900 px de alto.
+   */
   .hero__name {
+    font-size: clamp(5.5rem, min(15.5vw, 62svh - 20rem), 17rem);
     position: absolute;
     inset: 0;
     padding: var(--name-top) var(--gutter) 0;
