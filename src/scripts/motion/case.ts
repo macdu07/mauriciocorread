@@ -5,6 +5,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { showOnFocus } from './focus';
 
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -44,7 +45,7 @@ export function initCase() {
   if (list) {
     gsap.from(list.children, {
       y: 30,
-      autoAlpha: 0,
+      opacity: 0,
       duration: 0.9,
       stagger: 0.07,
       ease: 'mc-out',
@@ -172,11 +173,12 @@ export function initProjectsIndex(reduce: boolean) {
   }
 
   if (!reduce) {
-    gsap.set(cards, { y: 40, autoAlpha: 0 });
+    gsap.set(cards, { y: 40, opacity: 0 });
+    showOnFocus(cards);
     ScrollTrigger.batch(cards, {
       start: 'top 92%',
       once: true,
-      onEnter: (batch) => gsap.to(batch, { y: 0, autoAlpha: 1, duration: 0.9, stagger: 0.08, ease: 'mc-out' }),
+      onEnter: (batch) => gsap.to(batch, { y: 0, opacity: 1, duration: 0.9, stagger: 0.08, ease: 'mc-out' }),
     });
   }
 }

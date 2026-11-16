@@ -28,7 +28,7 @@ function printIn(print: HTMLElement, trigger: ScrollTrigger.Vars) {
 }
 
 /* ---------- 03 · Trabajo seleccionado: recorrido horizontal ---------- */
-export function initWork() {
+export function initWork(scrollTo: (y: number) => void) {
   const section = $('[data-work]');
   if (!section) return;
   const pin = $('[data-work-pin]', section)!;
@@ -72,6 +72,22 @@ export function initWork() {
       },
     });
 
+    // Teclado: el foco en un panel fuera de pantalla lleva el recorrido hasta él (WCAG 2.4.11).
+    // end = start + distance con ease none: cada px de scroll mueve 1 px el track.
+    const focusListeners = new AbortController();
+    panels.forEach((panel) =>
+      panel.addEventListener(
+        'focusin',
+        (e) => {
+          const st = move.scrollTrigger;
+          if (!st) return;
+          const left = (e.target as HTMLElement).getBoundingClientRect().left - track.getBoundingClientRect().left;
+          scrollTo(st.start + gsap.utils.clamp(0, distance(), left - window.innerWidth * 0.2));
+        },
+        { signal: focusListeners.signal },
+      ),
+    );
+
     panels.forEach((panel) => {
       const print = $('[data-print]', panel);
       if (print) printIn(print, { trigger: panel, containerAnimation: move, start: 'left 70%' });
@@ -94,6 +110,7 @@ export function initWork() {
     ScrollTrigger.refresh();
     updateSwaps();
     return () => {
+      focusListeners.abort();
       ScrollTrigger.removeEventListener('refresh', updateSwaps);
       $$('.work__name--swap', section).forEach((el) => el.remove());
       html.classList.remove('has-hscroll');
@@ -254,7 +271,7 @@ export function initProcess() {
     });
     gsap.from(step, {
       y: 40,
-      autoAlpha: 0,
+      opacity: 0,
       duration: 1,
       ease: 'mc-out',
       delay: i * 0.08,

@@ -69,6 +69,8 @@ const langHref = locale === 'en' ? alternate.es : alternate.en;
         window.addEventListener('pageswap', quiet);
         if (!reduce && !seen && document.currentScript && document.currentScript.dataset.preloader === '1') {
           d.classList.add('is-loading');
+          // Respaldo: si el motor no llega a arrancar el preloader, no tapa la página para siempre.
+          setTimeout(function () { if (!d.dataset.motionBoot) d.classList.remove('is-loading'); }, 4000);
         }
       })();
     </script>

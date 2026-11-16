@@ -11,6 +11,7 @@ import { CustomEase } from 'gsap/CustomEase';
 import Lenis from 'lenis';
 import { initCase, initProjectsIndex, prepareCaseIntro } from './case';
 import { initAboutDepth, initArchive, initCapabilities, initProcess, initStats, initWork } from './sections';
+import { showOnFocus } from './focus';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase);
 CustomEase.create('mc-out', '0.16, 1, 0.3, 1');
@@ -56,7 +57,7 @@ export function boot() {
     const intro = prepareHeroIntro() ?? prepareCaseIntro();
     // Los pines se crean en orden de página antes que los demás disparadores.
     initPortal();
-    initWork();
+    initWork((y) => (lenis ? lenis.scrollTo(y, { immediate: true, force: true }) : window.scrollTo(0, y)));
     initScrubWords();
     initReveals();
     initArchive();
@@ -137,6 +138,8 @@ function runPreloader(done: () => void) {
   const count = $('[data-preloader-count]', root);
   const mark = $('[data-preloader-mark]', root);
   const counter = { v: 0 };
+  // Señal para el respaldo del script inline: el preloader está en marcha y se quitará solo.
+  html.dataset.motionBoot = '1';
 
   const tl = gsap.timeline({
     onComplete: () => {
@@ -222,7 +225,7 @@ function prepareHeroIntro() {
     const lines = SplitText.create(title, { type: 'lines', mask: 'lines' }).lines;
     tl.from(lines, { yPercent: 110, duration: 1, stagger: 0.08 }, 0.45);
   }
-  tl.from($$('[data-reveal]', hero), { y: 24, autoAlpha: 0, duration: 0.9, stagger: 0.1 }, 0.7);
+  tl.from($$('[data-reveal]', hero), { y: 24, opacity: 0, duration: 0.9, stagger: 0.1 }, 0.7);
   tl.from($$('[data-hero-meta]', hero), { autoAlpha: 0, duration: 0.8, stagger: 0.1 }, 1);
   tl.from($('[data-hero-field]', hero), { scaleY: 0, transformOrigin: '50% 0%', duration: 1.2, ease: 'mc-inout' }, 0);
 
@@ -349,11 +352,12 @@ function initReveals() {
   });
 
   const items = $$('[data-reveal]').filter((el) => !el.closest('[data-hero]'));
-  gsap.set(items, { y: 28, autoAlpha: 0 });
+  gsap.set(items, { y: 28, opacity: 0 });
+  showOnFocus(items);
   ScrollTrigger.batch(items, {
     start: 'top 88%',
     once: true,
-    onEnter: (batch) => gsap.to(batch, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: 'mc-out' }),
+    onEnter: (batch) => gsap.to(batch, { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'mc-out' }),
   });
 }
 
