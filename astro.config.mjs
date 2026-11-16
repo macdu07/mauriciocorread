@@ -1,10 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://mauriciocorread.com',
   // Todas las URL con barra final: coincide con dist/<ruta>/index.html y con las 301 de nginx.conf.
   trailingSlash: 'always',
+  // Sin la opción i18n: empareja por ruta y aquí los slugs cambian entre idiomas (/contacto/ ↔ /en/contact/).
+  // Los hreflang ya van en el <head> de cada página.
+  integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
   i18n: {
     locales: ['es', 'en'],
     defaultLocale: 'es',
