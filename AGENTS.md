@@ -72,7 +72,7 @@ src/
 
 ## Reglas de movimiento
 
-- Animar solo `transform`, `opacity`, `clip-path` y `mask`. El contenido es visible sin JS; la animación se aplica encima.
+- Animar solo `transform`, `opacity`, `clip-path` y `mask`. Única excepción aceptada: el ancho que respira de los titulares-cartel (`font-stretch`, ver «The Breathing Width Exception» en `DESIGN.md`). El contenido es visible sin JS; la animación se aplica encima.
 - Respetar siempre `prefers-reduced-motion`: sin Lenis, sin parallax ni pin; los revelados se cambian por fundidos cortos.
 - Usar los easings y duraciones de `tokens.css`; no inventar curvas sueltas.
 - Los efectos pesados (pin horizontal, cursor, imagen que sigue al cursor) solo se activan en escritorio y con puntero fino.

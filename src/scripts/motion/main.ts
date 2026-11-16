@@ -368,8 +368,22 @@ function initMarquee() {
     if (!track) return;
     const loop = gsap.to(track, { xPercent: -50, duration: 28, ease: 'none', repeat: -1 });
     const skew = gsap.quickTo(track, 'skewX', { duration: 0.5, ease: 'power3.out' });
-    // Fuera de pantalla el bucle se pausa y el ticker no trabaja.
-    new IntersectionObserver(([entry]) => (entry.isIntersecting ? loop.resume() : loop.pause()), { rootMargin: '100px' }).observe(root);
+    // Fuera de pantalla el bucle se pausa y el ticker no trabaja; bajo el puntero también se detiene (WCAG 2.2.2).
+    let visible = true;
+    let hovered = false;
+    const update = () => (visible && !hovered ? loop.resume() : loop.pause());
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      update();
+    }, { rootMargin: '100px' }).observe(root);
+    root.addEventListener('pointerenter', () => {
+      hovered = true;
+      update();
+    });
+    root.addEventListener('pointerleave', () => {
+      hovered = false;
+      update();
+    });
     tickWhileVisible(root, () => {
       const v = gsap.utils.clamp(-40, 40, velocity);
       loop.timeScale(v < -0.5 ? -1 - Math.abs(v) / 8 : 1 + Math.abs(v) / 8);
