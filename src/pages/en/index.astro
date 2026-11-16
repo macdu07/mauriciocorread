@@ -11,6 +11,7 @@ import Stats from '../../components/sections/Stats.astro';
 import About from '../../components/sections/About.astro';
 import ContactClose from '../../components/sections/ContactClose.astro';
 import { getPage, getProjects, getServices, getSettings, toLocale } from '../../i18n';
+import { homeJsonLd } from '../../lib/jsonld';
 
 const locale = toLocale(Astro.currentLocale);
 const page = await getPage(locale, 'home');
@@ -19,7 +20,7 @@ const projects = await getProjects(locale);
 const services = await getServices(locale);
 ---
 
-<BaseLayout title={page.meta.title} description={page.meta.description} preloader={page.preloader}>
+<BaseLayout title={page.meta.title} description={page.meta.description} preloader={page.preloader} jsonLd={homeJsonLd(settings, locale, Astro.site!)}>
   {page.hero && <Hero hero={page.hero} settings={settings} />}
   {page.manifesto && <Manifesto manifesto={page.manifesto} index="02" />}
   {page.marquee && <Marquee items={page.marquee} surface="orange" />}

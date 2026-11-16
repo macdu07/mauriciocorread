@@ -16,8 +16,10 @@ interface Props {
   headerOnDark?: boolean;
   /** Páginas fuera del índice (404): sin canonical ni hreflang. */
   noindex?: boolean;
+  /** Datos estructurados schema.org (ver src/lib/jsonld.ts). */
+  jsonLd?: Record<string, unknown>;
 }
-const { title, description, preloader, alternate = { es: '/', en: '/en/' }, headerOnDark = false, noindex = false } = Astro.props;
+const { title, description, preloader, alternate = { es: '/', en: '/en/' }, headerOnDark = false, noindex = false, jsonLd } = Astro.props;
 const locale = toLocale(Astro.currentLocale);
 const settings = await getSettings(locale);
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -50,6 +52,7 @@ const langHref = locale === 'en' ? alternate.es : alternate.en;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'es_CO'} />
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />}
     <script is:inline data-preloader={preloader ? "1" : "0"}>
       // Preloader solo en la primera visita de la sesión y con movimiento permitido.
       (function () {
