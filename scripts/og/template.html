@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  @font-face { font-family: 'Geist'; src: url('{{fonts}}/Geist-Variable-latin.woff2') format('woff2-variations'); font-weight: 100 900; }
+  @font-face { font-family: 'Geist Mono'; src: url('{{fonts}}/GeistMono-Variable-latin.woff2') format('woff2-variations'); font-weight: 100 900; }
+  @font-face { font-family: 'Archivo'; src: url('{{fonts}}/Archivo-900-wdth62-100-latin.woff2') format('woff2-variations'); font-weight: 900; font-stretch: 62% 100%; }
+
+  :root {
+    --orange: #ff6b30;
+    --turquoise: #00aeae;
+    --turquoise-deep: #00797d;
+    --cream: #f8f3ea;
+    --gunmetal: #1d2730;
+    --gunmetal-soft: #2a3742;
+  }
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--gunmetal); }
+  body { position: relative; color: var(--cream); font-family: 'Geist', sans-serif; }
+
+  /* La M como ventana: campo turquesa con el sol naranja dentro, igual que en el hero. */
+  .m {
+    position: absolute;
+    right: 64px;
+    top: 130px;
+    width: 440px;
+    height: 348px;
+    mask: url("{{mask}}") center / 100% 100% no-repeat;
+    background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-deep) 100%);
+  }
+  .m::before {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    left: 196px;
+    top: 30px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+  .m::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-top: 2px solid color-mix(in oklab, var(--cream) 35%, transparent);
+    border-radius: 50%;
+    transform: translate(-20%, 46%) scale(1.5);
+  }
+
+  .folio {
+    position: absolute;
+    left: 64px;
+    top: 56px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--cream) 74%, var(--gunmetal));
+  }
+  .name {
+    position: absolute;
+    left: 60px;
+    top: 150px;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    font-stretch: 62%;
+    text-transform: uppercase;
+    font-size: 158px;
+    line-height: 0.8;
+    letter-spacing: -0.01em;
+  }
+  .name span { display: block; }
+  .name span + span { padding-left: 80px; color: var(--orange); }
+  .role {
+    position: absolute;
+    left: 64px;
+    bottom: 56px;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: color-mix(in oklab, var(--cream) 82%, var(--turquoise));
+  }
+</style>
+</head>
+<body>
+  <div class="m"></div>
+  <p class="folio">{{domain}}</p>
+  <p class="name">{{nameLines}}</p>
+  <p class="role">{{role}}</p>
+</body>
+</html>

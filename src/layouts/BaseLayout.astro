@@ -22,9 +22,11 @@ interface Props {
   /** Imagen para compartir (ver src/lib/share-image.ts). */
   image?: ShareImage;
 }
-const { title, description, preloader, alternate = { es: '/', en: '/en/' }, headerOnDark = false, noindex = false, jsonLd, image } = Astro.props;
+const { title, description, preloader, alternate = { es: '/', en: '/en/' }, headerOnDark = false, noindex = false, jsonLd, image: pageImage } = Astro.props;
 const locale = toLocale(Astro.currentLocale);
 const settings = await getSettings(locale);
+// Sin imagen propia: la tarjeta de marca del idioma (generada con `pnpm og`).
+const image: ShareImage = pageImage ?? { src: `/og/${locale}.png`, width: 1200, height: 630, alt: `${settings.siteName} — ${settings.role}` };
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const homeHref = locale === 'en' ? '/en/' : '/';
 const langHref = locale === 'en' ? alternate.es : alternate.en;
@@ -58,15 +60,11 @@ const langHref = locale === 'en' ? alternate.es : alternate.en;
     <meta property="og:locale:alternate" content={locale === 'en' ? 'es_CO' : 'en_US'} />
     <meta property="og:site_name" content={settings.siteName} />
     {!noindex && <meta property="og:url" content={canonical} />}
-    {image && (
-      <>
-        <meta property="og:image" content={new URL(image.src, Astro.site)} />
-        <meta property="og:image:width" content={String(image.width)} />
-        <meta property="og:image:height" content={String(image.height)} />
-        <meta property="og:image:alt" content={image.alt} />
-      </>
-    )}
-    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image" content={new URL(image.src, Astro.site)} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />}
     <script is:inline data-preloader={preloader ? "1" : "0"}>
       // Preloader solo en la primera visita de la sesión y con movimiento permitido.
