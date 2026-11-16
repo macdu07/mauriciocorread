@@ -3,8 +3,8 @@
  * Nada se escribe a mano: si un dato no existe en el contenido (fechas, email), no se emite.
  */
 
-import { getImage } from 'astro:assets';
 import { projectsHref, type getProjects, type getSettings, type Locale } from '../i18n';
+import type { ShareImage } from './share-image';
 
 type Settings = Awaited<ReturnType<typeof getSettings>>;
 type Project = Awaited<ReturnType<typeof getProjects>>[number];
@@ -41,8 +41,7 @@ export function homeJsonLd(settings: Settings, locale: Locale, site: URL) {
   };
 }
 
-export async function caseJsonLd(project: Project, settings: Settings, locale: Locale, site: URL, url: URL) {
-  const cover = await getImage({ src: project.cover, width: 1200 });
+export function caseJsonLd(project: Project, settings: Settings, locale: Locale, site: URL, url: URL, image: ShareImage) {
   const projectsLabel = settings.nav.find((l) => l.href === projectsHref(locale))?.label;
 
   const graph: Record<string, unknown>[] = [
@@ -53,7 +52,7 @@ export async function caseJsonLd(project: Project, settings: Settings, locale: L
       name: project.title,
       description: project.summary,
       url: url.href,
-      image: abs(cover.src, site),
+      image: abs(image.src, site),
       inLanguage: locale,
       keywords: project.categories.join(', '),
       creator: { '@id': personId(site) },
