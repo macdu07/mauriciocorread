@@ -1,0 +1,7 @@
+overrides:
+  # Herramientas de desarrollo (@astrojs/check): parche de seguridad de fast-uri.
+  fast-uri: ^3.1.9
+  # El peer de @astrojs/astro2tsx resuelve a la beta 2.0 de @emnapi/runtime, incompatible
+  # con @emnapi/core 1.x, y rompe `pnpm check`. Quitar cuando ambos publiquen la 2.0 estable.
+  '@emnapi/runtime': ^1.11.3
+  '@emnapi/core': ^1.11.3
