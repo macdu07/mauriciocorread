@@ -20,6 +20,7 @@ function person(settings: Settings, site: URL) {
     name: settings.siteName,
     url: site.href,
     jobTitle: settings.role,
+    ...(settings.contact.email && { email: `mailto:${settings.contact.email}` }),
     sameAs: settings.social.map((s) => s.href),
   };
 }
