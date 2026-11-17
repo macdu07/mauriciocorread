@@ -19,7 +19,8 @@ const { stats, index } = Astro.props;
         <dt class="stats__label">{item.label}</dt>
         <dd class="stats__value poster" data-breathe>
           {item.prefix && <span>{item.prefix}</span>}
-          <span data-count={item.value}>{item.value}</span>
+          <span data-count={item.value} aria-hidden="true">{item.value}</span>
+          <span class="visually-hidden">{item.value}</span>
         </dd>
       </div>
     ))}

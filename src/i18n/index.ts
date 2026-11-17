@@ -3,6 +3,12 @@ import { getCollection, getEntry } from 'astro:content';
 export const locales = ['es', 'en'] as const;
 export type Locale = (typeof locales)[number];
 
+/** Etiquetas menores de interfaz que no pertenecen a ninguna colección. */
+export const ui = {
+  es: { newTab: 'abre en otra pestaña' },
+  en: { newTab: 'opens in a new tab' },
+} satisfies Record<Locale, Record<string, string>>;
+
 export function toLocale(value: string | undefined): Locale {
   return value === 'en' ? 'en' : 'es';
 }

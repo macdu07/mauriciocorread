@@ -28,7 +28,7 @@ const { settings, homeHref, langHref = settings.langSwitch.href, onDark = false 
 
   <div class="header__actions">
     <a class="header__lang" href={langHref} hreflang={settings.langSwitch.lang} lang={settings.langSwitch.lang}>
-      {settings.langSwitch.label}
+      {settings.langSwitch.label}<span class="visually-hidden"> {settings.langSwitch.name}</span>
     </a>
     <Button href={settings.navCta.href} variant="orange" class="header__cta">{settings.navCta.label}</Button>
     <button class="header__menu" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
@@ -47,7 +47,7 @@ const { settings, homeHref, langHref = settings.langSwitch.href, onDark = false 
       </ul>
     </nav>
     <p class="menu__foot">
-      <a href={langHref} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}</a>
+      <a class="menu__lang" href={langHref} hreflang={settings.langSwitch.lang} lang={settings.langSwitch.lang}>{settings.langSwitch.label}<span class="visually-hidden"> {settings.langSwitch.name}</span></a>
       <span>{settings.role}</span>
     </p>
   </div>
@@ -185,6 +185,14 @@ const { settings, homeHref, langHref = settings.langSwitch.href, onDark = false 
     font-size: var(--step--2);
     text-transform: uppercase;
     letter-spacing: 0.06em;
+  }
+  /* Mismo chip que el selector del header: objetivo táctil de 24 px o más */
+  .menu__lang {
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.45rem 0.55rem;
+    border-radius: var(--radius-s);
+    box-shadow: inset 0 0 0 1px currentColor;
   }
   @media (max-width: 860px) {
     .header {

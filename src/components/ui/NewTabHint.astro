@@ -1,0 +1,7 @@
+---
+// Aviso para lectores de pantalla en los enlaces que abren otra pestaña.
+import { toLocale, ui } from '../../i18n';
+const t = ui[toLocale(Astro.currentLocale)];
+---
+
+<span class="visually-hidden"> ({t.newTab})</span>

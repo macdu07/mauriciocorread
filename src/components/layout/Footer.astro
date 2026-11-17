@@ -1,5 +1,6 @@
 ---
 import Icon from '../ui/Icon.astro';
+import NewTabHint from '../ui/NewTabHint.astro';
 import type { getSettings } from '../../i18n';
 
 interface Props {
@@ -21,12 +22,12 @@ const { settings, langHref = settings.langSwitch.href } = Astro.props;
       </nav>
       <ul role="list">
         {settings.social.map((item) => (
-          <li><a href={item.href} target="_blank" rel="noopener">{item.label}<Icon name="arrow-up-right" size="0.9em" /></a></li>
+          <li><a href={item.href} target="_blank" rel="noopener">{item.label}<Icon name="arrow-up-right" size="0.9em" /><NewTabHint /></a></li>
         ))}
       </ul>
       <ul role="list">
         <li>{settings.role}</li>
-        <li><a href={langHref} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}</a></li>
+        <li><a class="footer__lang" href={langHref} hreflang={settings.langSwitch.lang}>{settings.langSwitch.label}<span class="visually-hidden" lang={settings.langSwitch.lang}> {settings.langSwitch.name}</span></a></li>
         <li><a href="#top">{settings.footer.backToTop}</a></li>
       </ul>
     </div>
@@ -69,12 +70,17 @@ const { settings, langHref = settings.langSwitch.href } = Astro.props;
     gap: 0.5rem;
     align-content: start;
   }
+  /* Objetivo táctil mínimo de 24 px (WCAG 2.5.8) */
   .footer__grid a {
     display: inline-flex;
     align-items: center;
+    min-height: 1.5rem;
     gap: 0.35em;
     text-decoration: none;
     color: var(--cm-cream);
+  }
+  .footer__lang {
+    min-width: 1.5rem;
   }
   .footer__grid a:hover {
     color: var(--cm-orange);

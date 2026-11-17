@@ -68,6 +68,7 @@ const categories = [...new Set(projects.flatMap((p) => p.categories))].filter(
     })}
   </ul>
   <p class="pindex__empty" data-pindex-empty hidden>{t.empty}</p>
+  <p class="visually-hidden" role="status" data-pindex-status data-template={t.status} data-total={projects.length}></p>
 
   <!-- Vista lista: la captura sigue al cursor (solo puntero fino) -->
   <div class="pindex__float" data-index-float aria-hidden="true">
@@ -361,6 +362,10 @@ const categories = [...new Set(projects.flatMap((p) => p.categories))].filter(
   }
   [data-layout='list'] .pcard__go {
     position: static;
+  }
+  /* Sin JS los filtros no harían nada: la lista completa queda a la vista. */
+  :global(html.no-js) .pindex__controls {
+    display: none;
   }
   .pindex__empty {
     font-size: var(--step-1);

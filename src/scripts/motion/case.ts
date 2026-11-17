@@ -99,6 +99,7 @@ export function initProjectsIndex(reduce: boolean) {
   if (!root || !list) return;
   const cards = $$('[data-flip-id]', list);
   const empty = $('[data-pindex-empty]', root);
+  const status = $('[data-pindex-status]', root);
 
   // Flip solo se descarga cuando alguien usa un filtro o cambia la vista.
   const animate = async (change: () => void) => {
@@ -139,6 +140,10 @@ export function initProjectsIndex(reduce: boolean) {
           if (show) visible++;
         });
         if (empty) empty.hidden = visible > 0;
+        if (status)
+          status.textContent = (status.dataset.template ?? '')
+            .replace('{count}', String(visible))
+            .replace('{total}', status.dataset.total ?? '');
       });
     }),
   );

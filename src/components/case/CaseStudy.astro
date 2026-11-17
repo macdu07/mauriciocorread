@@ -9,6 +9,7 @@ import {
   projectHref,
   projectsHref,
   projectTone,
+  ui,
   whatsappHref,
   type getProjects,
   type getSettings,
@@ -134,7 +135,7 @@ const sheet = [
         <p class="case-cta__body" data-reveal>{t.ctaBody}</p>
         <div data-reveal><Button href={wa} variant="orange" external cursor="WhatsApp">{t.ctaButton}</Button></div>
       </div>
-      <a class="case-cta__ticket" href={wa} target="_blank" rel="noopener" data-reveal data-ticket-wrap data-cursor="WhatsApp" aria-label={`${t.ctaButton} (${settings.contact.whatsappDisplay})`}>
+      <a class="case-cta__ticket" href={wa} target="_blank" rel="noopener" data-reveal data-ticket-wrap data-cursor="WhatsApp" aria-label={`${t.ctaButton} (${settings.contact.whatsappDisplay}, ${ui[locale].newTab})`}>
         <Ticket rows={[
           { label: t.ticketRef, value: p.title },
           { label: t.ticketDest, value: t.ticketDestValue },

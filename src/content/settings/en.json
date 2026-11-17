@@ -27,7 +27,8 @@
   "langSwitch": {
     "label": "ES",
     "href": "/",
-    "lang": "es"
+    "lang": "es",
+    "name": "Español"
   },
   "menuLabel": {
     "open": "Open menu",

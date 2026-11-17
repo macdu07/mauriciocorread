@@ -2,7 +2,8 @@
 import Button from '../ui/Button.astro';
 import Ticket from '../ui/Ticket.astro';
 import Stamp from '../ui/Stamp.astro';
-import { whatsappHref, type getPage, type getSettings } from '../../i18n';
+import NewTabHint from '../ui/NewTabHint.astro';
+import { toLocale, ui, whatsappHref, type getPage, type getSettings } from '../../i18n';
 
 type Data = NonNullable<Awaited<ReturnType<typeof getPage>>['contact']>;
 interface Props {
@@ -36,11 +37,11 @@ const displaySize = `min(${(82 / (contact.display.length * 0.6)).toFixed(2)}vw, 
       </div>
       <p class="contact__phone" data-reveal>
         <span class="folio">WhatsApp</span>
-        <a href={wa} target="_blank" rel="noopener">{settings.contact.whatsappDisplay}</a>
+        <a href={wa} target="_blank" rel="noopener">{settings.contact.whatsappDisplay}<NewTabHint /></a>
       </p>
     </div>
 
-    <a class="contact__ticket" href={wa} target="_blank" rel="noopener" data-reveal data-ticket-wrap data-cursor="WhatsApp" aria-label={`${contact.whatsappLabel} (${settings.contact.whatsappDisplay})`}>
+    <a class="contact__ticket" href={wa} target="_blank" rel="noopener" data-reveal data-ticket-wrap data-cursor="WhatsApp" aria-label={`${contact.whatsappLabel} (${settings.contact.whatsappDisplay}, ${ui[toLocale(Astro.currentLocale)].newTab})`}>
       <Ticket rows={contact.ticket} />
       <div class="contact__stamp"><Stamp text={stamp} tone="orange" size="7.5rem" /></div>
     </a>

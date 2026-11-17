@@ -18,7 +18,7 @@ const settings = defineCollection({
     skipLink: z.string(),
     nav: z.array(link),
     navCta: link,
-    langSwitch: z.object({ label: z.string(), href: z.string(), lang: z.string() }),
+    langSwitch: z.object({ label: z.string(), href: z.string(), lang: z.string(), name: z.string() }),
     menuLabel: z.object({ open: z.string(), close: z.string() }),
     a11y: z.object({ home: z.string(), navMain: z.string(), navMenu: z.string(), navFooter: z.string() }),
     contact: z.object({
@@ -76,6 +76,7 @@ const pages = defineCollection({
           list: z.string(),
           viewCase: z.string(),
           empty: z.string(),
+          status: z.string(),
         })
         .optional(),
       case: z.record(z.string(), z.string()).optional(),

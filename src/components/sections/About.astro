@@ -17,12 +17,7 @@ const ring = (t: string) => {
   while ((r + t + ' · ').length <= 46) r += t + ' · ';
   return r || `${t} · `;
 };
-const swatches = [
-  { name: 'Cream', hex: '#F8F3EA' },
-  { name: 'Turquoise', hex: '#00AEAE' },
-  { name: 'Orange', hex: '#FF6B30' },
-  { name: 'Gunmetal', hex: '#1D2730' },
-];
+const swatches = ['#F8F3EA', '#00AEAE', '#FF6B30', '#1D2730'];
 ---
 
 <section class="about grain" data-surface="cream" data-about aria-labelledby="about-title">
@@ -53,10 +48,10 @@ const swatches = [
       <div class="card card--palette" data-depth-scroll="-0.18">
         <p class="card__label">{about.cards.palette}</p>
         <ul class="card__swatches">
-          {swatches.map((s) => (
-            <li style={`--c:${s.hex}`}>
+          {swatches.map((hex) => (
+            <li style={`--c:${hex}`}>
               <span class="card__chip"></span>
-              <span class="card__hex">{s.hex}</span>
+              <span class="card__hex">{hex}</span>
             </li>
           ))}
         </ul>

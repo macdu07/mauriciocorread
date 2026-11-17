@@ -10,7 +10,8 @@ const { items, surface = 'orange' } = Astro.props;
 const run = [...items, ...items];
 ---
 
-<section class="marquee grain" data-surface={surface} data-marquee aria-label={items.join(', ')}>
+<div class="marquee grain" data-surface={surface} data-marquee>
+  <p class="visually-hidden">{items.join(', ')}</p>
   <div class="marquee__track" data-marquee-track aria-hidden="true">
     {[0, 1].map(() => (
       <div class="marquee__group">
@@ -23,7 +24,7 @@ const run = [...items, ...items];
       </div>
     ))}
   </div>
-</section>
+</div>
 
 <style>
   .marquee {

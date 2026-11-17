@@ -13,6 +13,7 @@
     "grid": "Cuadrícula",
     "list": "Lista",
     "viewCase": "Ver caso",
-    "empty": "No hay proyectos en esta categoría."
+    "empty": "No hay proyectos en esta categoría.",
+    "status": "{count} de {total} proyectos"
   }
 }

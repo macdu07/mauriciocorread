@@ -1,5 +1,6 @@
 ---
 import Icon from '../ui/Icon.astro';
+import NewTabHint from '../ui/NewTabHint.astro';
 import { whatsappHref, type getPage, type getSettings } from '../../i18n';
 
 type Labels = NonNullable<Awaited<ReturnType<typeof getPage>>['contactPage']>;
@@ -18,7 +19,7 @@ const email = settings.contact.email;
     <ul role="list" class="channels__list">
       <li data-reveal>
         <span class="channels__label">{t.whatsapp}</span>
-        <a href={wa} target="_blank" rel="noopener" class="channels__link">{settings.contact.whatsappDisplay}<Icon name="arrow-up-right" size="0.9em" /></a>
+        <a href={wa} target="_blank" rel="noopener" class="channels__link">{settings.contact.whatsappDisplay}<Icon name="arrow-up-right" size="0.9em" /><NewTabHint /></a>
       </li>
       {email && (
         <li data-reveal>
@@ -30,7 +31,7 @@ const email = settings.contact.email;
         <span class="channels__label">{t.social}</span>
         <span class="channels__social">
           {settings.social.map((s) => (
-            <a href={s.href} target="_blank" rel="noopener" class="channels__link">{s.label}<Icon name="arrow-up-right" size="0.9em" /></a>
+            <a href={s.href} target="_blank" rel="noopener" class="channels__link">{s.label}<Icon name="arrow-up-right" size="0.9em" /><NewTabHint /></a>
           ))}
         </span>
       </li>
@@ -133,7 +134,7 @@ const email = settings.contact.email;
   .channels__n {
     font-family: var(--font-mono);
     font-size: var(--step--1);
-    color: var(--cm-orange);
+    color: var(--cm-ink-soft);
     padding-top: 0.2em;
   }
   @media (max-width: 860px) {

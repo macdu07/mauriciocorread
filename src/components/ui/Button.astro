@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import NewTabHint from './NewTabHint.astro';
 
 interface Props {
   href: string;
@@ -21,7 +22,7 @@ const { href, variant = 'ink', icon = 'arrow-up-right', external = false, cursor
 >
   <span class="btn__label" data-text-roll><span><slot /></span></span>
   <span class="btn__icon"><Icon name={icon} size="1.1em" /></span>
-  {external && <span class="visually-hidden"> (abre en otra pestaña)</span>}
+  {external && <NewTabHint />}
 </a>
 
 <style>
